@@ -735,7 +735,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581601503}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.5, y: 2.5, z: 0}
+  m_LocalPosition: {x: 1.5, y: 1.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2538284}
@@ -870,10 +870,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27178805e5f3c944b8683c5ebbb5ab55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectTargets:
-  - {fileID: 1346070034}
   buttonObject: {fileID: 1589068226}
-  buttonDownDisplacement: {x: 0, y: -0.05, z: 0}
+  buttonDownDisplacement: {x: 0, y: -0.25, z: 0}
+  clickable: 0
   m_activeButton: 0
 --- !u!1 &898640080
 GameObject:
@@ -1410,6 +1409,8 @@ GameObject:
   - component: {fileID: 1589068226}
   - component: {fileID: 1589068228}
   - component: {fileID: 1589068227}
+  - component: {fileID: 1589068229}
+  - component: {fileID: 1589068230}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -1424,8 +1425,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1589068225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.02, z: -6}
-  m_LocalScale: {x: 0.7, y: 0.2, z: 0.7}
+  m_LocalPosition: {x: 0, y: -4, z: -6}
+  m_LocalScale: {x: 0.7, y: 0.4, z: 0.7}
   m_Children: []
   m_Father: {fileID: 782486106}
   m_RootOrder: 1
@@ -1472,6 +1473,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1589068225}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &1589068229
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589068225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1589068230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589068225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18039fb725bf9b40b45ae713930f808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1700903069
 GameObject:
   m_ObjectHideFlags: 0
