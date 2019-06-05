@@ -26,6 +26,8 @@ public class ClickButton : MonoBehaviour
     private float startPosY;
     private float endPosY;
     private bool loaded;
+    private bool exit;
+    private bool stay;
 
     /// <summary>
     /// Der genutzte Button am ViveController. Einstellbar in der Szene in Unity.
@@ -51,6 +53,8 @@ public class ClickButton : MonoBehaviour
     private void Start()
     {
         loaded = false;
+        exit = false;
+        stay = false;
         startPosY = buttonObject.transform.localPosition.y;
         endPosY = startPosY + buttonDownDisplacement.y;
         Debug.Log("Start: " + startPosY);
@@ -115,13 +119,14 @@ public class ClickButton : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode die Aufgerufen wird, wenn wir mit dem Controller den Button berühren.
+    /// Methode die Aufgerufen wird, wenn wir mit dem Controller den Button berühren (für längere Zeit).
     /// Sofern clickable auf false gesetzt wurde.
     /// </summary>
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
     /// <param name="name">Name des berührten Objektes.</param>
-    public void myTriggerEnter(Collider collider, string name)
+    public void myTriggerStay(Collider collider, string name)
     {
+        stay = true;
         if (buttonObject.transform.localPosition.y > endPosY) buttonObject.transform.localPosition = buttonObject.transform.localPosition + new Vector3(0f, -0.01f, 0f);
         else if(!loaded)
         {
@@ -131,12 +136,39 @@ public class ClickButton : MonoBehaviour
     }
 
     /// <summary>
+    /// Methode die aufgerufen wird, wenn wir mit dem Controller den Button wieder verlassen.
+    /// Der Knopf geht so an seine Ursprungsposition zurück.
+    /// </summary>
+    /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kam.</param>
+    public void myTriggerExit(Collider collider, string name)
+    {
+        Debug.Log("Collidername EXIT: " + collider.gameObject.name);
+        Debug.Log("Objektname EXIT: " + name);        
+        exit = true;
+        stay = false;        
+    }
+
+    /// <summary>
     /// Methode um die Ausgewählten Daten auf der Hauptanzeige darzustellen.
     /// </summary>
     private void loadData()
     {
         loaded = true;
         Debug.Log("Load Data " + this.name);
+    }
+
+    // Update wird einmal pro Frame aufgerufen.
+    void Update()
+    {
+        if (exit && !stay)
+        {
+            if (buttonObject.transform.localPosition.y < startPosY) buttonObject.transform.localPosition = buttonObject.transform.localPosition + new Vector3(0f, 0.01f, 0f);
+            else
+            {
+                buttonObject.transform.localPosition = new Vector3(buttonObject.transform.localPosition.x, startPosY, buttonObject.transform.localPosition.z);
+                exit = false;
+            }
+        }
     }
 
     /// <summary>
