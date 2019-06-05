@@ -12,7 +12,7 @@ public class ClickButton : MonoBehaviour
     , IColliderEventPressEnterHandler
     , IColliderEventPressExitHandler
 {
-    public Transform buttonObject;
+    public GameObject buttonObject;
     public Vector3 buttonDownDisplacement;
     public bool clickable;
 
@@ -23,6 +23,9 @@ public class ClickButton : MonoBehaviour
 
     private GameObject buttonBase;
     private GameObject button;
+    private float startPosY;
+    private float endPosY;
+    private bool loaded;
 
     /// <summary>
     /// Der genutzte Button am ViveController. Einstellbar in der Szene in Unity.
@@ -47,6 +50,11 @@ public class ClickButton : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     private void Start()
     {
+        loaded = false;
+        startPosY = buttonObject.transform.localPosition.y;
+        endPosY = startPosY + buttonDownDisplacement.y;
+        Debug.Log("Start: " + startPosY);
+        Debug.Log("Ende: " + endPosY);
         getButtonGameObjects();
         switchCollider(clickable);        
     }
@@ -114,7 +122,12 @@ public class ClickButton : MonoBehaviour
     /// <param name="name">Name des berührten Objektes.</param>
     public void myTriggerEnter(Collider collider, string name)
     {
-        Debug.Log("Name: " + name);
+        if (buttonObject.transform.localPosition.y > endPosY) buttonObject.transform.localPosition = buttonObject.transform.localPosition + new Vector3(0f, -0.01f, 0f);
+        else if(!loaded)
+        {
+            buttonObject.transform.localPosition = new Vector3(buttonObject.transform.localPosition.x, endPosY, buttonObject.transform.localPosition.z);
+            loadData();            
+        }
     }
 
     /// <summary>
@@ -122,6 +135,7 @@ public class ClickButton : MonoBehaviour
     /// </summary>
     private void loadData()
     {
+        loaded = true;
         Debug.Log("Load Data " + this.name);
     }
 
@@ -134,7 +148,7 @@ public class ClickButton : MonoBehaviour
     {
         if (eventData.button == m_activeButton && pressingEvents.Add(eventData) && pressingEvents.Count == 1)
         {
-            buttonObject.localPosition += buttonDownDisplacement;
+            buttonObject.transform.localPosition += buttonDownDisplacement;
         }
     }
 
@@ -147,7 +161,7 @@ public class ClickButton : MonoBehaviour
     {
         if (pressingEvents.Remove(eventData) && pressingEvents.Count == 0)
         {
-            buttonObject.localPosition -= buttonDownDisplacement;
+            buttonObject.transform.localPosition -= buttonDownDisplacement;
         }
     }
 }

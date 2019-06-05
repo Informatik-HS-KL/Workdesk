@@ -24,6 +24,11 @@ public class myTriggerEvent : MonoBehaviour
         this.transform.GetComponentInParent<ClickButton>().myTriggerEnter(collider, this.gameObject.name);
     }
 
+    private void OnTriggerStay(Collider collider)
+    {
+        this.transform.GetComponentInParent<ClickButton>().myTriggerEnter(collider, this.gameObject.name);
+    }
+
     // Update wird einmal pro Frame aufgerufen.
     void Update()
     {
