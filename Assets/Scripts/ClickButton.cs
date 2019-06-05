@@ -119,7 +119,7 @@ public class ClickButton : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode die Aufgerufen wird, wenn wir mit dem Controller den Button berühren (für längere Zeit).
+    /// Methode die aufgerufen wird, wenn wir mit dem Controller den Button berühren (für längere Zeit).
     /// Sofern clickable auf false gesetzt wurde.
     /// </summary>
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
@@ -141,20 +141,18 @@ public class ClickButton : MonoBehaviour
     /// </summary>
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kam.</param>
     public void myTriggerExit(Collider collider, string name)
-    {
-        Debug.Log("Collidername EXIT: " + collider.gameObject.name);
-        Debug.Log("Objektname EXIT: " + name);        
+    {       
         exit = true;
         stay = false;        
     }
 
     /// <summary>
-    /// Methode um die Ausgewählten Daten auf der Hauptanzeige darzustellen.
+    /// Methode um die ausgewählten Daten auf der Hauptanzeige darzustellen.
     /// </summary>
     private void loadData()
     {
         loaded = true;
-        Debug.Log("Load Data " + this.name);
+        Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
     }
 
     // Update wird einmal pro Frame aufgerufen.
