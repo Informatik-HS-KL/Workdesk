@@ -463,7 +463,7 @@ Transform:
   - {fileID: 1707281609}
   - {fileID: 542189292}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &305709066
 GameObject:
@@ -871,8 +871,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonObject: {fileID: 1589068225}
-  buttonDownDisplacement: {x: 0, y: -0.25, z: 0}
-  clickable: 0
+  buttonDownDisplacement: {x: 0, y: -0.1, z: 0}
+  clickable: 1
   m_activeButton: 0
 --- !u!1 &885236273
 GameObject:
@@ -1059,7 +1059,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: d9d9470889829984d8acd6d010218531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.974
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: d9d9470889829984d8acd6d010218531, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1157,6 +1157,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: HTC.UnityPlugin.Vive.BasicGrabbable+UnityEventGrabbable, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!65 &967652395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 967652392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &988637923
 GameObject:
   m_ObjectHideFlags: 0

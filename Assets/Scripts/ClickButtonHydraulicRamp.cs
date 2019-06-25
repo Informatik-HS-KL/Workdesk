@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 /// Abgewandelte Klasse zum Darstellen eines Drückbaren Buttons.
 /// Grundlegend war das Skript "ResetButton" im VIU Beispiel "Collider Event".
 /// </summary>
-public class ClickButton : MonoBehaviour
+public class ClickButtonHydraulicRamp : MonoBehaviour
     , IColliderEventPressUpHandler
     , IColliderEventPressEnterHandler
     , IColliderEventPressExitHandler
@@ -26,7 +26,6 @@ public class ClickButton : MonoBehaviour
     private GameObject button;
     private float startPosY;
     private float endPosY;
-    private bool loaded;
     private bool exit;
     private bool stay;
 
@@ -53,7 +52,6 @@ public class ClickButton : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     private void Start()
     {
-        loaded = false;
         exit = false;
         stay = false;
         startPosY = buttonObject.transform.localPosition.y;
@@ -61,7 +59,9 @@ public class ClickButton : MonoBehaviour
         Debug.Log("Start: " + startPosY);
         Debug.Log("Ende: " + endPosY);
         getButtonGameObjects();
-        switchCollider(clickable);        
+        switchCollider(clickable);
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<MoveHydraulicRamp>().savePositions();
     }
 
     /// <summary>
@@ -112,11 +112,7 @@ public class ClickButton : MonoBehaviour
     /// <param name="eventData">Enthält Infos über das ausgelöste Event. Beispielsweise den gedrückten Knopf am Controller.</param>
     public void OnColliderEventPressUp(ColliderButtonEventData eventData)
     {
-        //Nur der Trigger löst die gewünschte Aktion aus.
-        if (eventData.button.ToString().Equals("Trigger"))
-        {
-            loadData();
-        }
+
     }
 
     /// <summary>
@@ -129,10 +125,10 @@ public class ClickButton : MonoBehaviour
     {
         stay = true;
         if (buttonObject.transform.localPosition.y > endPosY) buttonObject.transform.localPosition = buttonObject.transform.localPosition + new Vector3(0f, -0.01f, 0f);
-        else if(!loaded)
+        else
         {
             buttonObject.transform.localPosition = new Vector3(buttonObject.transform.localPosition.x, endPosY, buttonObject.transform.localPosition.z);
-            loadData();            
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<MoveHydraulicRamp>().moveCar(name);
         }
     }
 
@@ -142,22 +138,9 @@ public class ClickButton : MonoBehaviour
     /// </summary>
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kam.</param>
     public void myTriggerExit(Collider collider, string name)
-    {       
-        exit = true;
-        stay = false;        
-    }
-
-    /// <summary>
-    /// Methode um die ausgewählten Daten auf der Hauptanzeige darzustellen.
-    /// </summary>
-    private void loadData()
     {
-        loaded = true;
-        Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
-
-        //TEMPORÄR
-        SceneManager.LoadScene(1);
-        //TEMPORÄR
+        exit = true;
+        stay = false;
     }
 
     // Update wird einmal pro Frame aufgerufen.
