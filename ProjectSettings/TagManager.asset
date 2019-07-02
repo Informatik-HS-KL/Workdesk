@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Lift
+  - Car
+  - Lamp
   layers:
   - Default
   - TransparentFX

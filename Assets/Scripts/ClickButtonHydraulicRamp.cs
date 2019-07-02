@@ -56,8 +56,6 @@ public class ClickButtonHydraulicRamp : MonoBehaviour
         stay = false;
         startPosY = buttonObject.transform.localPosition.y;
         endPosY = startPosY + buttonDownDisplacement.y;
-        Debug.Log("Start: " + startPosY);
-        Debug.Log("Ende: " + endPosY);
         getButtonGameObjects();
         switchCollider(clickable);
 
