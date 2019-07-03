@@ -7,6 +7,10 @@ TagManager:
   - Lift
   - Car
   - Lamp
+  - DataInput
+  - ObjectContainer
+  - TrackerObjectContainer
+  - FirstPersonCamera
   layers:
   - Default
   - TransparentFX
