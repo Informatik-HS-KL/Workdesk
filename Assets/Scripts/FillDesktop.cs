@@ -11,7 +11,6 @@ using UnityEngine.Video;
 public class FillDesktop : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public Image picture;
     public RawImage rawPicture;
 
     private Camera firstPersonCam;
