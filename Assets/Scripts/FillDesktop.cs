@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+/// <summary>
+/// Diese Klasse wird dazu genutzt, um die Kamera auszulesen, die an der kleinen Figur angebracht ist.
+/// Das Bild dieser Kamera wird auf dem Bildschirm wiedergegeben.
+/// </summary>
 public class FillDesktop : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
@@ -11,27 +15,26 @@ public class FillDesktop : MonoBehaviour
     public RawImage rawPicture;
 
     private Camera firstPersonCam;
-    private Rect rect;
     private RenderTexture renderTexture;
-    private int count;
     private int resWidth;
     private int resHeight;
 
     // Wird zur Initialisierung genutzt.
     void Start()
     {
-        count = 0;
         resWidth = 1920;
         resHeight = 1080;
 
-        rect = new Rect(0, 0, resWidth, resHeight);
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
-    
+
         firstPersonCam = GameObject.FindGameObjectWithTag("FirstPersonCamera").GetComponent<Camera>();
     }
 
+    /// <summary>
+    /// Diese Methode nimmt einen Screenshot auf und gibt ihn auf dem Bildschirm wieder.
+    /// </summary>
     private void takeScreenshot()
-    {      
+    {
         firstPersonCam.targetTexture = renderTexture;
         firstPersonCam.Render();
 
@@ -49,11 +52,6 @@ public class FillDesktop : MonoBehaviour
         //Macht einen Screenshot der Szene und zeigt ihn auf dem Bildschirm an.
         //Nutzt die aktive Hauptkamera.
         //picture.texture = ScreenCapture.CaptureScreenshotAsTexture(1);
-        //if(count++ == 20)
-        //{
-            count = 0;
-            takeScreenshot();
-        //}
-        
+        takeScreenshot();
     }
 }

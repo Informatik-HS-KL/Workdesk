@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReadData : MonoBehaviour {
-
+/// <summary>
+/// Diese Klasse wird genutzt, um eine Scatterplot Matritze zu erzeugen und in der Welt darzustellen.
+/// </summary>
+public class ReadData : MonoBehaviour
+{
     public GameObject ShowData;
     public GameObject DataInput;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Wird zur Initialisierung genutzt.
+    void Start()
+    {
+
+    }
+
+    // Update wird einmal pro Frame aufgerufen.
+    void Update()
+    {
+
+    }
 }

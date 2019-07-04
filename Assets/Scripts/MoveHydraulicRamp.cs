@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Diese Klasse wird dazu genutzt, um die Hebebühne und das Auto zu bewegen. 
+/// Zusätzlich kann hier das Licht der Garage gesteuert werden.
+/// </summary>
 public class MoveHydraulicRamp : MonoBehaviour
 {
-
     private GameObject[] lifts;
     private GameObject[] lamps;
     private GameObject car;
@@ -13,8 +16,6 @@ public class MoveHydraulicRamp : MonoBehaviour
     private bool down;
     private Vector3[] startPos;
     private Vector3[] endPos;
-    private Vector3 startPosCar;
-    private Vector3 endPosCar;
     private bool loaded;
 
     private void Awake()
@@ -24,12 +25,15 @@ public class MoveHydraulicRamp : MonoBehaviour
 
     private void OnDestroy()
     {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Menu, ButtonEventType.Down, switchLight);        
+        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Menu, ButtonEventType.Down, switchLight);
     }
 
+    /// <summary>
+    /// Diese Methode schaltet die Lichtquellen an und aus
+    /// </summary>
     private void switchLight()
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (lamps[i].GetComponent<Light>().enabled == true) lamps[i].GetComponent<Light>().enabled = false;
             else lamps[i].GetComponent<Light>().enabled = true;
@@ -54,8 +58,6 @@ public class MoveHydraulicRamp : MonoBehaviour
     {
         if (!loaded)
         {
-            startPosCar = car.gameObject.transform.localPosition;
-            endPosCar = startPosCar + new Vector3(0.0f, 2.0f, 0.0f); ;
             startPos = new Vector3[4];
             endPos = new Vector3[4];
             for (int i = 0; i < 4; i++)
@@ -86,7 +88,7 @@ public class MoveHydraulicRamp : MonoBehaviour
                     {
                         lifts[i].transform.localPosition = startPos[i];
                         down = true;
-                    }                    
+                    }
                 }
                 car.transform.localPosition -= new Vector3(0.0f, 0.01f, 0.0f);
             }

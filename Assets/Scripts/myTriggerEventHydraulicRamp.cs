@@ -20,7 +20,7 @@ public class myTriggerEventHydraulicRamp : MonoBehaviour
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
     private void OnTriggerStay(Collider collider)
     {
-        if(collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButtonHydraulicRamp>().myTriggerStay(collider, this.gameObject.name);
+        if (collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButtonHydraulicRamp>().myTriggerStay(collider, this.gameObject.name);
     }
 
     /// <summary>
@@ -29,6 +29,6 @@ public class myTriggerEventHydraulicRamp : MonoBehaviour
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
     private void OnTriggerExit(Collider collider)
     {
-        if(collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButtonHydraulicRamp>().myTriggerExit(collider, this.gameObject.name);
+        if (collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButtonHydraulicRamp>().myTriggerExit(collider, this.gameObject.name);
     }
 }

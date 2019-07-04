@@ -59,7 +59,7 @@ public class ClickButton : MonoBehaviour
         startPosY = buttonObject.transform.localPosition.y;
         endPosY = startPosY + buttonDownDisplacement.y;
         getButtonGameObjects();
-        switchCollider(clickable);        
+        switchCollider(clickable);
     }
 
     /// <summary>
@@ -127,10 +127,10 @@ public class ClickButton : MonoBehaviour
     {
         stay = true;
         if (buttonObject.transform.localPosition.y > endPosY) buttonObject.transform.localPosition = buttonObject.transform.localPosition + new Vector3(0f, -0.01f, 0f);
-        else if(!loaded)
+        else if (!loaded)
         {
             buttonObject.transform.localPosition = new Vector3(buttonObject.transform.localPosition.x, endPosY, buttonObject.transform.localPosition.z);
-            loadData();            
+            loadData();
         }
     }
 
@@ -140,9 +140,9 @@ public class ClickButton : MonoBehaviour
     /// </summary>
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kam.</param>
     public void myTriggerExit(Collider collider, string name)
-    {       
+    {
         exit = true;
-        stay = false;        
+        stay = false;
     }
 
     /// <summary>

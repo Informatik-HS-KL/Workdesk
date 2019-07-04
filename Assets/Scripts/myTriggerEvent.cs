@@ -32,7 +32,7 @@ public class myTriggerEvent : MonoBehaviour
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
     private void OnTriggerStay(Collider collider)
     {
-        if(collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButton>().myTriggerStay(collider, this.gameObject.name);
+        if (collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButton>().myTriggerStay(collider, this.gameObject.name);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class myTriggerEvent : MonoBehaviour
     /// <param name="collider">Das Objekt, das mit dem Collider in Berührung kommt.</param>
     private void OnTriggerExit(Collider collider)
     {
-        if(collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButton>().myTriggerExit(collider, this.gameObject.name);
+        if (collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButton>().myTriggerExit(collider, this.gameObject.name);
     }
 
     // Update wird einmal pro Frame aufgerufen.
