@@ -11,6 +11,8 @@ TagManager:
   - ObjectContainer
   - TrackerObjectContainer
   - FirstPersonCamera
+  - GrabbableObjectContainer
+  - TurningPlateObjectContainer
   layers:
   - Default
   - TransparentFX

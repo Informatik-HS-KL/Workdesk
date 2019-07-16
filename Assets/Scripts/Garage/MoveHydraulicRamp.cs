@@ -20,12 +20,12 @@ public class MoveHydraulicRamp : MonoBehaviour
 
     private void Awake()
     {
-        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Menu, ButtonEventType.Down, switchLight);
+        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, switchLight);
     }
 
     private void OnDestroy()
     {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Menu, ButtonEventType.Down, switchLight);
+        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, switchLight);
     }
 
     /// <summary>

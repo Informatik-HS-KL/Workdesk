@@ -26,7 +26,26 @@ public class FillDesktop : MonoBehaviour
 
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
 
+        if (GameObject.FindGameObjectWithTag("FirstPersonCamera") != null) findCamera();
+    }
+
+    /// <summary>
+    /// Diese Methode sucht die First Person Kamera in der Szene und weißt sie dem Kameraobjekt zu. 
+    /// Zusätzlich aktiviert sie die Anzeige auf dem Bildschirm.
+    /// </summary>
+    public void findCamera()
+    {
         firstPersonCam = GameObject.FindGameObjectWithTag("FirstPersonCamera").GetComponent<Camera>();
+        rawPicture.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Diese Methode löscht die Kamera und deaktiviert die Anzeige auf dem Bildschirm.
+    /// </summary>
+    public void closeCamera()
+    {
+        firstPersonCam = null;
+        rawPicture.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -51,6 +70,6 @@ public class FillDesktop : MonoBehaviour
         //Macht einen Screenshot der Szene und zeigt ihn auf dem Bildschirm an.
         //Nutzt die aktive Hauptkamera.
         //picture.texture = ScreenCapture.CaptureScreenshotAsTexture(1);
-        takeScreenshot();
+        if (firstPersonCam != null) takeScreenshot();
     }
 }
