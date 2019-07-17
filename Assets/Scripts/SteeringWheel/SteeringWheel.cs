@@ -5,24 +5,13 @@ using UnityEngine;
 public class SteeringWheel : MonoBehaviour
 {
     [SerializeField]
-    SteeringWheelCollider collider;
+    new SteeringWheelCollider collider;
 
     [SerializeField]
     float actualAngle = 0f;
 
     [SerializeField]
-    float maxAngle = 720f;
-
-    [SerializeField]
-    float steeringValue = 0f;
-
-    public float GetSteeringValue
-    {
-        get
-        {
-            return steeringValue;
-        }
-    }
+    float maxAngle = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,30 +22,17 @@ public class SteeringWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (collider.GetDeltaAngle != 0f
-            && !(actualAngle + collider.GetDeltaAngle <= -maxAngle
-            || actualAngle + collider.GetDeltaAngle >= maxAngle))
+        if (collider.GetDeltaAngle != 0f && !(actualAngle + collider.GetDeltaAngle <= -maxAngle
+            || actualAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
             actualAngle += collider.GetDeltaAngle;
         }
-        else if (collider.GetDeltaAngle != 0f
-           && (actualAngle + collider.GetDeltaAngle <= -maxAngle
-           || actualAngle + collider.GetDeltaAngle >= maxAngle))
+        else if (collider.GetDeltaAngle != 0f && (actualAngle + collider.GetDeltaAngle <= -maxAngle
+           || actualAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
-            if (actualAngle < 0)
-            {
-                actualAngle = -maxAngle;
-                // rumble
-            }
-            else
-            {
-                actualAngle = maxAngle;
-                // rumble
-            }
+            if (actualAngle < 0) actualAngle = -maxAngle;
+            else actualAngle = maxAngle;
         }
-
-        steeringValue = -actualAngle * (maxAngle / 360) / maxAngle;
-
-        transform.rotation = Quaternion.Euler(0f, 0f, actualAngle);
+        transform.rotation = Quaternion.Euler(0f, actualAngle, 0f);
     }
 }

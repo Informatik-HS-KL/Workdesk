@@ -40,7 +40,7 @@ public class SteeringWheelCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        oldVector = Vector3.up;
+        oldVector = Vector3.right;
     }
 
     // Update is called once per frame
@@ -49,9 +49,9 @@ public class SteeringWheelCollider : MonoBehaviour
         if (otherCollider != Vector3.zero && grabbed)
         {
             newVector = new Vector3(otherCollider.x - transform.position.x,
-            otherCollider.y - transform.position.y, 0f).normalized;
+            0f, otherCollider.z - transform.position.z).normalized;
 
-            deltaAngle = Vector3.SignedAngle(oldVector, newVector, Vector3.forward);
+            deltaAngle = Vector3.SignedAngle(oldVector, newVector, Vector3.up);
 
             actualAngle += deltaAngle;
 
@@ -67,19 +67,16 @@ public class SteeringWheelCollider : MonoBehaviour
             {
                 grabbed = false;
                 deltaAngle = 0f;
-
-            } else if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Trigger) && !grabbed)
+            }
+            else if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Trigger) && !grabbed)
             {
                 grabbed = true;
 
                 oldVector = new Vector3(otherCollider.x - transform.position.x,
-                    otherCollider.y - transform.position.y, 0f).normalized;
+                    0f, otherCollider.z - transform.position.z).normalized;
             }
 
             otherCollider = other.transform.position;
-
-
-
         }
     }
 
