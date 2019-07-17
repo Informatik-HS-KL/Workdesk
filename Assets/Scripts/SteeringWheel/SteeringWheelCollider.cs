@@ -14,11 +14,22 @@ public class SteeringWheelCollider : MonoBehaviour
     [SerializeField]
     float deltaAngle = 0f;
 
+    [SerializeField]
+    float secondDeltaAngle = 0f;
+
     public float GetDeltaAngle
     {
         get
         {
             return deltaAngle;
+        }
+    }
+
+    public float GetSecondDeltaAngle
+    {
+        get
+        {
+            return secondDeltaAngle;
         }
     }
 
@@ -32,6 +43,9 @@ public class SteeringWheelCollider : MonoBehaviour
     Vector3 oldVector;
 
     [SerializeField]
+    Vector3 secondOldVector;
+
+    [SerializeField]
     Vector3 newVector;
 
     [SerializeField]
@@ -41,6 +55,7 @@ public class SteeringWheelCollider : MonoBehaviour
     void Start()
     {
         oldVector = Vector3.right;
+        secondOldVector = Vector3.up;
     }
 
     // Update is called once per frame
@@ -57,6 +72,17 @@ public class SteeringWheelCollider : MonoBehaviour
 
             oldVector = newVector;
         }
+        if (otherCollider != Vector3.zero && grabbed)
+        {
+            newVector = new Vector3(otherCollider.x - transform.position.x,
+            otherCollider.y - transform.position.y, 0f).normalized;
+
+            secondDeltaAngle = Vector3.SignedAngle(secondOldVector, newVector, Vector3.forward);
+
+            actualAngle += secondDeltaAngle;
+
+            secondOldVector = newVector;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -67,6 +93,7 @@ public class SteeringWheelCollider : MonoBehaviour
             {
                 grabbed = false;
                 deltaAngle = 0f;
+                secondDeltaAngle = 0f;
             }
             else if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Trigger) && !grabbed)
             {
@@ -74,6 +101,9 @@ public class SteeringWheelCollider : MonoBehaviour
 
                 oldVector = new Vector3(otherCollider.x - transform.position.x,
                     0f, otherCollider.z - transform.position.z).normalized;
+
+                secondOldVector = new Vector3(otherCollider.x - transform.position.x,
+                    otherCollider.x - transform.position.x, 0f).normalized;
             }
 
             otherCollider = other.transform.position;
@@ -86,6 +116,7 @@ public class SteeringWheelCollider : MonoBehaviour
         {
             grabbed = false;
             deltaAngle = 0f;
+            secondDeltaAngle = 0f;
         }
     }
 }

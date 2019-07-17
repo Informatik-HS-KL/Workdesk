@@ -8,7 +8,10 @@ public class SteeringWheel : MonoBehaviour
     new SteeringWheelCollider collider;
 
     [SerializeField]
-    float actualAngle = 0f;
+    float yAngle = 0f;
+
+    [SerializeField]
+    float xAngle = 0f;
 
     [SerializeField]
     float maxAngle = 0f;
@@ -22,17 +25,30 @@ public class SteeringWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (collider.GetDeltaAngle != 0f && !(actualAngle + collider.GetDeltaAngle <= -maxAngle
-            || actualAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
+        if (collider.GetDeltaAngle != 0f && !(yAngle + collider.GetDeltaAngle <= -maxAngle
+            || yAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
-            actualAngle += collider.GetDeltaAngle;
+            yAngle += collider.GetDeltaAngle;
         }
-        else if (collider.GetDeltaAngle != 0f && (actualAngle + collider.GetDeltaAngle <= -maxAngle
-           || actualAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
+        else if (collider.GetDeltaAngle != 0f && (yAngle + collider.GetDeltaAngle <= -maxAngle
+           || yAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
-            if (actualAngle < 0) actualAngle = -maxAngle;
-            else actualAngle = maxAngle;
+            if (yAngle < 0) yAngle = -maxAngle;
+            else yAngle = maxAngle;
         }
-        transform.rotation = Quaternion.Euler(0f, actualAngle, 0f);
+
+        if (collider.GetSecondDeltaAngle != 0f && !(xAngle + collider.GetSecondDeltaAngle <= -maxAngle
+            || xAngle + collider.GetSecondDeltaAngle >= maxAngle) || maxAngle == 0)
+        {
+            xAngle += collider.GetSecondDeltaAngle;
+        }
+        else if (collider.GetSecondDeltaAngle != 0f && (xAngle + collider.GetSecondDeltaAngle <= -maxAngle
+           || xAngle + collider.GetSecondDeltaAngle >= maxAngle) || maxAngle == 0)
+        {
+            if (xAngle < 0) xAngle = -maxAngle;
+            else xAngle = maxAngle;
+        }
+
+        transform.rotation = Quaternion.Euler(xAngle, yAngle, 0f);
     }
 }
