@@ -13,6 +13,7 @@ TagManager:
   - FirstPersonCamera
   - GrabbableObjectContainer
   - TurningPlateObjectContainer
+  - ObjectControllerField
   layers:
   - Default
   - TransparentFX

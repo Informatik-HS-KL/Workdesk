@@ -22,6 +22,7 @@ public class ClickButton : MonoBehaviour
     private RigidPose[] resetPoses;
     private HashSet<ColliderButtonEventData> pressingEvents = new HashSet<ColliderButtonEventData>();
 
+    private GameObject gameController;
     private GameObject buttonBase;
     private GameObject button;
     private float startPosY;
@@ -53,6 +54,7 @@ public class ClickButton : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     private void Start()
     {
+        gameController = GameObject.FindGameObjectWithTag("GameController");
         loaded = false;
         exit = false;
         stay = false;
@@ -152,10 +154,7 @@ public class ClickButton : MonoBehaviour
     {
         loaded = true;
         Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
-
-        //TEMPORÄR
-        SceneManager.LoadScene(1);
-        //TEMPORÄR
+        gameController.GetComponentInChildren<LoadObject>().activateContainer(this.name);
     }
 
     // Update wird einmal pro Frame aufgerufen.

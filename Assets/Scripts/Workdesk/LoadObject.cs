@@ -17,6 +17,7 @@ public class LoadObject : MonoBehaviour
         grabbableObjectContainer = GameObject.FindGameObjectWithTag("GrabbableObjectContainer");
         trackerObjectContainer = GameObject.FindGameObjectWithTag("TrackerObjectContainer");
         turningPlateObjectContainer = GameObject.FindGameObjectWithTag("TurningPlateObjectContainer");
+        activateGrabbableObjectContainer();
     }
 
     /// <summary>
@@ -26,8 +27,8 @@ public class LoadObject : MonoBehaviour
     public void activateGrabbableObjectContainer()
     {
         grabbableObjectContainer.gameObject.SetActive(true);
-        trackerObjectContainer.gameObject.SetActive(false);
-        turningPlateObjectContainer.gameObject.SetActive(false);
+        trackerObjectContainer.gameObject.SetActive(false);        
+        turningPlateObjectContainer.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public class LoadObject : MonoBehaviour
     {
         grabbableObjectContainer.gameObject.SetActive(false);
         trackerObjectContainer.gameObject.SetActive(true);
-        turningPlateObjectContainer.gameObject.SetActive(false);
+        turningPlateObjectContainer.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -49,7 +50,31 @@ public class LoadObject : MonoBehaviour
     {
         grabbableObjectContainer.gameObject.SetActive(false);
         trackerObjectContainer.gameObject.SetActive(false);
-        turningPlateObjectContainer.gameObject.SetActive(true);
+        turningPlateObjectContainer.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void activateContainer(string buttonName)
+    {
+        switch(buttonName)
+        {
+            case "TurnButton":
+                activateTurningPlateObjectContainer();
+                load(1);
+                break;
+            case "TrackButton":
+                activateTrackerObjectContainer();
+                load(2);
+                break;
+            case "GrabButton":
+                activateGrabbableObjectContainer();
+                load(3);
+                break;
+        }
+    }
+
+    private void load(int objContainer)
+    {
+        Debug.Log("ObjectContainer: " + objContainer);
     }
 
     // Update wird einmal pro Frame aufgerufen.
