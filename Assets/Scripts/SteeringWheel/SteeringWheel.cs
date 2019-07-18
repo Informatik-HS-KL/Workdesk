@@ -8,33 +8,38 @@ public class SteeringWheel : MonoBehaviour
     new SteeringWheelCollider collider;
 
     [SerializeField]
+    float zAngle = 0f;
+
+    [SerializeField]
     float yAngle = 0f;
 
     [SerializeField]
-    float xAngle = 0f;
+    float xAngle = 0f;    
 
     [SerializeField]
     float maxAngle = 0f;
 
+    public bool activated3D;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        activated3D = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (collider.GetDeltaAngle != 0f && !(yAngle + collider.GetDeltaAngle <= -maxAngle
-            || yAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
+        if (collider.GetDeltaAngle != 0f && !(zAngle + collider.GetDeltaAngle <= -maxAngle
+            || zAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
-            yAngle += collider.GetDeltaAngle;
+            zAngle += collider.GetDeltaAngle;
         }
-        else if (collider.GetDeltaAngle != 0f && (yAngle + collider.GetDeltaAngle <= -maxAngle
-           || yAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
+        else if (collider.GetDeltaAngle != 0f && (zAngle + collider.GetDeltaAngle <= -maxAngle
+           || zAngle + collider.GetDeltaAngle >= maxAngle) || maxAngle == 0)
         {
-            if (yAngle < 0) yAngle = -maxAngle;
-            else yAngle = maxAngle;
+            if (zAngle < 0) zAngle = -maxAngle;
+            else zAngle = maxAngle;
         }
 
         if (collider.GetSecondDeltaAngle != 0f && !(xAngle + collider.GetSecondDeltaAngle <= -maxAngle
@@ -49,6 +54,25 @@ public class SteeringWheel : MonoBehaviour
             else xAngle = maxAngle;
         }
 
-        transform.rotation = Quaternion.Euler(xAngle, yAngle, 0f);
+        if (collider.GetThirdDeltaAngle != 0f && !(yAngle + collider.GetThirdDeltaAngle <= -maxAngle
+            || yAngle + collider.GetThirdDeltaAngle >= maxAngle) || maxAngle == 0)
+        {
+            yAngle += collider.GetThirdDeltaAngle;
+        }
+        else if (collider.GetThirdDeltaAngle != 0f && (yAngle + collider.GetThirdDeltaAngle <= -maxAngle
+           || yAngle + collider.GetThirdDeltaAngle >= maxAngle) || maxAngle == 0)
+        {
+            if (yAngle < 0) yAngle = -maxAngle;
+            else yAngle = maxAngle;
+        }
+
+        if (!activated3D)
+        {
+            xAngle = 0f; // geht einzeln
+            //yAngle = 0f; //geht einzeln
+            zAngle = 0f; // geht einzeln
+        }
+
+        transform.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
     }
 }

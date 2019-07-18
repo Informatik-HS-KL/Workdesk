@@ -984,9 +984,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1083275567}
-  actualAngle: 0
+  yAngle: 0
+  xAngle: 0
   maxAngle: 0
-  steeringValue: 0
+  activated3D: 1
 --- !u!23 &385583605
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2790,9 +2791,11 @@ MonoBehaviour:
   otherCollider: {x: 0, y: 0, z: 0}
   offsetAngle: 0
   deltaAngle: 0
+  secondDeltaAngle: 0
   actualAngle: 0
   startVector: {x: 0, y: 0, z: 0}
   oldVector: {x: 0, y: 0, z: 0}
+  secondOldVector: {x: 0, y: 0, z: 0}
   newVector: {x: 0, y: 0, z: 0}
   grabbed: 1
 --- !u!64 &1083275568

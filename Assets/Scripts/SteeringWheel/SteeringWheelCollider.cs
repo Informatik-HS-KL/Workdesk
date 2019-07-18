@@ -17,6 +17,9 @@ public class SteeringWheelCollider : MonoBehaviour
     [SerializeField]
     float secondDeltaAngle = 0f;
 
+    [SerializeField]
+    float thirdDeltaAngle = 0f;
+
     public float GetDeltaAngle
     {
         get
@@ -33,6 +36,14 @@ public class SteeringWheelCollider : MonoBehaviour
         }
     }
 
+    public float GetThirdDeltaAngle
+    {
+        get
+        {
+            return thirdDeltaAngle;
+        }
+    }
+
     [SerializeField]
     float actualAngle = 0f;
 
@@ -46,6 +57,9 @@ public class SteeringWheelCollider : MonoBehaviour
     Vector3 secondOldVector;
 
     [SerializeField]
+    Vector3 thirdOldVector;
+
+    [SerializeField]
     Vector3 newVector;
 
     [SerializeField]
@@ -54,8 +68,9 @@ public class SteeringWheelCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        oldVector = Vector3.right;
+        oldVector = Vector3.up;
         secondOldVector = Vector3.up;
+        thirdOldVector = Vector3.right;
     }
 
     // Update is called once per frame
@@ -64,9 +79,9 @@ public class SteeringWheelCollider : MonoBehaviour
         if (otherCollider != Vector3.zero && grabbed)
         {
             newVector = new Vector3(otherCollider.x - transform.position.x,
-            0f, otherCollider.z - transform.position.z).normalized;
+            otherCollider.y - transform.position.y, 0f).normalized;
 
-            deltaAngle = Vector3.SignedAngle(oldVector, newVector, Vector3.up);
+            deltaAngle = Vector3.SignedAngle(oldVector, newVector, Vector3.forward);
 
             actualAngle += deltaAngle;
 
@@ -74,14 +89,26 @@ public class SteeringWheelCollider : MonoBehaviour
         }
         if (otherCollider != Vector3.zero && grabbed)
         {
-            newVector = new Vector3(otherCollider.x - transform.position.x,
-            otherCollider.y - transform.position.y, 0f).normalized;
+            newVector = new Vector3(0f,
+            otherCollider.y - transform.position.y, otherCollider.z - transform.position.z).normalized;
 
-            secondDeltaAngle = Vector3.SignedAngle(secondOldVector, newVector, Vector3.forward);
+            secondDeltaAngle = Vector3.SignedAngle(secondOldVector, newVector, Vector3.right);
 
             actualAngle += secondDeltaAngle;
 
             secondOldVector = newVector;
+        }
+
+        if (otherCollider != Vector3.zero && grabbed)
+        {
+            newVector = new Vector3(otherCollider.x - transform.position.x,
+            0f, otherCollider.z - transform.position.z).normalized;
+
+            thirdDeltaAngle = Vector3.SignedAngle(thirdOldVector, newVector, Vector3.up);
+
+            actualAngle += thirdDeltaAngle;
+
+            thirdOldVector = newVector;
         }
     }
 
@@ -94,16 +121,20 @@ public class SteeringWheelCollider : MonoBehaviour
                 grabbed = false;
                 deltaAngle = 0f;
                 secondDeltaAngle = 0f;
+                thirdDeltaAngle = 0f;
             }
             else if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Trigger) && !grabbed)
             {
                 grabbed = true;
 
                 oldVector = new Vector3(otherCollider.x - transform.position.x,
-                    0f, otherCollider.z - transform.position.z).normalized;
+                    otherCollider.y - transform.position.y, 0f).normalized;
 
-                secondOldVector = new Vector3(otherCollider.x - transform.position.x,
-                    otherCollider.x - transform.position.x, 0f).normalized;
+                secondOldVector = new Vector3(0f,
+                    otherCollider.y - transform.position.y, otherCollider.z - transform.position.z).normalized;
+
+                thirdOldVector = new Vector3(otherCollider.y - transform.position.y,
+                    0f, otherCollider.z - transform.position.z).normalized;
             }
 
             otherCollider = other.transform.position;
@@ -117,6 +148,7 @@ public class SteeringWheelCollider : MonoBehaviour
             grabbed = false;
             deltaAngle = 0f;
             secondDeltaAngle = 0f;
+            thirdDeltaAngle = 0f;
         }
     }
 }
