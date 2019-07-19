@@ -133,7 +133,7 @@ public class SteeringWheelCollider : MonoBehaviour
                 secondOldVector = new Vector3(0f,
                     otherCollider.y - transform.position.y, otherCollider.z - transform.position.z).normalized;
 
-                thirdOldVector = new Vector3(otherCollider.y - transform.position.y,
+                thirdOldVector = new Vector3(otherCollider.x - transform.position.x,
                     0f, otherCollider.z - transform.position.z).normalized;
             }
 

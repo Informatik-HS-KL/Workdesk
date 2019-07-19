@@ -12,15 +12,22 @@ public class FillDesktop : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
     public RawImage rawPicture;
+    public Text screenText;
 
     private Camera firstPersonCam;
     private RenderTexture renderTexture;
     private int resWidth;
     private int resHeight;
 
+    private string firstPersonString;
+    private string turn3DString;
+
     // Wird zur Initialisierung genutzt.
     void Start()
     {
+        firstPersonString = "First Person Camera in Standby.";
+        turn3DString = "3D turning deactivated.";
+        
         resWidth = 1920;
         resHeight = 1080;
 
@@ -62,6 +69,20 @@ public class FillDesktop : MonoBehaviour
         RenderTexture.active = null;
 
         rawPicture.texture = renderTexture;
+    }
+
+    public void writeOnScreen(bool turn3D)
+    {
+        if(turn3D)
+        {
+            turn3DString = "3D turning activated.";
+            screenText.text = firstPersonString + "\n" + turn3DString;
+        }
+        else
+        {
+            turn3DString = "3D turning deactivated.";
+            screenText.text = firstPersonString + "\n" + turn3DString;
+        }
     }
 
     // Update wird einmal pro Frame aufgerufen.

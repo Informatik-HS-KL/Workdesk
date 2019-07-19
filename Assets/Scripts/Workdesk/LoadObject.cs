@@ -59,6 +59,7 @@ public class LoadObject : MonoBehaviour
         {
             case "TurnButton":
                 activateTurningPlateObjectContainer();
+                turningPlateObjectContainer.transform.parent.gameObject.GetComponent<SteeringWheel>().toggle3D();
                 load(1);
                 break;
             case "TrackButton":

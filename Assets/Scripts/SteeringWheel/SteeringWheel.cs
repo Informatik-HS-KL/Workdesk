@@ -14,17 +14,35 @@ public class SteeringWheel : MonoBehaviour
     float yAngle = 0f;
 
     [SerializeField]
-    float xAngle = 0f;    
+    float xAngle = 0f;
 
     [SerializeField]
     float maxAngle = 0f;
 
     public bool activated3D;
+    private bool firstTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        activated3D = true;
+        firstTime = true;
+        activated3D = false;
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().writeOnScreen(activated3D);
+    }
+
+    public void toggle3D()
+    {
+        if (firstTime)
+        {
+            firstTime = false;
+        }
+        else
+        {
+            if (activated3D) activated3D = false;
+            else activated3D = true;
+        }
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().writeOnScreen(activated3D);
     }
 
     // Update is called once per frame
@@ -68,11 +86,11 @@ public class SteeringWheel : MonoBehaviour
 
         if (!activated3D)
         {
-            xAngle = 0f; // geht einzeln
-            //yAngle = 0f; //geht einzeln
-            zAngle = 0f; // geht einzeln
+            xAngle = 0f; // geht einzeln -> auch in VR
+            //yAngle = 0f; //geht einzeln -> auch in VR
+            zAngle = 0f; // geht einzeln -> auch in VR
         }
 
-        transform.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
+        transform.rotation = Quaternion.Euler(xAngle, yAngle, 0f);
     }
 }
