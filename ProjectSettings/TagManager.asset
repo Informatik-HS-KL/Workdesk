@@ -14,6 +14,7 @@ TagManager:
   - GrabbableObjectContainer
   - TurningPlateObjectContainer
   - ObjectControllerField
+  - Vehicle
   layers:
   - Default
   - TransparentFX

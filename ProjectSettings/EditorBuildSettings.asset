@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Workdesk.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/ShowRoom.unity
+    path: Assets/Scenes/CarShowRoom.unity
     guid: 60f3765b909d3e24fbb906e4989fa2e5
+  - enabled: 1
+    path: Assets/Scenes/BikeShowRoom.unity
+    guid: ba149ae2ca3502d4c88a91ada365e6be
   m_configObjects: {}

@@ -2522,57 +2522,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1001 &1005958590
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1990359371}
-    m_Modifications:
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1575230532945886, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2a54a37246f83164ba57b7f2be4849ac, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &1005958591 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4951375620991658, guid: 2a54a37246f83164ba57b7f2be4849ac,
-    type: 2}
-  m_PrefabInternal: {fileID: 1005958590}
 --- !u!1 &1075345800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,18 +2993,38 @@ Prefab:
     - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
         type: 2}
       propertyPath: m_FontData.m_FontSize
-      value: 30
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
         type: 2}
       propertyPath: m_FontData.m_MaxSize
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
         type: 2}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
+        type: 2}
+      propertyPath: m_FontData.m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
+        type: 2}
+      propertyPath: m_FontData.m_LineSpacing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
+        type: 2}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13db0b795570e514d9ca4d905d4abb93, type: 2}
   m_IsPrefabAsset: 0
@@ -4206,8 +4175,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0.04}
   m_LocalScale: {x: 2, y: 100, z: 2}
-  m_Children:
-  - {fileID: 1005958591}
+  m_Children: []
   m_Father: {fileID: 1441101559}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

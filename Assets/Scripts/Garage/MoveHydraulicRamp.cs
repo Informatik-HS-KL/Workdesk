@@ -11,12 +11,14 @@ public class MoveHydraulicRamp : MonoBehaviour
 {
     private GameObject[] lifts;
     private GameObject[] lamps;
-    private GameObject car;
+    private GameObject vehicle;
     private bool up;
     private bool down;
     private Vector3[] startPos;
     private Vector3[] endPos;
     private bool loaded;
+
+    public Material lightMaterial;
 
     private void Awake()
     {
@@ -33,10 +35,19 @@ public class MoveHydraulicRamp : MonoBehaviour
     /// </summary>
     private void switchLight()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < lamps.Length; i++)
         {
             if (lamps[i].GetComponent<Light>().enabled == true) lamps[i].GetComponent<Light>().enabled = false;
             else lamps[i].GetComponent<Light>().enabled = true;
+        }
+
+        if (lamps[0].GetComponent<Light>().enabled == false)
+        {
+            lightMaterial.SetColor("_EmissionColor", Color.black);
+        }
+        else
+        {
+            lightMaterial.SetColor("_EmissionColor", Color.white);
         }
     }
 
@@ -46,7 +57,7 @@ public class MoveHydraulicRamp : MonoBehaviour
         up = false;
         down = true;
         lifts = GameObject.FindGameObjectsWithTag("Lift");
-        car = GameObject.FindGameObjectWithTag("Car");
+        vehicle = GameObject.FindGameObjectWithTag("Vehicle");
         lamps = GameObject.FindGameObjectsWithTag("Lamp");
         loaded = false;
     }
@@ -58,9 +69,9 @@ public class MoveHydraulicRamp : MonoBehaviour
     {
         if (!loaded)
         {
-            startPos = new Vector3[4];
-            endPos = new Vector3[4];
-            for (int i = 0; i < 4; i++)
+            startPos = new Vector3[lifts.Length];
+            endPos = new Vector3[lifts.Length];
+            for (int i = 0; i < lifts.Length; i++)
             {
                 startPos[i] = lifts[i].gameObject.transform.localPosition;
                 endPos[i] = startPos[i] + new Vector3(0.0f, 2.0f, 0.0f);
@@ -78,7 +89,7 @@ public class MoveHydraulicRamp : MonoBehaviour
             up = false;
             if (down == false)
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < lifts.Length; i++)
                 {
                     if (lifts[i].transform.localPosition.y > startPos[i].y)
                     {
@@ -90,7 +101,7 @@ public class MoveHydraulicRamp : MonoBehaviour
                         down = true;
                     }
                 }
-                car.transform.localPosition -= new Vector3(0.0f, 0.01f, 0.0f);
+                vehicle.transform.localPosition -= new Vector3(0.0f, 0.01f, 0.0f);
             }
 
         }
@@ -99,7 +110,7 @@ public class MoveHydraulicRamp : MonoBehaviour
             down = false;
             if (up == false)
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < lifts.Length; i++)
                 {
                     if (lifts[i].transform.localPosition.y < endPos[i].y)
                     {
@@ -111,7 +122,7 @@ public class MoveHydraulicRamp : MonoBehaviour
                         up = true;
                     }
                 }
-                car.transform.localPosition += new Vector3(0.0f, 0.01f, 0.0f);
+                vehicle.transform.localPosition += new Vector3(0.0f, 0.01f, 0.0f);
             }
         }
 
