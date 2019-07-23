@@ -53,13 +53,17 @@ public class LoadObject : MonoBehaviour
         turningPlateObjectContainer.transform.parent.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Methode zur Aktivierung der verschiedenen Interaktionsmöglichkeiten.
+    /// </summary>
+    /// <param name="buttonName">Name des betätigten Knopfes.</param>
     public void activateContainer(string buttonName)
     {
         switch(buttonName)
         {
             case "TurnButton":
                 activateTurningPlateObjectContainer();
-                turningPlateObjectContainer.transform.parent.gameObject.GetComponent<SteeringWheel>().toggle3D();
+                turningPlateObjectContainer.transform.parent.gameObject.GetComponent<TurningPlate>().toggle3D();
                 load(1);
                 break;
             case "TrackButton":
@@ -73,6 +77,10 @@ public class LoadObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="objContainer"></param>
     private void load(int objContainer)
     {
         Debug.Log("ObjectContainer: " + objContainer);
