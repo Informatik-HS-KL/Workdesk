@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using HTC.UnityPlugin.Vive;
 
@@ -12,6 +13,8 @@ public class LoadObject : MonoBehaviour
     private GameObject grabbableObjectContainer;
     private GameObject trackerObjectContainer;
     private GameObject turningPlateObjectContainer;
+
+    private Dropdown objectDropdown;
 
     private List<GameObject> objectList = new List<GameObject>();
 
@@ -26,6 +29,9 @@ public class LoadObject : MonoBehaviour
         grabbableObjectContainer = GameObject.FindGameObjectWithTag("GrabbableObjectContainer");
         trackerObjectContainer = GameObject.FindGameObjectWithTag("TrackerObjectContainer");
         turningPlateObjectContainer = GameObject.FindGameObjectWithTag("TurningPlateObjectContainer");
+
+
+        objectDropdown = GameObject.FindGameObjectWithTag("ObjectDropdown").GetComponent<Dropdown>();
 
         chosenObject = 1;
         activatedObjectContainer = 0;
@@ -72,6 +78,17 @@ public class LoadObject : MonoBehaviour
     }
 
     /// <summary>
+    /// Methode zum Ändern des ausgewählten Objektes.
+    /// Wird aus dem GameController aufgerufen.
+    /// </summary>
+    /// <param name=""></param>
+    public void switchChosenObject()
+    {
+        chosenObject = objectDropdown.value;
+        reloadObject();
+    }
+
+    /// <summary>
     /// Methode zur Aktivierung der verschiedenen Interaktionsmöglichkeiten.
     /// </summary>
     /// <param name="buttonName">Name des betätigten Knopfes.</param>
@@ -81,7 +98,10 @@ public class LoadObject : MonoBehaviour
         {
             case "TurnButton":
                 activateTurningPlateObjectContainer();
-                turningPlateObjectContainer.transform.parent.gameObject.GetComponent<TurningPlate>().toggle3D();
+                if (turningPlateObjectContainer.transform.parent.gameObject.activeSelf == true)
+                {
+                    turningPlateObjectContainer.transform.parent.gameObject.GetComponent<TurningPlate>().toggle3D();
+                }
                 unloadObjects();
                 loadObject(1);
                 break;
@@ -112,10 +132,10 @@ public class LoadObject : MonoBehaviour
         if (!objectLoaded)
         {
             GameObject tempObj = objectList[chosenObject].transform.gameObject;
-            
+
             if (objContainer == 1)
             {
-                Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.parent.transform.position;                
+                Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.parent.transform.position;
                 GameObject clonedObject = Instantiate(tempObj, turningPlatePos, Quaternion.identity) as GameObject;
                 clonedObject.transform.parent = turningPlateObjectContainer.transform;
             }
@@ -134,6 +154,15 @@ public class LoadObject : MonoBehaviour
             else Debug.Log("Fehler bei der Auswahl des ObjectContainers!");
             objectLoaded = true;
         }
+    }
+
+    /// <summary>
+    /// Methode dient zum erneuten Laden eines Objektes, nachdem der User ein anderes ausgewählt hat.
+    /// </summary>
+    private void reloadObject()
+    {
+        unloadObjects();
+        loadObject(activatedObjectContainer);
     }
 
     /// <summary>

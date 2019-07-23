@@ -15,6 +15,7 @@ TagManager:
   - TurningPlateObjectContainer
   - ObjectControllerField
   - Vehicle
+  - ObjectDropdown
   layers:
   - Default
   - TransparentFX
