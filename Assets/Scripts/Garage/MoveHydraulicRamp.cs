@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Diese Klasse wird dazu genutzt, um die Hebebühne und das Auto zu bewegen. 
@@ -84,7 +85,11 @@ public class MoveHydraulicRamp : MonoBehaviour
     /// </summary>
     public void moveCar(string name)
     {
-        if (name.Equals("ButtonDown"))
+        if (name.Equals("ButtonBack"))
+        {
+            SceneManager.LoadScene("Workdesk");
+        }
+        else if (name.Equals("ButtonDown"))
         {
             up = false;
             if (down == false)
