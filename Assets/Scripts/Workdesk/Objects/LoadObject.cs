@@ -33,14 +33,13 @@ public class LoadObject : MonoBehaviour
 
         objectDropdown = GameObject.FindGameObjectWithTag("ObjectDropdown").GetComponent<Dropdown>();
 
-        chosenObject = 1;
+        chosenObject = 0;
         activatedObjectContainer = 0;
         objectLoaded = false;
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
 
-        Debug.Log("Listengröße: " + objectList.Count);
         activateGrabbableObjectContainer();
     }
 
@@ -103,21 +102,21 @@ public class LoadObject : MonoBehaviour
                     turningPlateObjectContainer.transform.parent.gameObject.GetComponent<TurningPlate>().toggle3D();
                 }
                 unloadObjects();
-                loadObject(1);
+                loadObjectInContainer(1);
                 break;
             case "TrackButton":
                 activateTrackerObjectContainer();
                 unloadObjects();
-                loadObject(2);
+                loadObjectInContainer(2);
                 break;
             case "GrabButton":
                 activateGrabbableObjectContainer();
                 unloadObjects();
-                loadObject(3);
+                loadObjectInContainer(3);
                 break;
             case "TeleportButton":
                 unloadObjects();
-                teleport();
+                transform.GetComponent<ChangeScene>().loadScene(chosenObject);
                 break;
         }
     }
@@ -126,7 +125,7 @@ public class LoadObject : MonoBehaviour
     /// Methode zum Laden des ausgewählten Objektes und Einfügen an den richtigen Objekt Container.
     /// </summary>
     /// <param name="objContainer"></param>
-    private void loadObject(int objContainer)
+    private void loadObjectInContainer(int objContainer)
     {
         activatedObjectContainer = objContainer;
         if (!objectLoaded)
@@ -162,16 +161,7 @@ public class LoadObject : MonoBehaviour
     private void reloadObject()
     {
         unloadObjects();
-        loadObject(activatedObjectContainer);
-    }
-
-    /// <summary>
-    /// Methode zum teleportieren in eine andere Szene, je nach ausgewähltem Objekt.
-    /// </summary>
-    private void teleport()
-    {
-        if (chosenObject == 0) SceneManager.LoadScene("BikeShowRoom");
-        else if (chosenObject == 1) SceneManager.LoadScene("CarShowRoom");
+        loadObjectInContainer(activatedObjectContainer);
     }
 
     /// <summary>

@@ -10,8 +10,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MoveHydraulicRamp : MonoBehaviour
 {
-    private GameObject[] lifts;
-    private GameObject[] lamps;
+    private GameObject[] lifts = null;
+    private GameObject[] lamps = null;
     private GameObject vehicle;
     private bool up;
     private bool down;
@@ -24,11 +24,22 @@ public class MoveHydraulicRamp : MonoBehaviour
     private void Awake()
     {
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, switchLight);
+        lifts = GameObject.FindGameObjectsWithTag("Lift");
+        vehicle = GameObject.FindGameObjectWithTag("Vehicle");
+        lamps = GameObject.FindGameObjectsWithTag("Lamp");
     }
 
     private void OnDestroy()
     {
         ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, switchLight);
+    }
+
+    // Wird zur Initialisierung genutzt.
+    void Start()
+    {
+        up = false;
+        down = true;
+        loaded = false;
     }
 
     /// <summary>
@@ -50,26 +61,16 @@ public class MoveHydraulicRamp : MonoBehaviour
         {
             lightMaterial.SetColor("_EmissionColor", Color.white);
         }
-    }
-
-    // Wird zur Initialisierung genutzt.
-    void Start()
-    {
-        up = false;
-        down = true;
-        lifts = GameObject.FindGameObjectsWithTag("Lift");
-        vehicle = GameObject.FindGameObjectWithTag("Vehicle");
-        lamps = GameObject.FindGameObjectsWithTag("Lamp");
-        loaded = false;
-    }
+    }    
 
     /// <summary>
     /// Methode um die Positionen der vier bewegenden Liftplatten zu speichern.
     /// </summary>
     public void savePositions()
     {
-        if (!loaded)
+        if (!loaded && lifts != null)
         {
+            loaded = true;
             startPos = new Vector3[lifts.Length];
             endPos = new Vector3[lifts.Length];
             for (int i = 0; i < lifts.Length; i++)
@@ -77,7 +78,7 @@ public class MoveHydraulicRamp : MonoBehaviour
                 startPos[i] = lifts[i].gameObject.transform.localPosition;
                 endPos[i] = startPos[i] + new Vector3(0.0f, 2.0f, 0.0f);
             }
-        }
+        }        
     }
 
     /// <summary>
@@ -85,11 +86,7 @@ public class MoveHydraulicRamp : MonoBehaviour
     /// </summary>
     public void moveCar(string name)
     {
-        if (name.Equals("ButtonBack"))
-        {
-            SceneManager.LoadScene("Workdesk");
-        }
-        else if (name.Equals("ButtonDown"))
+        if (name.Equals("ButtonDown"))
         {
             up = false;
             if (down == false)

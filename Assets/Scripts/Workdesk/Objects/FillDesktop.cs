@@ -20,14 +20,24 @@ public class FillDesktop : MonoBehaviour
     private int resHeight;
 
     private string firstPersonString;
-    private string turn3DString;
+    private string turn3DStringDeactivated;
+    private string turn3DStringActivated;
+
+    private bool objectVision;
+    private bool scatterPlotVision;
+    private bool architectureVision;
 
     // Wird zur Initialisierung genutzt.
     void Start()
     {
+        objectVision = true;
+        scatterPlotVision = false;
+        architectureVision = false;
+
         firstPersonString = "First Person Camera in Standby.";
-        turn3DString = "3D turning deactivated.";
-        
+        turn3DStringDeactivated = "3D turning deactivated.";
+        turn3DStringActivated = "3D turning activated.";
+
         resWidth = 1920;
         resHeight = 1080;
 
@@ -73,15 +83,13 @@ public class FillDesktop : MonoBehaviour
 
     public void writeOnScreen(bool turn3D)
     {
-        if(turn3D)
+        if(turn3D && objectVision)
         {
-            turn3DString = "3D turning activated.";
-            screenText.text = firstPersonString + "\n" + turn3DString;
+            screenText.text = firstPersonString + "\n" + turn3DStringActivated;
         }
         else
         {
-            turn3DString = "3D turning deactivated.";
-            screenText.text = firstPersonString + "\n" + turn3DString;
+            screenText.text = firstPersonString + "\n" + turn3DStringDeactivated;
         }
     }
 
