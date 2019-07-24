@@ -13,6 +13,7 @@ public class LoadObject : MonoBehaviour
     private GameObject grabbableObjectContainer;
     private GameObject trackerObjectContainer;
     private GameObject turningPlateObjectContainer;
+    private GameObject objectsContainer;
 
     private Dropdown objectDropdown;
 
@@ -22,6 +23,7 @@ public class LoadObject : MonoBehaviour
     private int activatedObjectContainer;
 
     private bool objectLoaded;
+    private bool objectChosen;
 
     // Wird zur Initialisierung genutzt.
     void Start()
@@ -29,18 +31,40 @@ public class LoadObject : MonoBehaviour
         grabbableObjectContainer = GameObject.FindGameObjectWithTag("GrabbableObjectContainer");
         trackerObjectContainer = GameObject.FindGameObjectWithTag("TrackerObjectContainer");
         turningPlateObjectContainer = GameObject.FindGameObjectWithTag("TurningPlateObjectContainer");
-
+        objectsContainer = GameObject.FindGameObjectWithTag("Object");
 
         objectDropdown = GameObject.FindGameObjectWithTag("ObjectDropdown").GetComponent<Dropdown>();
 
         chosenObject = 0;
-        activatedObjectContainer = 0;
+        objectDropdown.value = chosenObject;
+        activatedObjectContainer = 1;
         objectLoaded = false;
+        objectChosen = true;
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
+        activateObjects();        
+    }
 
-        activateGrabbableObjectContainer();
+    public void activateObjects()
+    {
+        if (!objectChosen)
+        {
+            objectChosen = true;
+            objectsContainer.SetActive(true);
+        }
+
+        loadObjectInContainer(1);        
+        activateTurningPlateObjectContainer();                
+    }
+
+    public void deactivateObjects()
+    {
+        deactivateAllContainers();
+        chosenObject = 0;
+        objectDropdown.value = chosenObject;
+        activatedObjectContainer = 1;
+        objectsContainer.SetActive(false);
     }
 
     /// <summary>
@@ -74,6 +98,16 @@ public class LoadObject : MonoBehaviour
         grabbableObjectContainer.gameObject.SetActive(false);
         trackerObjectContainer.gameObject.SetActive(false);
         turningPlateObjectContainer.transform.parent.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Methode um alle Container zu deaktivieren, sobald ein anderer Task ausgewählt wird.
+    /// </summary>
+    public void deactivateAllContainers()
+    {
+        grabbableObjectContainer.gameObject.SetActive(false);
+        trackerObjectContainer.gameObject.SetActive(false);
+        turningPlateObjectContainer.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -132,19 +166,20 @@ public class LoadObject : MonoBehaviour
         {
             GameObject tempObj = objectList[chosenObject].transform.gameObject;
 
-            if (objContainer == 1)
+            if (objContainer == 1)  //Turning Table
             {
                 Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.parent.transform.position;
+                turningPlatePos = turningPlatePos + tempObj.transform.position;
                 GameObject clonedObject = Instantiate(tempObj, turningPlatePos, Quaternion.identity) as GameObject;
                 clonedObject.transform.parent = turningPlateObjectContainer.transform;
             }
-            else if (objContainer == 2)
+            else if (objContainer == 2) //Tracker
             {
                 Vector3 trackerPos = trackerObjectContainer.transform.parent.transform.position;
                 GameObject clonedObject = Instantiate(tempObj, trackerPos, Quaternion.identity) as GameObject;
                 clonedObject.transform.parent = trackerObjectContainer.transform;
             }
-            else if (objContainer == 3)
+            else if (objContainer == 3) //Grab
             {
                 GameObject clonedObject = Instantiate(tempObj, new Vector3(0.2f, 0.8f, 0.2f), Quaternion.identity) as GameObject;
                 clonedObject.transform.parent = grabbableObjectContainer.transform;

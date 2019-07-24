@@ -16,6 +16,9 @@ TagManager:
   - ObjectControllerField
   - Vehicle
   - ObjectDropdown
+  - Objects
+  - Scatterplots
+  - Architecture
   layers:
   - Default
   - TransparentFX
