@@ -31,7 +31,7 @@ public class LoadObject : MonoBehaviour
         grabbableObjectContainer = GameObject.FindGameObjectWithTag("GrabbableObjectContainer");
         trackerObjectContainer = GameObject.FindGameObjectWithTag("TrackerObjectContainer");
         turningPlateObjectContainer = GameObject.FindGameObjectWithTag("TurningPlateObjectContainer");
-        objectsContainer = GameObject.FindGameObjectWithTag("Object");
+        objectsContainer = GameObject.FindGameObjectWithTag("Objects");
 
         objectDropdown = GameObject.FindGameObjectWithTag("ObjectDropdown").GetComponent<Dropdown>();
 
@@ -43,10 +43,10 @@ public class LoadObject : MonoBehaviour
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
-        activateObjects();        
+        //activateObjects();
     }
 
-    public void activateObjects()
+    public void activateView()
     {
         if (!objectChosen)
         {
@@ -58,7 +58,7 @@ public class LoadObject : MonoBehaviour
         activateTurningPlateObjectContainer();                
     }
 
-    public void deactivateObjects()
+    public void deactivateView()
     {
         deactivateAllContainers();
         chosenObject = 0;
