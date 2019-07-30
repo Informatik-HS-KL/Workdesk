@@ -12,8 +12,6 @@ public class ClickButtonHydraulicRamp : MonoBehaviour
     public GameObject buttonObject;
     public Vector3 buttonDownDisplacement;
 
-    private GameObject buttonBase;
-    private GameObject button;
     private float startPosY;
     private float endPosY;
     private bool exit;
@@ -26,26 +24,8 @@ public class ClickButtonHydraulicRamp : MonoBehaviour
         stay = false;
         startPosY = buttonObject.transform.localPosition.y;
         endPosY = startPosY + buttonDownDisplacement.y;
-        getButtonGameObjects();
 
         GameObject.FindGameObjectWithTag("GameController").GetComponent<MoveHydraulicRamp>().savePositions();
-    }
-
-    /// <summary>
-    /// Liest die zwei GameObjects des Knopfes zur späteren Verwendung aus.
-    /// </summary>
-    private void getButtonGameObjects()
-    {
-        if (this.transform.GetChild(0).name.Equals("Base") || this.transform.GetChild(0).name.Equals("base"))
-        {
-            buttonBase = this.transform.GetChild(0).gameObject;
-            button = this.transform.GetChild(1).gameObject;
-        }
-        else
-        {
-            buttonBase = this.transform.GetChild(1).gameObject;
-            button = this.transform.GetChild(0).gameObject;
-        }
     }
 
     /// <summary>

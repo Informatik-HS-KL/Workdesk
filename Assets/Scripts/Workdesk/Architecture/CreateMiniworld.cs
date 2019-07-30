@@ -7,18 +7,24 @@ using UnityEngine;
 /// </summary>
 public class CreateMiniworld : MonoBehaviour {
 
-    private GameObject architecture;
+    private GameObject architecture = null;
 
     // Wird zur Initialisierung genutzt.
     void Start () {
-        architecture = GameObject.FindGameObjectWithTag("Architecture");
+        findArchitectureObject();
 	}
+
+    private void findArchitectureObject()
+    {
+        architecture = GameObject.FindGameObjectWithTag("Architecture");
+    }
 
     /// <summary>
     /// Methode dient zur Aktivierung der Architekturansicht.
     /// </summary>
     public void activateView()
     {
+        if (architecture == null) findArchitectureObject();
         architecture.SetActive(true);
     }
 
@@ -27,6 +33,7 @@ public class CreateMiniworld : MonoBehaviour {
     /// </summary>
     public void deactivateView()
     {
+        if (architecture == null) findArchitectureObject();
         architecture.SetActive(false);
     }
 

@@ -3175,9 +3175,9 @@ GameObject:
   - component: {fileID: 1149719819}
   - component: {fileID: 1149719820}
   - component: {fileID: 1149719821}
+  - component: {fileID: 1149719824}
   - component: {fileID: 1149719822}
   - component: {fileID: 1149719823}
-  - component: {fileID: 1149719824}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
