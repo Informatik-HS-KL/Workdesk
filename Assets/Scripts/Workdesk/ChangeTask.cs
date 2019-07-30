@@ -9,14 +9,14 @@ using UnityEngine;
 public class ChangeTask : MonoBehaviour
 {
     private LoadObject loadObjectScript;
-    private ReadData readDataScript;
+    private BuildScatterplot buildScatterplotScript;
     private CreateMiniworld createMiniworldScript;
 
     // Use this for initialization
     void Start()
     {
         loadObjectScript = transform.GetComponent<LoadObject>();
-        readDataScript = transform.GetComponent<ReadData>();
+        buildScatterplotScript = transform.GetComponent<BuildScatterplot>();
         createMiniworldScript = transform.GetComponent<CreateMiniworld>();
 
         activateObjectView();
@@ -28,7 +28,7 @@ public class ChangeTask : MonoBehaviour
     private void activateObjectView()
     {
         loadObjectScript.activateView();
-        readDataScript.deactivateView();
+        buildScatterplotScript.deactivateView();
         createMiniworldScript.deactivateView();
     }
 
@@ -38,7 +38,7 @@ public class ChangeTask : MonoBehaviour
     private void activateScatterplotView()
     {
         loadObjectScript.deactivateView();
-        readDataScript.activateView();
+        buildScatterplotScript.activateView();
         createMiniworldScript.deactivateView();
     }
 
@@ -48,7 +48,7 @@ public class ChangeTask : MonoBehaviour
     private void activateArchitectureView()
     {
         loadObjectScript.deactivateView();
-        readDataScript.deactivateView();
+        buildScatterplotScript.deactivateView();
         createMiniworldScript.activateView();
     }
 

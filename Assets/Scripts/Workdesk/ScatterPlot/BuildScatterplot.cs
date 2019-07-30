@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Diese Klasse wird genutzt, um eine Scatterplot Matritzen zu erzeugen und in der Welt darzustellen.
 /// </summary>
-public class ReadData : MonoBehaviour
+public class BuildScatterplot : MonoBehaviour
 {
     private GameObject dataInput;
     private GameObject scatterplots;
