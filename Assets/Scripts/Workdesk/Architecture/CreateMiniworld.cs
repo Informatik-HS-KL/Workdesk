@@ -5,18 +5,22 @@ using UnityEngine;
 /// <summary>
 /// Diese Klasse dient dazu eine Miniaturszene zu erzeugen und sie auf dem Schreibtisch anzuzeigen.
 /// </summary>
-public class CreateMiniworld : MonoBehaviour {
+public class CreateMiniworld : MonoBehaviour
+{
 
     private GameObject architecture = null;
+    private FillDesktop fillDesktopScript;
 
     // Wird zur Initialisierung genutzt.
-    void Start () {
+    void Start()
+    {
         findArchitectureObject();
-	}
+    }
 
     private void findArchitectureObject()
     {
         architecture = GameObject.FindGameObjectWithTag("Architecture");
+        fillDesktopScript = transform.GetComponent<FillDesktop>();
     }
 
     /// <summary>
@@ -26,6 +30,7 @@ public class CreateMiniworld : MonoBehaviour {
     {
         if (architecture == null) findArchitectureObject();
         architecture.SetActive(true);
+        fillDesktopScript.openCamera();
     }
 
     /// <summary>
@@ -35,10 +40,12 @@ public class CreateMiniworld : MonoBehaviour {
     {
         if (architecture == null) findArchitectureObject();
         architecture.SetActive(false);
+        fillDesktopScript.closeCamera();
     }
 
     // Update wird einmal pro Frame aufgerufen.
-    void Update () {
-		
-	}
+    void Update()
+    {
+
+    }
 }

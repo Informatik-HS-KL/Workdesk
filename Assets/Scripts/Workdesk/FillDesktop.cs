@@ -43,14 +43,14 @@ public class FillDesktop : MonoBehaviour
 
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
 
-        if (GameObject.FindGameObjectWithTag("FirstPersonCamera") != null) findCamera();
+        if (GameObject.FindGameObjectWithTag("FirstPersonCamera") != null) openCamera();
     }
 
     /// <summary>
     /// Diese Methode sucht die First Person Kamera in der Szene und weißt sie dem Kameraobjekt zu. 
     /// Zusätzlich aktiviert sie die Anzeige auf dem Bildschirm.
     /// </summary>
-    public void findCamera()
+    public void openCamera()
     {
         firstPersonCam = GameObject.FindGameObjectWithTag("FirstPersonCamera").GetComponent<Camera>();
         rawPicture.gameObject.SetActive(true);
