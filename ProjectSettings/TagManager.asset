@@ -19,6 +19,17 @@ TagManager:
   - Objects
   - Scatterplots
   - Architecture
+  - Scatterplot
+  - Z Axis Label
+  - Y Axis Label
+  - X Axis Label
+  - TurningPlateScatterplotContainer
+  - DataPoint
+  - Attribute2
+  - Attribute3
+  - Attribute1
+  - ScatterplotMatrix
+  - TurningPlateScatterplot
   layers:
   - Default
   - TransparentFX

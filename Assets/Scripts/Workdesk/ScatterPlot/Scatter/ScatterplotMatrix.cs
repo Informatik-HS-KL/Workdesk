@@ -78,7 +78,7 @@ public class ScatterplotMatrix : MonoBehaviour
             scatterplot.Initialize(dataSource, matrixPosX, matrixPosZ, pointSize, xDim, yDim, zDim);
             scatterplots[i] = scatterplot;
 
-            scatterplot.transform.localScale += Vector3.one;
+            scatterplot.transform.localScale -= Vector3.one / 2;
 
             yield return null;
         }

@@ -41,30 +41,58 @@ public class Visualizer : MonoBehaviour
     /// The second dimension contains the three indeces of the column of the CSV-File.
     /// </summary>
     private int[,] possibleScatterplots;
-
+    private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
+
+    public Dropdown scatterplotDropdown;
+
+    private void loadOtherScatterplot(int elem)
+    {
+        LoadDataSource(dataFiles[elem]);
+    }
+
+    private void loadAllScatterplots()
+    {
+        //scatterplotDropdown = GameObject.Find("dropdown_input_files").GetComponent<Dropdown>();
+        scatterplotDropdown.onValueChanged.AddListener(loadOtherScatterplot);
+
+        dataFiles = Resources.LoadAll<TextAsset>(csvDirectoryName);
+        FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
+
+        dataFiles = new TextAsset[fileInfos.Length];
+        int textAssetIndex = 0;
+        foreach (FileInfo fileInfo in fileInfos)
+        {
+            scatterplotDropdown.options.Add(new Dropdown.OptionData() { text = fileInfo.Name });
+            dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
+            dataFiles[textAssetIndex++].name = fileInfo.Name;
+        }
+    }
 
     public void Awake()
     {
         dataSource = gameObject.AddComponent<CSVDataSource>();
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, create);
 
-        FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
+        /*FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
 
         dataFiles = new TextAsset[fileInfos.Length];
         int textAssetIndex = 0;
         foreach (FileInfo fileInfo in fileInfos)
-        {            
+        {
             dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
             dataFiles[textAssetIndex++].name = fileInfo.Name;
-        }
+        }*/
+
+        loadAllScatterplots();
+        create();
     }
 
     private void OnDestroy()
     {
         ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, create);
     }
-   
+
     public void LoadDataSource(TextAsset dataFile)
     {
         if (null != dataFile)
@@ -84,8 +112,8 @@ public class Visualizer : MonoBehaviour
         Debug.Log("Loading DataSource");
         LoadDataSource(dataFiles[0]);
         Debug.Log("Create ScatterPlot started");
-        int[] scatterplotIndices = { 0, 1, 2 };
-        CreateScatterplotMatrix(scatterplotIndices);        
+        int[] scatterplotIndices = {0};
+        CreateScatterplotMatrix(scatterplotIndices);
     }
 
     /// <summary>
@@ -104,16 +132,16 @@ public class Visualizer : MonoBehaviour
             }
 
             int[,] dimCombinations = new int[scatterplotIndices.GetLength(0), 3];
-            for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
+            //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
+            //{
+            int i = 0;
+            for (int j = 0; 3 > j; ++j)
             {
-                for (int j = 0; 3 > j; ++j)
-                {
-                    dimCombinations[i, j] = possibleScatterplots[scatterplotIndices[i], j];
-                }
+                dimCombinations[i, j] = possibleScatterplots[scatterplotIndices[i], j];
             }
+            //}
 
-            scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform)
-                .GetComponent<ScatterplotMatrix>();
+            scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();
             scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize);
             Debug.Log("ScatterplotMatrix was created.");
         }
@@ -121,6 +149,14 @@ public class Visualizer : MonoBehaviour
         {
             Debug.LogError("CSVDataSource was not loaded!");
         }
+    }
+
+    /// <summary>
+    /// Gibt den nächsten möglichen Scatterplot auf der Drehscheibe aus.
+    /// </summary>
+    public void nextPossibleScatterplot()
+    {
+
     }
 
     /// <summary>
@@ -136,7 +172,7 @@ public class Visualizer : MonoBehaviour
         {
             possibilities[i] = dataSource[possibleScatterplots[i, 0]].Identifier + " - "
                 + dataSource[possibleScatterplots[i, 1]].Identifier + " - "
-                + dataSource[possibleScatterplots[i, 2]].Identifier;
+                + dataSource[possibleScatterplots[i, 2]].Identifier;            
         }
         return possibilities;
     }
@@ -158,6 +194,7 @@ public class Visualizer : MonoBehaviour
             for (int j = 0; 3 > j; ++j)
             {
                 result[i, j] = combinations[i].ToArray()[j];
+                Debug.Log("+++++++++++" + result[i,j] + "++++++++++");
             }
         }
 
