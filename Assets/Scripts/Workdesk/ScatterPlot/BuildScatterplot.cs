@@ -61,7 +61,6 @@ public class BuildScatterplot : MonoBehaviour
 
     public void switchScatterplot()
     {
-        turningPlateScript.resetPosition();
         visualizerScript.loadOtherScatterplot(scatterplotDropdown.value);
     }
 

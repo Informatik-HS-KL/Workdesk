@@ -44,6 +44,7 @@ public class Visualizer : MonoBehaviour
     private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
     private int selectedScatterplot = 0;
+    private int chosenScatterplot = 0;
 
     public Dropdown scatterplotDropdown;
 
@@ -71,7 +72,7 @@ public class Visualizer : MonoBehaviour
     }
 
     public void Awake()
-    {
+    {        
         dataSource = gameObject.AddComponent<CSVDataSource>();
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
 
@@ -105,10 +106,8 @@ public class Visualizer : MonoBehaviour
 
     private void create()
     {
-        Debug.Log("Loading DataSource");
         LoadDataSource(dataFiles[selectedScatterplot]);
-        Debug.Log("Create ScatterPlot started");
-        int[] scatterplotIndices = { 0 };
+        int[] scatterplotIndices = { 0 , 1 };
         CreateScatterplotMatrix(scatterplotIndices);
     }
 
@@ -130,7 +129,7 @@ public class Visualizer : MonoBehaviour
             int[,] dimCombinations = new int[scatterplotIndices.GetLength(0), 3];
             //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
             //{
-            int chosenScatterplot = 0;
+            chosenScatterplot = 0;
             for (int j = 0; 3 > j; ++j)
             {
                 dimCombinations[chosenScatterplot, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
@@ -153,6 +152,7 @@ public class Visualizer : MonoBehaviour
     public void nextPossibleScatterplot()
     {
         Debug.Log("NEXT SCATTERPLOT");
+        
     }
 
     /// <summary>
@@ -190,11 +190,15 @@ public class Visualizer : MonoBehaviour
             for (int j = 0; 3 > j; ++j)
             {
                 result[i, j] = combinations[i].ToArray()[j];
-                //Debug.Log("+++++++++++" + result[i,j] + "++++++++++");
             }
         }
 
         return result;
+    }
+
+    void Update()
+    {
+        
     }
 }
 

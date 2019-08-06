@@ -76,7 +76,6 @@ public class Scatterplot : MonoBehaviour
         GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("TurningPlateScatterplot");
         Transform scatterplotPlateTransform = scatterplotPlate.GetComponent<Transform>();
 
-        Debug.Log("CREATE DATAPOINTS");
         dataPoints = new DataPoint[dataSource.DataCount];
         for (int i = 0; dataSource.DataCount > i; ++i)
         {
@@ -128,7 +127,7 @@ public class Scatterplot : MonoBehaviour
     /// dramatically.
     /// </summary>
     /// <param name="iSelection"></param>
-    /*protected void OnMVRWandEnter(VRSelection iSelection)
+    protected void activateColliders()
     {
         foreach (Transform scatterplot in transform.parent)
         {
@@ -145,5 +144,5 @@ public class Scatterplot : MonoBehaviour
                 }
             }
         }
-    }*/
+    }
 }
