@@ -48,12 +48,27 @@ public class Visualizer : MonoBehaviour
 
     public Dropdown scatterplotDropdown;
 
+    public void Awake()
+    {
+        dataSource = gameObject.AddComponent<CSVDataSource>();
+        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
+
+        loadAllScatterplots();
+        create();
+    }
+
+    private void OnDestroy()
+    {
+        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
+    }
+
     public void loadOtherScatterplot(int elem)
     {
         selectedScatterplot = elem;
         LoadDataSource(dataFiles[selectedScatterplot]);
         int[] scatterplotIndices = { 0 };
         CreateScatterplotMatrix(scatterplotIndices);
+        
     }
 
     private void loadAllScatterplots()
@@ -69,20 +84,6 @@ public class Visualizer : MonoBehaviour
             dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
             dataFiles[textAssetIndex++].name = fileInfo.Name;
         }
-    }
-
-    public void Awake()
-    {        
-        dataSource = gameObject.AddComponent<CSVDataSource>();
-        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
-
-        loadAllScatterplots();
-        create();
-    }
-
-    private void OnDestroy()
-    {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
     }
 
     public void LoadDataSource(TextAsset dataFile)
@@ -107,7 +108,7 @@ public class Visualizer : MonoBehaviour
     private void create()
     {
         LoadDataSource(dataFiles[selectedScatterplot]);
-        int[] scatterplotIndices = { 0 , 1 };
+        int[] scatterplotIndices = { 0, 1 };
         CreateScatterplotMatrix(scatterplotIndices);
     }
 
@@ -152,7 +153,7 @@ public class Visualizer : MonoBehaviour
     public void nextPossibleScatterplot()
     {
         Debug.Log("NEXT SCATTERPLOT");
-        
+
     }
 
     /// <summary>
@@ -194,11 +195,6 @@ public class Visualizer : MonoBehaviour
         }
 
         return result;
-    }
-
-    void Update()
-    {
-        
     }
 }
 

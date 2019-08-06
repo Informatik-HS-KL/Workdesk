@@ -7,9 +7,9 @@ public class LookAtCamera : MonoBehaviour
     /// </summary>
     private GameObject headNode;
 
-    void Start()
+    private void Awake()
     {
-        headNode = GameObject.Find("HeadNode");
+        headNode = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void Update()

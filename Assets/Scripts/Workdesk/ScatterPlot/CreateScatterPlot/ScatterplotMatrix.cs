@@ -74,7 +74,10 @@ public class ScatterplotMatrix : MonoBehaviour
             int yDim = dimCombinations[i, 1];
             int zDim = dimCombinations[i, 2];
 
-            Scatterplot scatterplot = Instantiate(scatterplotPrefab, transform).GetComponent<Scatterplot>();
+            Transform tempTransform = transform;
+            tempTransform.position += new Vector3(0f, 0.02f, 0f);
+
+            Scatterplot scatterplot = Instantiate(scatterplotPrefab, tempTransform).GetComponent<Scatterplot>();
             scatterplot.Initialize(dataSource, matrixPosX, matrixPosZ, pointSize, xDim, yDim, zDim);
             scatterplots[i] = scatterplot;
 

@@ -80,7 +80,7 @@ public class Scatterplot : MonoBehaviour
         for (int i = 0; dataSource.DataCount > i; ++i)
         {
             Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotPlateTransform.position.x,
-                dataSource[yDim].Data[i] + scatterplotPlateTransform.position.y, dataSource[zDim].Data[i] + scatterplotPlateTransform.position.z);            
+                dataSource[yDim].Data[i] + scatterplotPlateTransform.position.y + 0.02f, dataSource[zDim].Data[i] + scatterplotPlateTransform.position.z);
             DataPoint dataPoint = Instantiate(pointPrefab, transform).GetComponent<DataPoint>();
             dataPoint.Initialize(i, pointSize, position);
             dataPoints[i] = dataPoint;
@@ -126,8 +126,7 @@ public class Scatterplot : MonoBehaviour
     /// disabled. This reduces the amount of active colliders at a time
     /// dramatically.
     /// </summary>
-    /// <param name="iSelection"></param>
-    protected void activateColliders()
+    /*protected void activateColliders()
     {
         foreach (Transform scatterplot in transform.parent)
         {
@@ -144,5 +143,5 @@ public class Scatterplot : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }
