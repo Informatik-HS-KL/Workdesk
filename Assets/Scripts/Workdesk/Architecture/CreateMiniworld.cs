@@ -7,14 +7,20 @@ using UnityEngine;
 /// </summary>
 public class CreateMiniworld : MonoBehaviour
 {
-
     private GameObject architecture = null;
     private FillDesktop fillDesktopScript;
+
+    private bool isActive = true;
+
+    private void Awake()
+    {
+        findArchitectureObject();
+    }
 
     // Wird zur Initialisierung genutzt.
     void Start()
     {
-        findArchitectureObject();
+
     }
 
     private void findArchitectureObject()
@@ -28,9 +34,13 @@ public class CreateMiniworld : MonoBehaviour
     /// </summary>
     public void activateView()
     {
-        if (architecture == null) findArchitectureObject();
-        architecture.SetActive(true);
-        fillDesktopScript.openCamera();
+        if (!isActive)
+        {
+            isActive = true;
+            if (architecture == null) findArchitectureObject();
+            architecture.SetActive(true);
+            fillDesktopScript.openCamera();
+        }
     }
 
     /// <summary>
@@ -38,9 +48,13 @@ public class CreateMiniworld : MonoBehaviour
     /// </summary>
     public void deactivateView()
     {
-        if (architecture == null) findArchitectureObject();
-        architecture.SetActive(false);
-        fillDesktopScript.closeCamera();
+        if (isActive)
+        {
+            isActive = false;
+            if (architecture == null) findArchitectureObject();
+            architecture.SetActive(false);
+            fillDesktopScript.closeCamera();
+        }
     }
 
     // Update wird einmal pro Frame aufgerufen.

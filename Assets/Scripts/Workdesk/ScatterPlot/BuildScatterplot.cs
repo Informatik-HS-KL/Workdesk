@@ -10,6 +10,7 @@ public class BuildScatterplot : MonoBehaviour
     private GameObject dataInput;
     private GameObject scatterplots;
 
+    private bool isActive = true;
     // Wird zur Initialisierung genutzt.
     void Start()
     {
@@ -22,7 +23,11 @@ public class BuildScatterplot : MonoBehaviour
     /// </summary>
     public void activateView()
     {
-        scatterplots.SetActive(true);
+        if (!isActive)
+        {
+            isActive = true;
+            scatterplots.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -30,7 +35,11 @@ public class BuildScatterplot : MonoBehaviour
     /// </summary>
     public void deactivateView()
     {
-        scatterplots.SetActive(false);
+        if (isActive)
+        {
+            isActive = false;
+            scatterplots.SetActive(false);
+        }
     }
 
     // Update wird einmal pro Frame aufgerufen.

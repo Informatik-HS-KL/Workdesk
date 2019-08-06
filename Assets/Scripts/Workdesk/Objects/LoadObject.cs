@@ -24,9 +24,9 @@ public class LoadObject : MonoBehaviour
 
     private bool objectLoaded;
     private bool objectChosen;
+    private bool isActive = true;
 
-    // Wird zur Initialisierung genutzt.
-    void Start()
+    private void Awake()
     {
         grabbableObjectContainer = GameObject.FindGameObjectWithTag("GrabbableObjectContainer");
         trackerObjectContainer = GameObject.FindGameObjectWithTag("TrackerObjectContainer");
@@ -34,7 +34,11 @@ public class LoadObject : MonoBehaviour
         objectsContainer = GameObject.FindGameObjectWithTag("Objects");
 
         objectDropdown = GameObject.FindGameObjectWithTag("ObjectDropdown").GetComponent<Dropdown>();
+    }
 
+    // Wird zur Initialisierung genutzt.
+    void Start()
+    {
         chosenObject = 0;
         objectDropdown.value = chosenObject;
         activatedObjectContainer = 1;
@@ -43,28 +47,36 @@ public class LoadObject : MonoBehaviour
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
-        //activateObjects();
     }
 
     public void activateView()
     {
-        if (!objectChosen)
+        if (!isActive)
         {
-            objectChosen = true;
-            objectsContainer.SetActive(true);
-        }
+            Debug.Log("AKTIV");
+            isActive = true;
+            //if (!objectChosen)
+            //{
+                objectChosen = true;
+                objectsContainer.SetActive(true);
+            //}
 
-        loadObjectInContainer(1);        
-        activateTurningPlateObjectContainer();                
+            loadObjectInContainer(1);
+            activateTurningPlateObjectContainer();
+        }
     }
 
     public void deactivateView()
     {
-        deactivateAllContainers();
-        chosenObject = 0;
-        objectDropdown.value = chosenObject;
-        activatedObjectContainer = 1;
-        objectsContainer.SetActive(false);
+        if (isActive)
+        {
+            isActive = false;
+            deactivateAllContainers();
+            chosenObject = 0;
+            objectDropdown.value = chosenObject;
+            activatedObjectContainer = 1;
+            objectsContainer.SetActive(false);
+        }
     }
 
     /// <summary>
