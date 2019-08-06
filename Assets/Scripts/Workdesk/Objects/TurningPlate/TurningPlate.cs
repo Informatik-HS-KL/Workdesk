@@ -30,6 +30,14 @@ public class TurningPlate : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().writeOnScreen(activated3D);
     }
 
+    public void resetPosition()
+    {
+        Debug.Log("RESET POSITION");
+        xAngle = 0f;
+        yAngle = 0f;
+        zAngle = 0f;
+    }
+
     /// <summary>
     /// Diese Methode dient zum Umschalten der TurningPlate zwischen 2D und 3D Modus.
     /// </summary>

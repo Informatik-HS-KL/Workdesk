@@ -42,7 +42,7 @@ public class DataPoint : MonoBehaviour
     /// <param name="pointSize"></param>
     /// <param name="position"></param>
     public void Initialize(int index, float pointSize, Vector3 position)
-    {
+    {        
         this.index = index;
         this.pointSize = pointSize;
         transform.position = position;

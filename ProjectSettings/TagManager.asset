@@ -30,6 +30,10 @@ TagManager:
   - Attribute1
   - ScatterplotMatrix
   - TurningPlateScatterplot
+  - ScatterplotDropdown
+  - Visualizer
+  - ScatterplotPlate
+  - Screen
   layers:
   - Default
   - TransparentFX

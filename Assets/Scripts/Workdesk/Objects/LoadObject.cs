@@ -23,7 +23,6 @@ public class LoadObject : MonoBehaviour
     private int activatedObjectContainer;
 
     private bool objectLoaded;
-    private bool objectChosen;
     private bool isActive = true;
 
     private void Awake()
@@ -43,7 +42,6 @@ public class LoadObject : MonoBehaviour
         objectDropdown.value = chosenObject;
         activatedObjectContainer = 1;
         objectLoaded = false;
-        objectChosen = true;
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
@@ -53,14 +51,8 @@ public class LoadObject : MonoBehaviour
     {
         if (!isActive)
         {
-            Debug.Log("AKTIV");
             isActive = true;
-            //if (!objectChosen)
-            //{
-                objectChosen = true;
-                objectsContainer.SetActive(true);
-            //}
-
+            objectsContainer.SetActive(true);
             loadObjectInContainer(1);
             activateTurningPlateObjectContainer();
         }

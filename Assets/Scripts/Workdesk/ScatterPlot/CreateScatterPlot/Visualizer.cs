@@ -43,19 +43,20 @@ public class Visualizer : MonoBehaviour
     private int[,] possibleScatterplots;
     private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
+    private int selectedScatterplot = 0;
 
     public Dropdown scatterplotDropdown;
 
-    private void loadOtherScatterplot(int elem)
+    public void loadOtherScatterplot(int elem)
     {
-        LoadDataSource(dataFiles[elem]);
+        selectedScatterplot = elem;
+        LoadDataSource(dataFiles[selectedScatterplot]);
+        int[] scatterplotIndices = { 0 };
+        CreateScatterplotMatrix(scatterplotIndices);
     }
 
     private void loadAllScatterplots()
     {
-        //scatterplotDropdown = GameObject.Find("dropdown_input_files").GetComponent<Dropdown>();
-        scatterplotDropdown.onValueChanged.AddListener(loadOtherScatterplot);
-
         dataFiles = Resources.LoadAll<TextAsset>(csvDirectoryName);
         FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
 
@@ -72,17 +73,7 @@ public class Visualizer : MonoBehaviour
     public void Awake()
     {
         dataSource = gameObject.AddComponent<CSVDataSource>();
-        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, create);
-
-        /*FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
-
-        dataFiles = new TextAsset[fileInfos.Length];
-        int textAssetIndex = 0;
-        foreach (FileInfo fileInfo in fileInfos)
-        {
-            dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
-            dataFiles[textAssetIndex++].name = fileInfo.Name;
-        }*/
+        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
 
         loadAllScatterplots();
         create();
@@ -90,7 +81,7 @@ public class Visualizer : MonoBehaviour
 
     private void OnDestroy()
     {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, create);
+        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
     }
 
     public void LoadDataSource(TextAsset dataFile)
@@ -107,12 +98,17 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    private void resetPos()
+    {
+        GameObject.FindGameObjectWithTag("ScatterplotPlate").GetComponent<TurningPlate>().resetPosition();
+    }
+
     private void create()
     {
         Debug.Log("Loading DataSource");
-        LoadDataSource(dataFiles[0]);
+        LoadDataSource(dataFiles[selectedScatterplot]);
         Debug.Log("Create ScatterPlot started");
-        int[] scatterplotIndices = {0};
+        int[] scatterplotIndices = { 0 };
         CreateScatterplotMatrix(scatterplotIndices);
     }
 
@@ -134,10 +130,10 @@ public class Visualizer : MonoBehaviour
             int[,] dimCombinations = new int[scatterplotIndices.GetLength(0), 3];
             //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
             //{
-            int i = 0;
+            int chosenScatterplot = 0;
             for (int j = 0; 3 > j; ++j)
             {
-                dimCombinations[i, j] = possibleScatterplots[scatterplotIndices[i], j];
+                dimCombinations[chosenScatterplot, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
             }
             //}
 
@@ -156,7 +152,7 @@ public class Visualizer : MonoBehaviour
     /// </summary>
     public void nextPossibleScatterplot()
     {
-
+        Debug.Log("NEXT SCATTERPLOT");
     }
 
     /// <summary>
@@ -172,7 +168,7 @@ public class Visualizer : MonoBehaviour
         {
             possibilities[i] = dataSource[possibleScatterplots[i, 0]].Identifier + " - "
                 + dataSource[possibleScatterplots[i, 1]].Identifier + " - "
-                + dataSource[possibleScatterplots[i, 2]].Identifier;            
+                + dataSource[possibleScatterplots[i, 2]].Identifier;
         }
         return possibilities;
     }
@@ -194,7 +190,7 @@ public class Visualizer : MonoBehaviour
             for (int j = 0; 3 > j; ++j)
             {
                 result[i, j] = combinations[i].ToArray()[j];
-                Debug.Log("+++++++++++" + result[i,j] + "++++++++++");
+                //Debug.Log("+++++++++++" + result[i,j] + "++++++++++");
             }
         }
 

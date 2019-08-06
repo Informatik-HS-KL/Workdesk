@@ -74,14 +74,14 @@ public class Scatterplot : MonoBehaviour
         GameObject pointPrefab = Resources.Load<GameObject>("Prefabs/Scatterplot/DataPoint");
 
         GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("TurningPlateScatterplot");
-        Transform scatterplotPlatePosition = scatterplotPlate.GetComponent<Transform>();
+        Transform scatterplotPlateTransform = scatterplotPlate.GetComponent<Transform>();
 
-
+        Debug.Log("CREATE DATAPOINTS");
         dataPoints = new DataPoint[dataSource.DataCount];
         for (int i = 0; dataSource.DataCount > i; ++i)
         {
-            Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotPlatePosition.position.x,
-                dataSource[yDim].Data[i] + scatterplotPlatePosition.position.y, dataSource[zDim].Data[i] + scatterplotPlatePosition.position.z);
+            Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotPlateTransform.position.x,
+                dataSource[yDim].Data[i] + scatterplotPlateTransform.position.y, dataSource[zDim].Data[i] + scatterplotPlateTransform.position.z);            
             DataPoint dataPoint = Instantiate(pointPrefab, transform).GetComponent<DataPoint>();
             dataPoint.Initialize(i, pointSize, position);
             dataPoints[i] = dataPoint;
