@@ -40,8 +40,6 @@ GameObject:
   - component: {fileID: 23874540990998684}
   - component: {fileID: 135924122206073388}
   - component: {fileID: 114176070757825396}
-  - component: {fileID: 223253368385013112}
-  - component: {fileID: 114981193068905936}
   m_Layer: 0
   m_Name: DataPoint
   m_TagString: DataPoint
@@ -462,18 +460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ea14f6bf30b54459d6dae113fc9561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114981193068905936
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244592275092420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d518a00ceacb57f4d94b3cc806d60f40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
 --- !u!135 &135924122206073388
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -486,26 +472,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!223 &223253368385013112
-Canvas:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244592275092420}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!224 &224810802894375106
 RectTransform:
   m_ObjectHideFlags: 1
