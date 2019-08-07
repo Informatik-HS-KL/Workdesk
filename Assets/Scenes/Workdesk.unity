@@ -192,6 +192,18 @@ Prefab:
       propertyPath: customModelActiveMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11411378, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: hideRenderModelOnGrab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411378, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: laserPointerActiveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411378, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: curvePointerActiveMode
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
   m_IsPrefabAsset: 0

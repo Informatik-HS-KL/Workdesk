@@ -27,7 +27,7 @@ public class DataPoint : MonoBehaviour
     }
 
     private Scatterplot scatterplot;
-    
+
     /// <summary>
     /// The dialog which holds the attribute values of this DataPoint.
     /// Will be shown when the DataPoint is selected.
@@ -42,7 +42,7 @@ public class DataPoint : MonoBehaviour
     /// <param name="pointSize"></param>
     /// <param name="position"></param>
     public void Initialize(int index, float pointSize, Vector3 position)
-    {        
+    {
         this.index = index;
         this.pointSize = pointSize;
         transform.position = position;
@@ -66,10 +66,10 @@ public class DataPoint : MonoBehaviour
         TextMesh attribute2 = attributes.transform.Find("attribute2").GetComponent<TextMesh>();
         TextMesh attribute3 = attributes.transform.Find("attribute3").GetComponent<TextMesh>();
 
-        attribute1.text = String.Format("{0}: {1}", data[0,0], data[0,1]);
-        attribute2.text = String.Format("{0}: {1}", data[1,0], data[1,1]);
-        attribute3.text = String.Format("{0}: {1}", data[2,0], data[2,1]);
-        
+        attribute1.text = String.Format("{0}: {1}", data[0, 0], data[0, 1]);
+        attribute2.text = String.Format("{0}: {1}", data[1, 0], data[1, 1]);
+        attribute3.text = String.Format("{0}: {1}", data[2, 0], data[2, 1]);
+
         Transform background = attributes.transform.Find("Background");
         Vector3 newScale = background.localScale;
         newScale.x = Mathf.Max(GetTextMeshWidth(attribute1), GetTextMeshWidth(attribute2), GetTextMeshWidth(attribute3));
@@ -108,7 +108,7 @@ public class DataPoint : MonoBehaviour
     {
         attributes.SetActive(show);
     }
-    
+
     /// <summary>
     /// Returns the data from the CSV-File which this DataPoint represents.
     /// The first dimension holds the three columns.

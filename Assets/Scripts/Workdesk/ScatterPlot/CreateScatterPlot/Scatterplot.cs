@@ -111,37 +111,4 @@ public class Scatterplot : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// This gets call if the Wand enters a Scatterplot.
-    /// Normally the colliders of the DataPoints are disabled.
-    /// This is done because Unity can only handle so many colliders
-    /// at once. If the user imports to many DataPoints, Unity 
-    /// throws an error. Because of this the colliders of the DataPoints
-    /// are only enabled if the Wand enters their Scatterplot. The
-    /// collider of this Scatterplot gets disabled so the Wand can 
-    /// interact with the DataPoints. Once another Scatterplot is entered
-    /// by the Wand the collider of the previous entered Scatterplot is
-    /// enabled again and the colliders of his included DataPoints are 
-    /// disabled. This reduces the amount of active colliders at a time
-    /// dramatically.
-    /// </summary>
-    /*protected void activateColliders()
-    {
-        foreach (Transform scatterplot in transform.parent)
-        {
-            Collider collider = scatterplot.GetComponent<BoxCollider>();
-            bool previouslySelected = !collider.enabled;
-
-            collider.enabled = previouslySelected;
-            foreach (Transform dataPoint in scatterplot)
-            {
-                collider = dataPoint.GetComponent<SphereCollider>();
-                if (null != collider)
-                {
-                    collider.enabled = !previouslySelected;
-                }
-            }
-        }
-    }*/
 }

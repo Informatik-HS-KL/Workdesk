@@ -24,7 +24,8 @@ public class ControllerManagerSample : MonoBehaviour
     {
         None,
         ActiveOnPadPressed,
-        ToggleByPadDoubleClick
+        ToggleByPadDoubleClick,
+        OnlyRightClick
     }
 
     // after changing following public fields in playing mode, call UpdateStatus() to apply changes
@@ -250,6 +251,11 @@ public class ControllerManagerSample : MonoBehaviour
                     ToggleLeftCurvePointer();
                     needUpdate = true;
                 }
+                break;
+
+            case CurvePointerActiveModeEnum.OnlyRightClick:
+                needUpdate |= SetRightCurvePointerActive(ViveInput.GetPressEx(HandRole.RightHand, ControllerButton.Pad));
+                needUpdate |= SetLeftCurvePointerActive(false);
                 break;
         }
 

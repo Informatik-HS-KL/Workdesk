@@ -21,6 +21,7 @@ public class BuildScatterplot : MonoBehaviour
     private void Awake()
     {
         screen = GameObject.FindGameObjectWithTag("Screen");
+        scatterplots = GameObject.FindGameObjectWithTag("Scatterplots");
         screen.SetActive(false);
         scatterplotDropdown = GameObject.FindGameObjectWithTag("ScatterplotDropdown").GetComponent<Dropdown>();
         visualizerScript = GameObject.FindGameObjectWithTag("Visualizer").GetComponent<Visualizer>();
