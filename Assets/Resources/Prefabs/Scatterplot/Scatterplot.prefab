@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4939129247251178}
   - component: {fileID: 33836971477255160}
   - component: {fileID: 23017152431113438}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4571160433477176}
   - component: {fileID: 33803687015022402}
   - component: {fileID: 23562059485988722}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4908356433087974}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Axes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4020339252828668}
   - component: {fileID: 33571710132161934}
   - component: {fileID: 23182073794913150}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4179358337168184}
   - component: {fileID: 33964337076518760}
   - component: {fileID: 23585899633115020}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4918727135448148}
   - component: {fileID: 114830964231781734}
   - component: {fileID: 65972489176465678}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Scatterplot
   m_TagString: Scatterplot
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4859791143680270}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Y Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4484343872565406}
   - component: {fileID: 33165485279642084}
   - component: {fileID: 23181100980078574}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4886379485859296}
   - component: {fileID: 23774771575813078}
   - component: {fileID: 102742928843197426}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Label
   m_TagString: Y Axis Label
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4959054668740840}
   - component: {fileID: 23446714580088224}
   - component: {fileID: 102894716991509122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Label
   m_TagString: Z Axis Label
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 4641464642970478}
   - component: {fileID: 33510496936616604}
   - component: {fileID: 23238517613981076}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4705704073261612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: X Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4927309918219612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Z Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 4718724194030476}
   - component: {fileID: 23649646203324964}
   - component: {fileID: 102213132350674048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Label
   m_TagString: X Axis Label
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 4175771329954486}
   - component: {fileID: 33739877121782422}
   - component: {fileID: 23389743541347420}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

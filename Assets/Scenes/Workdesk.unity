@@ -158,27 +158,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 493328, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 493328, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 493328, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 455230, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 455230, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 455230, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 416412, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
       propertyPath: m_RootOrder

@@ -143,10 +143,9 @@ public class DataPoint : MonoBehaviour
     /// This way if a DataPoint with a given index is selected, the
     /// same DataPoint in other Scatterplots are highlighted as well.
     /// </summary>
-    /// <param name="iSelection"></param>
-    /*protected void VRAction(VRSelection iSelection)
+    public void selectDatapoint()
     {
         ScatterplotMatrix scatterplotMatrix = scatterplot.GetComponentInParent<ScatterplotMatrix>();
         scatterplotMatrix.SelectDataPoint(index);
-    }*/
+    }
 }
