@@ -204,6 +204,22 @@ Prefab:
       propertyPath: curvePointerActiveMode
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029416, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfd31aaac017204885fcc03f0579a1a, type: 2}
   m_IsPrefabAsset: 0

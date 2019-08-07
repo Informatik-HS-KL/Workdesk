@@ -34,7 +34,7 @@ public class ChangeTask : MonoBehaviour
         buildScatterplotScript = transform.GetComponent<BuildScatterplot>();
         createMiniworldScript = transform.GetComponent<CreateMiniworld>();
 
-        activateObjectView();
+        activateScatterplotView();
     }
 
     /// <summary>

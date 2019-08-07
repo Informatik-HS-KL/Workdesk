@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Diese Klasse dient dazu eine Miniaturszene zu erzeugen und sie auf dem Schreibtisch anzuzeigen.
@@ -11,6 +12,7 @@ public class CreateMiniworld : MonoBehaviour
     private FillDesktop fillDesktopScript;
 
     private bool isActive = true;
+    private SceneManager manager;
 
     private void Awake()
     {
@@ -20,7 +22,7 @@ public class CreateMiniworld : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     void Start()
     {
-
+        
     }
 
     private void findArchitectureObject()
