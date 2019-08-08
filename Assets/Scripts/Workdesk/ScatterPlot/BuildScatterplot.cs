@@ -10,7 +10,6 @@ public class BuildScatterplot : MonoBehaviour
 {
     private GameObject dataInput;
     private GameObject scatterplots;
-    private GameObject screen;
 
     private Dropdown scatterplotDropdown;
     private Visualizer visualizerScript;
@@ -20,9 +19,7 @@ public class BuildScatterplot : MonoBehaviour
 
     private void Awake()
     {
-        screen = GameObject.FindGameObjectWithTag("Screen");
         scatterplots = GameObject.FindGameObjectWithTag("Scatterplots");
-        screen.SetActive(false);
         scatterplotDropdown = GameObject.FindGameObjectWithTag("ScatterplotDropdown").GetComponent<Dropdown>();
         visualizerScript = GameObject.FindGameObjectWithTag("Visualizer").GetComponent<Visualizer>();
         turningPlateScript = GameObject.FindGameObjectWithTag("ScatterplotPlate").GetComponent<TurningPlate>();
@@ -43,7 +40,6 @@ public class BuildScatterplot : MonoBehaviour
         {
             isActive = true;
             scatterplots.SetActive(true);
-            screen.SetActive(false);
         }
     }
 
@@ -56,7 +52,6 @@ public class BuildScatterplot : MonoBehaviour
         {
             isActive = false;
             scatterplots.SetActive(false);
-            screen.SetActive(true);
         }
     }
 

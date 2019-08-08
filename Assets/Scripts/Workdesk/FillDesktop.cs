@@ -10,7 +10,6 @@ using UnityEngine.Video;
 /// </summary>
 public class FillDesktop : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
     public RawImage rawPicture;
     public Text screenText;
 
@@ -83,7 +82,7 @@ public class FillDesktop : MonoBehaviour
 
     public void writeOnScreen(bool turn3D)
     {
-        if(turn3D && objectVision)
+        if (turn3D && objectVision)
         {
             screenText.text = firstPersonString + "\n" + turn3DStringActivated;
         }

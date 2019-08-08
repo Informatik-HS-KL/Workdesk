@@ -13,11 +13,17 @@ public class ChangeTask : MonoBehaviour
     private BuildScatterplot buildScatterplotScript;
     private CreateMiniworld createMiniworldScript;
 
+    private GameObject screen;
+    private GameObject vrScreen;
+    
     private void Awake()
     {
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.DPadLeft, ButtonEventType.Click, activateObjectView);
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.DPadUp, ButtonEventType.Click, activateScatterplotView);
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.DPadRight, ButtonEventType.Click, activateArchitectureView);
+
+        vrScreen = GameObject.FindGameObjectWithTag("VRScreen");
+        screen = GameObject.FindGameObjectWithTag("Screen");
     }
 
     private void OnDestroy()
@@ -34,7 +40,7 @@ public class ChangeTask : MonoBehaviour
         buildScatterplotScript = transform.GetComponent<BuildScatterplot>();
         createMiniworldScript = transform.GetComponent<CreateMiniworld>();
 
-        activateScatterplotView();
+        activateArchitectureView();
     }
 
     /// <summary>
@@ -45,6 +51,7 @@ public class ChangeTask : MonoBehaviour
         loadObjectScript.activateView();
         buildScatterplotScript.deactivateView();
         createMiniworldScript.deactivateView();
+        activateDesktopScreen();
     }
 
     /// <summary>
@@ -55,6 +62,7 @@ public class ChangeTask : MonoBehaviour
         loadObjectScript.deactivateView();
         buildScatterplotScript.activateView();
         createMiniworldScript.deactivateView();
+        deactivateScreens();
     }
 
     /// <summary>
@@ -65,8 +73,35 @@ public class ChangeTask : MonoBehaviour
         loadObjectScript.deactivateView();
         buildScatterplotScript.deactivateView();
         createMiniworldScript.activateView();
+        activateVRScreen();
     }
 
+    /// <summary>
+    /// Methode zum Aktivieren des VRScreens und Deaktivieren des DesktopScreens.
+    /// </summary>
+    private void activateVRScreen()
+    {
+        vrScreen.SetActive(true);
+        screen.SetActive(false);
+    }
+
+    /// <summary>
+    /// Methode zum Aktivieren des DesktopScreens und Deaktivieren des VRScreens.
+    /// </summary>
+    private void activateDesktopScreen()
+    {
+        vrScreen.SetActive(false);
+        screen.SetActive(true);
+    }
+
+    /// <summary>
+    /// Methode zum Deaktivieren von beiden Screens.
+    /// </summary>
+    private void deactivateScreens()
+    {
+        vrScreen.SetActive(false);
+        screen.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {

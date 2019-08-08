@@ -22,7 +22,7 @@ public class CreateMiniworld : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     void Start()
     {
-        
+
     }
 
     private void findArchitectureObject()
