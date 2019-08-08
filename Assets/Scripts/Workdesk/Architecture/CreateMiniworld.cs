@@ -12,6 +12,7 @@ public class CreateMiniworld : MonoBehaviour
     private GameObject miniPlayer;
     private GameObject vrOrigin;
     private FillDesktop fillDesktopScript;
+    private Maze mazeScript;
 
     private bool isActive = true;
     private Vector3 startPos;
@@ -19,16 +20,28 @@ public class CreateMiniworld : MonoBehaviour
     private bool inMaze;
 
     private void Awake()
-    {
-        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
-        ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
-
+    {        
+        //ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
+        //ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
         findArchitectureObject();
         miniPlayer = GameObject.FindGameObjectWithTag("MiniPlayer");
         vrOrigin = GameObject.FindGameObjectWithTag("VROrigin");
+        mazeScript = GameObject.FindGameObjectWithTag("GameController").transform.GetComponent<Maze>();
     }
-                   
+
     private void OnDestroy()
+    {
+        //ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
+        //ViveInput.RemoveListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
+    }
+
+    public void activateListener()
+    {
+        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
+        ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
+    }
+
+    private void deactivateListener()
     {
         ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
         ViveInput.RemoveListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
@@ -54,10 +67,12 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (!isActive)
         {
+            activateListener();
             isActive = true;
             if (architecture == null) findArchitectureObject();
             architecture.SetActive(true);
             fillDesktopScript.openCamera();
+            mazeScript.buildMaze();
         }
     }
 
@@ -68,10 +83,13 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (isActive)
         {
+            teleportToDesk();
+            mazeScript.reset();
+            deactivateListener();
             isActive = false;
             if (architecture == null) findArchitectureObject();
             architecture.SetActive(false);
-            fillDesktopScript.closeCamera();
+            fillDesktopScript.closeCamera();            
         }
     }
 
@@ -112,14 +130,10 @@ public class CreateMiniworld : MonoBehaviour
             float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
 
             Vector3 tempVector = new Vector3((localXPos * scaleXZ), (localYPos * scaleY), (localZPos * scaleXZ));
-
-            Debug.Log("RotationY " + GameObject.FindGameObjectWithTag("MainCamera").transform.eulerAngles.y);
             
             miniPlayer.transform.localPosition = tempVector;
             miniPlayer.transform.eulerAngles = new Vector3(miniPlayer.transform.eulerAngles.x, GameObject.FindGameObjectWithTag("MainCamera").transform.eulerAngles.y, miniPlayer.transform.eulerAngles.z);
             vrOrigin.transform.eulerAngles = new Vector3(vrOrigin.transform.eulerAngles.x, 0.0f, vrOrigin.transform.eulerAngles.z);
-
-            Debug.Log("MiniPlayerY " + miniPlayer.transform.eulerAngles.y);
 
             vrOrigin.transform.position = startPos;
         }

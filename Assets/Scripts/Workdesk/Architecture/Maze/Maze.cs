@@ -21,12 +21,11 @@ public class Maze : MonoBehaviour
         public GameObject west; //4
     }
 
-
     public bool create = true;
     //public bool solve = true;    
     //public bool show = false;
 
-    public KeyCode solveMazeKey = KeyCode.Space;
+    //public KeyCode solveMazeKey = KeyCode.Space;
 
     //benötigte GameObjects
     public GameObject wall;
@@ -39,10 +38,10 @@ public class Maze : MonoBehaviour
     public int xSize = 5;
     public int zSize = 5;
 
-    public GameObject[] cubes;
+    //public GameObject[] cubes;
 
     //wird benutzt um den Solver zu spwanen
-    private GameObject tempSolver;
+    //private GameObject tempSolver;
 
     private int count = 0;
     private List<int> solution;
@@ -52,9 +51,6 @@ public class Maze : MonoBehaviour
     public Cell[] cells;
     //aktuelle Zellennummer
     public int currentCell = 0;
-
-    //zählt die Ausführungen von Update
-    private int updateCount = 0;
 
     private Vector3 initPos;
     private Vector3 startPos;
@@ -78,7 +74,7 @@ public class Maze : MonoBehaviour
         mazeHolder = GameObject.FindGameObjectWithTag("Maze");
         miniMazeHolder = GameObject.FindGameObjectWithTag("MiniMaze");
     }
-    private int m = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -92,57 +88,53 @@ public class Maze : MonoBehaviour
 
     public void buildMaze()
     {
-        Debug.Log("BuildMaze" + m++);
         //erzeugt x * z großes Grid aus Wänden
         createWalls();
         //Teilt die Wände in Zellen auf
         createCells();
         //löscht Wände im Grid bis jede Zelle erreichbar ist 
         createMaze();
+
+        miniMazeActive = true;
     }
 
     public void buildMiniMaze()
     {
-        Debug.Log("BuildMiniMaze" + m++);
         GameObject tempMiniMaze = Instantiate(mazeHolder, miniMazeHolder.transform.position, Quaternion.identity);
         Vector3 tempScale = new Vector3(0.1f, 0.05f, 0.1f);
         tempMiniMaze.transform.localScale = tempScale;
         tempMiniMaze.name = "MiniMaze";
-        tempMiniMaze.transform.parent = miniMazeHolder.transform;
+        tempMiniMaze.transform.parent = miniMazeHolder.transform;        
     }
 
     public void reset()
     {
         Debug.Log("reset");
-
-        //Destroy(wallHolder);        
-        Destroy(GameObject.Find("Maze"));
-        Destroy(GameObject.Find("start(Clone)"));
-        Destroy(GameObject.Find("end(Clone)"));
-        Destroy(GameObject.Find("solver(Clone)"));
+        Destroy(GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).gameObject);
+        foreach (Transform child in GameObject.FindGameObjectWithTag("Maze").transform)
+        {
+            Destroy(child.gameObject);
+        }
 
         solutionIterator = 0;
         backingUp = 0;
         visitedCells = 0;
 
-        int x = (int)GameObject.Find("xSize").GetComponent<Slider>().value;
-        int z = (int)GameObject.Find("zSize").GetComponent<Slider>().value;
-
-        xSize = x;
-        zSize = z;
+        //---------------------------------------------------
+        cells = null;
+        lastCell = null;
+        currentCell = 0;
+        currentNeighbour = 0;
+        wallToBreak = 0;
+        //---------------------------------------------------
+        xSize = 10;
+        zSize = 12;
 
         MazeSize = xSize * zSize;
 
-        //erzeugt x * z großes Grid aus Wänden
-        createWalls();
-        ////Teilt die Wände in Zellen auf
-        createCells();
-        ////löscht Wände im Grid bis jede Zelle erreichbar ist 
-        createMaze();
-
         //solve = true;
 
-        Debug.Log("reset ende");
+        Debug.Log("reset ende");        
     }
 
     void createWalls()
@@ -555,14 +547,21 @@ public class Maze : MonoBehaviour
     }//showSolution()*/
 
 
-    private bool firstTime = true;
+    private bool miniMazeActive = true;
     // Update is called once per frame
     void Update()
     {
-
-        if (firstTime)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            firstTime = false;
+            reset();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            buildMaze();
+        }
+        if (miniMazeActive)
+        {
+            miniMazeActive = false;
             buildMiniMaze();
         }
         /*if (updateCount >= 35 && show)
@@ -571,6 +570,8 @@ public class Maze : MonoBehaviour
             showSolution();
             updateCount = 0;
         }
+
+
               
         updateCount++;*/
     }
