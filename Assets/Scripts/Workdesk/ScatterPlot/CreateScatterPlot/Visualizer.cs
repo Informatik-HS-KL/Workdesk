@@ -51,15 +51,9 @@ public class Visualizer : MonoBehaviour
     public void Awake()
     {
         dataSource = gameObject.AddComponent<CSVDataSource>();
-        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
 
         loadAllScatterplots();
         create();
-    }
-
-    private void OnDestroy()
-    {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Down, resetPos);
     }
 
     public void loadOtherScatterplot(int elem)

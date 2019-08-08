@@ -38,6 +38,8 @@ TagManager:
   - start
   - MiniMaze
   - VRScreen
+  - MiniPlayer
+  - VROrigin
   layers:
   - Default
   - TransparentFX

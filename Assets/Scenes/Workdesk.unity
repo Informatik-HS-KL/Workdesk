@@ -559,7 +559,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 118903859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.77, z: -0.15}
+  m_LocalPosition: {x: -0.55, y: 0.77, z: -0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 656018815}
@@ -2688,7 +2688,7 @@ GameObject:
   - component: {fileID: 581601504}
   m_Layer: 0
   m_Name: VROrigin
-  m_TagString: Untagged
+  m_TagString: VROrigin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2699,14 +2699,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581601503}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2538284}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &622486064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,15 +2853,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4167892766487606, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.36589998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167892766487606, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.0024000406
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4167892766487606, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.20519999
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4167892766487606, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2901,6 +2901,10 @@ Prefab:
         type: 2}
       propertyPath: far clip plane
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341007032247378, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
+      propertyPath: m_TagString
+      value: MiniPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68fe81ea3d01454cac376795e472bb9, type: 2}
@@ -4155,7 +4159,7 @@ MonoBehaviour:
   end_cube: {fileID: 1000010301922716, guid: eba6341763c402d43b0c70fee2756f1c, type: 2}
   wallLength: 1
   xSize: 10
-  zSize: 10
+  zSize: 12
   cubes: []
   cells: []
   currentCell: 0
