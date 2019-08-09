@@ -11,6 +11,8 @@ public class CreateMiniworld : MonoBehaviour
     private GameObject architecture = null;
     private GameObject miniPlayer;
     private GameObject vrOrigin;
+    private GameObject clipboardArchitecture;
+    private GameObject resetButton;
     private FillDesktop fillDesktopScript;
     private Maze mazeScript;
 
@@ -21,18 +23,23 @@ public class CreateMiniworld : MonoBehaviour
 
     private void Awake()
     {        
-        //ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
-        //ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
+        ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
+        ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
         findArchitectureObject();
         miniPlayer = GameObject.FindGameObjectWithTag("MiniPlayer");
         vrOrigin = GameObject.FindGameObjectWithTag("VROrigin");
         mazeScript = GameObject.FindGameObjectWithTag("GameController").transform.GetComponent<Maze>();
+        clipboardArchitecture = GameObject.FindGameObjectWithTag("ClipboardArchitecture");
+        resetButton = GameObject.FindGameObjectWithTag("ResetButton");
     }
 
     private void OnDestroy()
     {
-        //ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
-        //ViveInput.RemoveListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
+        if (isActive)
+        {
+            ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
+            ViveInput.RemoveListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
+        }
     }
 
     public void activateListener()
@@ -54,6 +61,18 @@ public class CreateMiniworld : MonoBehaviour
         startPos = vrOrigin.transform.position;        
     }
 
+    public void activateClipboard()
+    {
+        clipboardArchitecture.SetActive(true);
+        resetButton.SetActive(false);
+    }
+
+    public void deactivateClipboard()
+    {
+        clipboardArchitecture.SetActive(false);
+        resetButton.SetActive(true);
+    }
+
     private void findArchitectureObject()
     {
         architecture = GameObject.FindGameObjectWithTag("Architecture");
@@ -67,7 +86,9 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (!isActive)
         {
+            Debug.Log("ACTIVATEARCH");
             activateListener();
+            activateClipboard();
             isActive = true;
             if (architecture == null) findArchitectureObject();
             architecture.SetActive(true);
@@ -83,7 +104,8 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (isActive)
         {
-            teleportToDesk();
+            Debug.Log("DEACTIVATEARCH");
+            teleportToDesk();            
             mazeScript.reset();
             deactivateListener();
             isActive = false;
@@ -125,9 +147,11 @@ public class CreateMiniworld : MonoBehaviour
             float scaleXZ = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.x;
             float scaleY = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.y;
 
-            float localXPos = vrOrigin.transform.localPosition.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
+            Debug.Log("Änderung Prüfen");
+            //Änderung + MainCamera überprüfen!
+            float localXPos = vrOrigin.transform.localPosition.x + GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
             float localYPos = vrOrigin.transform.localPosition.y - GameObject.FindGameObjectWithTag("Maze").transform.position.y;
-            float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
+            float localZPos = vrOrigin.transform.localPosition.z + GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
 
             Vector3 tempVector = new Vector3((localXPos * scaleXZ), (localYPos * scaleY), (localZPos * scaleXZ));
             

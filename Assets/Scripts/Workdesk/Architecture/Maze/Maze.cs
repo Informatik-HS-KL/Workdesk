@@ -10,6 +10,8 @@ using HTC.UnityPlugin.Vive;
 /// </summary>
 public class Maze : MonoBehaviour
 {
+    private Text xSizeLabel;
+    private Text zSizeLabel;
 
     [System.Serializable]
     public class Cell
@@ -21,7 +23,8 @@ public class Maze : MonoBehaviour
         public GameObject west; //4
     }
 
-    public bool create = true;
+    private bool create = true;
+    private bool isBuild;
     //public bool solve = true;    
     //public bool show = false;
 
@@ -60,8 +63,8 @@ public class Maze : MonoBehaviour
     private GameObject miniMazeHolder;
 
     //xSize * zSize
-    private int MazeSize;
-
+    private int mazeSize;
+    private int maxCount;
     private int visitedCells = 0;
 
     private int currentNeighbour = 0;
@@ -70,21 +73,44 @@ public class Maze : MonoBehaviour
     private int wallToBreak = 0;
 
     private void Awake()
-    {
+    {        
         mazeHolder = GameObject.FindGameObjectWithTag("Maze");
         miniMazeHolder = GameObject.FindGameObjectWithTag("MiniMaze");
+        xSizeLabel = GameObject.FindGameObjectWithTag("XSize").GetComponent<Text>();
+        zSizeLabel = GameObject.FindGameObjectWithTag("ZSize").GetComponent<Text>();
     }
 
     // Use this for initialization
     void Start()
     {
-        MazeSize = xSize * zSize;
+        setMazeSize();
 
-        buildMaze();
         //solve = true;         
+
+        //buildMaze();
 
         wallLength = wall.transform.localScale.z;
     }
+
+    public void setXSize()
+    {
+        xSize = int.Parse(xSizeLabel.text);
+        setMazeSize();
+    }
+
+    public void setZSize()
+    {
+        zSize = int.Parse(zSizeLabel.text);
+        setMazeSize();
+    }
+
+    public void setMazeSize()
+    {
+        mazeSize = xSize * zSize;
+        maxCount = (mazeSize * 2) + xSize + zSize + 3;
+    }
+
+    //GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().deactivateClipboard();
 
     public void buildMaze()
     {
@@ -95,46 +121,50 @@ public class Maze : MonoBehaviour
         //löscht Wände im Grid bis jede Zelle erreichbar ist 
         createMaze();
 
-        miniMazeActive = true;
+        isBuild = true;
     }
 
     public void buildMiniMaze()
-    {
+    {        
         GameObject tempMiniMaze = Instantiate(mazeHolder, miniMazeHolder.transform.position, Quaternion.identity);
         Vector3 tempScale = new Vector3(0.1f, 0.05f, 0.1f);
         tempMiniMaze.transform.localScale = tempScale;
         tempMiniMaze.name = "MiniMaze";
-        tempMiniMaze.transform.parent = miniMazeHolder.transform;        
+        tempMiniMaze.tag = "Untagged";
+        tempMiniMaze.transform.parent = miniMazeHolder.transform;
+
+        tempMiniMaze = null;
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().deactivateClipboard();
     }
 
     public void reset()
     {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().activateClipboard();
         Debug.Log("reset");
-        Destroy(GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).gameObject);
-        foreach (Transform child in GameObject.FindGameObjectWithTag("Maze").transform)
+        if (isBuild)
         {
-            Destroy(child.gameObject);
+            if (GameObject.FindGameObjectWithTag("MiniMaze").transform.childCount == 3)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).gameObject);
+                Destroy(GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(2).gameObject);
+            }
+            else Destroy(GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).gameObject);
+            foreach (Transform child in mazeHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
-
         solutionIterator = 0;
         backingUp = 0;
         visitedCells = 0;
-
-        //---------------------------------------------------
-        cells = null;
-        lastCell = null;
-        currentCell = 0;
-        currentNeighbour = 0;
-        wallToBreak = 0;
-        //---------------------------------------------------
-        xSize = 10;
-        zSize = 12;
-
-        MazeSize = xSize * zSize;
+        mazeHolder = null;
+        mazeHolder = GameObject.FindGameObjectWithTag("Maze");
+        
 
         //solve = true;
 
-        Debug.Log("reset ende");        
+        Debug.Log("reset ende");
+        isBuild = false;
     }
 
     void createWalls()
@@ -226,7 +256,7 @@ public class Maze : MonoBehaviour
     {
         bool startedBuilding = false;
 
-        while (visitedCells < MazeSize)
+        while (visitedCells < mazeSize)
         {
             if (startedBuilding)
             {
@@ -246,7 +276,7 @@ public class Maze : MonoBehaviour
             }
             else
             {
-                currentCell = Random.Range(0, MazeSize);
+                currentCell = Random.Range(0, mazeSize);
                 cells[currentCell].visited = true;
                 visitedCells++;
                 startedBuilding = true;
@@ -256,6 +286,7 @@ public class Maze : MonoBehaviour
         markStart();
         markEnd();
         Debug.Log("Finshed");
+        miniMazeActive = true;
     }//createMaze
 
     // erzeugt Array mit allen Nachbarn der aktuellen Zelle
@@ -274,7 +305,7 @@ public class Maze : MonoBehaviour
         check += xSize;
 
         //north
-        if (currentCell + xSize < MazeSize)
+        if (currentCell + xSize < mazeSize)
         {
             if (cells[currentCell + xSize].visited == false)
             {
@@ -297,7 +328,7 @@ public class Maze : MonoBehaviour
 
 
         //east
-        if (currentCell + 1 < MazeSize && (currentCell + 1) != check)
+        if (currentCell + 1 < mazeSize && (currentCell + 1) != check)
         {
             if (cells[currentCell + 1].visited == false)
             {
@@ -375,7 +406,7 @@ public class Maze : MonoBehaviour
     {
         GameObject end;
 
-        Vector3 myPos = new Vector3(cells[MazeSize - 1].east.transform.position.x - wallLength / 2, 1, cells[MazeSize - 1].east.transform.position.z);
+        Vector3 myPos = new Vector3(cells[mazeSize - 1].east.transform.position.x - wallLength / 2, 1, cells[mazeSize - 1].east.transform.position.z);
         end = Instantiate(end_cube, myPos, Quaternion.identity) as GameObject;
 
         end.transform.parent = mazeHolder.transform;
@@ -546,7 +577,6 @@ public class Maze : MonoBehaviour
         }
     }//showSolution()*/
 
-
     private bool miniMazeActive = true;
     // Update is called once per frame
     void Update()
@@ -559,7 +589,8 @@ public class Maze : MonoBehaviour
         {
             buildMaze();
         }
-        if (miniMazeActive)
+
+        if (miniMazeActive && mazeHolder.transform.childCount < maxCount)
         {
             miniMazeActive = false;
             buildMiniMaze();

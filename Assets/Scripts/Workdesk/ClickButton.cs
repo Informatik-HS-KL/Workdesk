@@ -152,9 +152,17 @@ public class ClickButton : MonoBehaviour
     /// </summary>
     private void loadData()
     {
-        loaded = true;
-        Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
-        gameController.GetComponentInChildren<LoadObject>().activateContainer(this.name);
+        if (this.name.Equals("ResetButton"))
+        {
+            Debug.Log("RESETBUTTON");
+            gameController.GetComponent<Maze>().reset();
+        }
+        else
+        {
+            loaded = true;
+            Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
+            gameController.GetComponentInChildren<LoadObject>().activateContainer(this.name);
+        }
     }
 
     // Update wird einmal pro Frame aufgerufen.

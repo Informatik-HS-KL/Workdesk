@@ -40,6 +40,12 @@ TagManager:
   - VRScreen
   - MiniPlayer
   - VROrigin
+  - ClipboardArchitecture
+  - XSize
+  - XSizeSlider
+  - ZSize
+  - ZSizeSlider
+  - ResetButton
   layers:
   - Default
   - TransparentFX
