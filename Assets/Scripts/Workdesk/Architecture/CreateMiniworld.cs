@@ -86,7 +86,6 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (!isActive)
         {
-            Debug.Log("ACTIVATEARCH");
             activateListener();
             activateClipboard();
             isActive = true;
@@ -104,7 +103,6 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (isActive)
         {
-            Debug.Log("DEACTIVATEARCH");
             teleportToDesk();            
             mazeScript.reset();
             deactivateListener();
@@ -149,9 +147,13 @@ public class CreateMiniworld : MonoBehaviour
 
             Debug.Log("Änderung Prüfen");
             //Änderung + MainCamera überprüfen!
-            float localXPos = vrOrigin.transform.localPosition.x + GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
+            //float localXPos = vrOrigin.transform.localPosition.x - GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
+            //float localXPos = vrOrigin.transform.localPosition.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x;
+            float localXPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
             float localYPos = vrOrigin.transform.localPosition.y - GameObject.FindGameObjectWithTag("Maze").transform.position.y;
-            float localZPos = vrOrigin.transform.localPosition.z + GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
+            float localZPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
+            //float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
+            //float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("MainCamera").transform.position.z;
 
             Vector3 tempVector = new Vector3((localXPos * scaleXZ), (localYPos * scaleY), (localZPos * scaleXZ));
             

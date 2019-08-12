@@ -57,10 +57,12 @@ public class Maze : MonoBehaviour
 
     private Vector3 initPos;
     private Vector3 startPos;
+    private Vector3 startPosCameraMan;
     private Vector3 planePos;
     private Vector3 planeScale;
     private GameObject mazeHolder;
     private GameObject miniMazeHolder;
+    private GameObject cameraMan;
 
     //xSize * zSize
     private int mazeSize;
@@ -78,6 +80,8 @@ public class Maze : MonoBehaviour
         miniMazeHolder = GameObject.FindGameObjectWithTag("MiniMaze");
         xSizeLabel = GameObject.FindGameObjectWithTag("XSize").GetComponent<Text>();
         zSizeLabel = GameObject.FindGameObjectWithTag("ZSize").GetComponent<Text>();
+        cameraMan = GameObject.FindGameObjectWithTag("MiniPlayer");
+        startPosCameraMan = cameraMan.transform.position;
     }
 
     // Use this for initialization
@@ -125,12 +129,16 @@ public class Maze : MonoBehaviour
     }
 
     public void buildMiniMaze()
-    {        
+    {
         GameObject tempMiniMaze = Instantiate(mazeHolder, miniMazeHolder.transform.position, Quaternion.identity);
         Vector3 tempScale = new Vector3(0.1f, 0.05f, 0.1f);
         tempMiniMaze.transform.localScale = tempScale;
         tempMiniMaze.name = "MiniMaze";
         tempMiniMaze.tag = "Untagged";
+
+        Teleportable tempTeleportScript = tempMiniMaze.transform.Find("MazeFloor").gameObject.GetComponent<Teleportable>();
+        Destroy(tempTeleportScript);
+
         tempMiniMaze.transform.parent = miniMazeHolder.transform;
 
         tempMiniMaze = null;
@@ -140,7 +148,6 @@ public class Maze : MonoBehaviour
     public void reset()
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().activateClipboard();
-        Debug.Log("reset");
         if (isBuild)
         {
             if (GameObject.FindGameObjectWithTag("MiniMaze").transform.childCount == 3)
@@ -159,17 +166,16 @@ public class Maze : MonoBehaviour
         visitedCells = 0;
         mazeHolder = null;
         mazeHolder = GameObject.FindGameObjectWithTag("Maze");
+        cameraMan.transform.position = startPosCameraMan;
         
 
         //solve = true;
 
-        Debug.Log("reset ende");
         isBuild = false;
     }
 
     void createWalls()
     {
-        //initPos = new Vector3((-xSize / 2) + wallLength / 2, wall.transform.localScale.y / 2, (-zSize / 2) + wallLength / 2);
         initPos = new Vector3(mazeHolder.transform.position.x, mazeHolder.transform.position.y, mazeHolder.transform.position.z);
 
         Vector3 myPos = initPos;
@@ -212,8 +218,6 @@ public class Maze : MonoBehaviour
 
     void createCells()
     {
-        Debug.Log("create Cells");
-
         lastCell = new List<int>();
         lastCell.Clear();
         GameObject[] allWalls;
@@ -247,7 +251,6 @@ public class Maze : MonoBehaviour
             cells[i].east = allWalls[westEast];
             cells[i].north = allWalls[(child + (xSize + 1) * zSize) + xSize - 1];
         }
-        Debug.Log("create Cells ende");
     }//createCells
 
 
@@ -285,7 +288,6 @@ public class Maze : MonoBehaviour
 
         markStart();
         markEnd();
-        Debug.Log("Finshed");
         miniMazeActive = true;
     }//createMaze
 
@@ -386,10 +388,10 @@ public class Maze : MonoBehaviour
         start = Instantiate(start_cube, myPos, Quaternion.identity) as GameObject;
         startPos = start.transform.position;
 
-        if (GameObject.Find("FPSController") != null)
-        {
-            GameObject.Find("FPSController").transform.position = (startPos);
-        }
+        //if (GameObject.Find("FPSController") != null)
+        //{
+        //    GameObject.Find("FPSController").transform.position = (startPos);
+        //}
         if (GameObject.FindGameObjectWithTag("MainCamera") != null)
         {
             GameObject.FindGameObjectWithTag("MainCamera").transform.position = (startPos);
@@ -577,7 +579,7 @@ public class Maze : MonoBehaviour
         }
     }//showSolution()*/
 
-    private bool miniMazeActive = true;
+    private bool miniMazeActive = false;
     // Update is called once per frame
     void Update()
     {
