@@ -47,6 +47,7 @@ public class Visualizer : MonoBehaviour
     private int chosenScatterplot = 0;
 
     public Dropdown scatterplotDropdown;
+    public Dropdown DataDropdown;
 
     public void Awake()
     {
@@ -54,17 +55,11 @@ public class Visualizer : MonoBehaviour
 
         loadAllScatterplots();
         create();
-    }
+    }    
 
-    public void loadOtherScatterplot(int elem)
-    {
-        selectedScatterplot = elem;
-        LoadDataSource(dataFiles[selectedScatterplot]);
-        int[] scatterplotIndices = { 0 };
-        CreateScatterplotMatrix(scatterplotIndices);
-        
-    }
-
+    /// <summary>
+    /// Lädt alle CSV-Dateien aus dem StreamingAssets Verzeichnis.
+    /// </summary>
     private void loadAllScatterplots()
     {
         dataFiles = Resources.LoadAll<TextAsset>(csvDirectoryName);
@@ -80,12 +75,18 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Lädt die ausgewählte CSV-Datei.
+    /// </summary>
+    /// <param name="dataFile"></param>
     public void LoadDataSource(TextAsset dataFile)
     {
         if (null != dataFile)
         {
             dataSource.load(dataFile.text, null);
             possibleScatterplots = CalculatePossibleScatterplots();
+            Debug.Log("Length: " + possibleScatterplots.GetLength(0));
+
             Debug.Log("Loaded CSV file from: " + dataFile.name);
         }
         else
@@ -94,16 +95,38 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Setzt die Position der Drehscheibe zurück.
+    /// </summary>
     private void resetPos()
     {
         GameObject.FindGameObjectWithTag("ScatterplotPlate").GetComponent<TurningPlate>().resetPosition();
     }
 
+    public void loadOtherScatterplot(int elem)
+    {
+        selectedScatterplot = elem;
+        LoadDataSource(dataFiles[selectedScatterplot]);
+
+        int[] scatterplotIndices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        CreateScatterplotMatrix(scatterplotIndices);
+    }
+
+    /// <summary>
+    /// Erstellt einen Scatterplot und lässt ihn auf dem Tisch anzeigen.
+    /// </summary>
     private void create()
     {
         LoadDataSource(dataFiles[selectedScatterplot]);
-        int[] scatterplotIndices = { 0, 1 };
+        int[] scatterplotIndices = { 0, 1, 2, 3, 4, 5 , 6 , 7 , 8 , 9};
         CreateScatterplotMatrix(scatterplotIndices);
+
+        string[] tempString = GetPossibleScattersplots();
+        for (int i = 0; i < tempString.Length; i++)
+        {
+            //Debug.Log("POSSIBLE: " + tempString[i]);
+        }
     }
 
     /// <summary>
@@ -121,15 +144,17 @@ public class Visualizer : MonoBehaviour
                 Destroy(scatterplotMatrix.gameObject);
             }
 
-            int[,] dimCombinations = new int[scatterplotIndices.GetLength(0), 3];
+            int[,] dimCombinations = new int[1, 3];
             //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
             //{
-            chosenScatterplot = 0;
+            chosenScatterplot = 6;
             for (int j = 0; 3 > j; ++j)
             {
-                dimCombinations[chosenScatterplot, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
+                dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
             }
             //}
+            Debug.Log("DIMCOMBINATIONS LENGTH 0: " + dimCombinations.GetLength(0));
+            Debug.Log("DIMCOMBINATIONS LENGTH 1: " + dimCombinations.GetLength(1));
 
             scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();
             scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize);
@@ -142,9 +167,9 @@ public class Visualizer : MonoBehaviour
     }
 
     /// <summary>
-    /// Gibt den nächsten möglichen Scatterplot auf der Drehscheibe aus.
+    /// Gibt den ausgewählten Scatterplot auf der Drehscheibe aus.
     /// </summary>
-    public void nextPossibleScatterplot()
+    public void nextScatterplot()
     {
         Debug.Log("NEXT SCATTERPLOT");
 
@@ -187,7 +212,6 @@ public class Visualizer : MonoBehaviour
                 result[i, j] = combinations[i].ToArray()[j];
             }
         }
-
         return result;
     }
 }
