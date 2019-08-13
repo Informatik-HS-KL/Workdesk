@@ -83,7 +83,6 @@ public class Visualizer : MonoBehaviour
 
         if (dataDropdown.options.Count != 0)
         {
-            //dataDropdown.options.RemoveRange(0, dataDropdown.options.Count);
             dataDropdown.ClearOptions();
         }
         for (int i = 0; i < tempString.Length; i++)
@@ -103,8 +102,6 @@ public class Visualizer : MonoBehaviour
         {
             dataSource.load(dataFile.text, null);
             possibleScatterplots = CalculatePossibleScatterplots();
-            Debug.Log("Length: " + possibleScatterplots.GetLength(0));
-
             Debug.Log("Loaded CSV file from: " + dataFile.name);
         }
         else
@@ -120,16 +117,6 @@ public class Visualizer : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("ScatterplotPlate").GetComponent<TurningPlate>().resetPosition();
     }
-
-    /*public void loadOtherScatterplot(int elem)
-    {
-        selectedScatterplot = elem;
-        LoadDataSource(dataFiles[selectedScatterplot]);
-
-        int[] scatterplotIndices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-        CreateScatterplotMatrix(scatterplotIndices);
-    }*/
 
     /// <summary>
     /// Methode zum Auswählen eines bestimmten Scatterplots aus der gewählten CSV-Datei.
@@ -179,16 +166,11 @@ public class Visualizer : MonoBehaviour
             }
 
             int[,] dimCombinations = new int[1, 3];
-            //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
-            //{
+
             for (int j = 0; 3 > j; ++j)
             {
                 dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
             }
-            //}
-
-            Debug.Log("DIMCOMBINATIONS LENGTH 0: " + dimCombinations.GetLength(0));
-            Debug.Log("DIMCOMBINATIONS LENGTH 1: " + dimCombinations.GetLength(1));
 
             scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();
             scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize);
@@ -198,15 +180,6 @@ public class Visualizer : MonoBehaviour
         {
             Debug.LogError("CSVDataSource was not loaded!");
         }
-    }
-
-    /// <summary>
-    /// Gibt den ausgewählten Scatterplot auf der Drehscheibe aus.
-    /// </summary>
-    public void nextScatterplot()
-    {
-        Debug.Log("NEXT SCATTERPLOT");
-
     }
 
     /// <summary>
@@ -227,6 +200,10 @@ public class Visualizer : MonoBehaviour
         return possibilities;
     }
 
+    /// <summary>
+    /// Berechnet die möglichen Kombinationen der Werte.
+    /// </summary>
+    /// <returns></returns>
     private int[,] CalculatePossibleScatterplots()
     {
         if (!dataSource.IsLoaded) return new int[0, 0];

@@ -28,7 +28,7 @@ public class BuildScatterplot : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     void Start()
     {
-        
+
     }
 
     /// <summary>
