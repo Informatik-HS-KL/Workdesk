@@ -5,6 +5,7 @@ using System.Linq;
 using HTC.UnityPlugin.Vive;
 using System.IO;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// Load's CSV-Files and creates ScatterplotMatrices.
@@ -41,21 +42,22 @@ public class Visualizer : MonoBehaviour
     /// The second dimension contains the three indeces of the column of the CSV-File.
     /// </summary>
     private int[,] possibleScatterplots;
+    private int[] scatterplotIndicesGlobal;
     private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
     private int selectedScatterplot = 0;
     private int chosenScatterplot = 0;
 
     public Dropdown scatterplotDropdown;
-    public Dropdown DataDropdown;
+    public Dropdown dataDropdown;
 
     public void Awake()
     {
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
         loadAllScatterplots();
-        create();
-    }    
+        create(0);
+    }
 
     /// <summary>
     /// Lädt alle CSV-Dateien aus dem StreamingAssets Verzeichnis.
@@ -73,6 +75,22 @@ public class Visualizer : MonoBehaviour
             dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
             dataFiles[textAssetIndex++].name = fileInfo.Name;
         }
+    }
+
+    private void fillDataDropdown()
+    {
+        string[] tempString = GetPossibleScattersplots();
+
+        if (dataDropdown.options.Count != 0)
+        {
+            //dataDropdown.options.RemoveRange(0, dataDropdown.options.Count);
+            dataDropdown.ClearOptions();
+        }
+        for (int i = 0; i < tempString.Length; i++)
+        {
+            dataDropdown.options.Add(new Dropdown.OptionData() { text = tempString[i] });
+        }
+        dataDropdown.value = 0;
     }
 
     /// <summary>
@@ -103,7 +121,7 @@ public class Visualizer : MonoBehaviour
         GameObject.FindGameObjectWithTag("ScatterplotPlate").GetComponent<TurningPlate>().resetPosition();
     }
 
-    public void loadOtherScatterplot(int elem)
+    /*public void loadOtherScatterplot(int elem)
     {
         selectedScatterplot = elem;
         LoadDataSource(dataFiles[selectedScatterplot]);
@@ -111,22 +129,38 @@ public class Visualizer : MonoBehaviour
         int[] scatterplotIndices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         CreateScatterplotMatrix(scatterplotIndices);
+    }*/
+
+    /// <summary>
+    /// Methode zum Auswählen eines bestimmten Scatterplots aus der gewählten CSV-Datei.
+    /// </summary>
+    public void loadSpecificScatterplot()
+    {
+        chosenScatterplot = dataDropdown.value;
+        CreateScatterplotMatrix(scatterplotIndicesGlobal);
     }
 
     /// <summary>
     /// Erstellt einen Scatterplot und lässt ihn auf dem Tisch anzeigen.
     /// </summary>
-    private void create()
+    public void create(int elem)
     {
+        selectedScatterplot = elem;
         LoadDataSource(dataFiles[selectedScatterplot]);
-        int[] scatterplotIndices = { 0, 1, 2, 3, 4, 5 , 6 , 7 , 8 , 9};
+
+        int size = possibleScatterplots.GetLength(0);
+        int[] temp = new int[size];
+        for (int i = 0; i < possibleScatterplots.GetLength(0); i++)
+        {
+            temp[i] = i;
+        }
+
+        int[] scatterplotIndices = temp;
+        scatterplotIndicesGlobal = temp;
+        chosenScatterplot = 0;
         CreateScatterplotMatrix(scatterplotIndices);
 
-        string[] tempString = GetPossibleScattersplots();
-        for (int i = 0; i < tempString.Length; i++)
-        {
-            //Debug.Log("POSSIBLE: " + tempString[i]);
-        }
+        fillDataDropdown();
     }
 
     /// <summary>
@@ -147,12 +181,12 @@ public class Visualizer : MonoBehaviour
             int[,] dimCombinations = new int[1, 3];
             //for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
             //{
-            chosenScatterplot = 6;
             for (int j = 0; 3 > j; ++j)
             {
                 dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
             }
             //}
+
             Debug.Log("DIMCOMBINATIONS LENGTH 0: " + dimCombinations.GetLength(0));
             Debug.Log("DIMCOMBINATIONS LENGTH 1: " + dimCombinations.GetLength(1));
 

@@ -57,7 +57,7 @@ public class BuildScatterplot : MonoBehaviour
 
     public void switchScatterplot()
     {
-        visualizerScript.loadOtherScatterplot(scatterplotDropdown.value);
+        visualizerScript.create(scatterplotDropdown.value);
     }
 
     // Update wird einmal pro Frame aufgerufen.
