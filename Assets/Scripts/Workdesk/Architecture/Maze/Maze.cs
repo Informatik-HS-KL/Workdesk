@@ -38,8 +38,8 @@ public class Maze : MonoBehaviour
 
     //Variablen für das Labyrith
     public float wallLength = 1.0f;
-    public int xSize = 5;
-    public int zSize = 5;
+    public int xSize = 2;
+    public int zSize = 2;
 
     //public GameObject[] cubes;
 

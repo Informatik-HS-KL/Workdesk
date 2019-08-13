@@ -32,7 +32,6 @@ public class TurningPlate : MonoBehaviour
 
     public void resetPosition()
     {
-        Debug.Log("RESET POSITION");
         xAngle = 0f;
         yAngle = 0f;
         zAngle = 0f;

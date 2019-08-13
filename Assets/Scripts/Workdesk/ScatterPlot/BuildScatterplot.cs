@@ -55,6 +55,9 @@ public class BuildScatterplot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Methode zum Ändern des angezeigten Scatterplots.
+    /// </summary>
     public void switchScatterplot()
     {
         visualizerScript.create(scatterplotDropdown.value);

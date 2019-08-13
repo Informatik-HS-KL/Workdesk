@@ -154,13 +154,11 @@ public class ClickButton : MonoBehaviour
     {
         if (this.name.Equals("ResetButton"))
         {
-            Debug.Log("RESETBUTTON");
             gameController.GetComponent<Maze>().reset();
         }
         else
         {
             loaded = true;
-            Debug.Log("Load Data " + this.name); //Aufruf Skript -> ReadData auf GameController
             gameController.GetComponentInChildren<LoadObject>().activateContainer(this.name);
         }
     }

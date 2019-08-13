@@ -22,7 +22,7 @@ public class CreateMiniworld : MonoBehaviour
     private bool inMaze;
 
     private void Awake()
-    {        
+    {
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
         ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
         findArchitectureObject();
@@ -42,12 +42,18 @@ public class CreateMiniworld : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Methode dient zum Aktivieren von zwei Listenern.
+    /// </summary>
     public void activateListener()
     {
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
         ViveInput.AddListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
     }
 
+    /// <summary>
+    /// Methode dient zum Deaktivieren von zwei Listenern.
+    /// </summary>
     private void deactivateListener()
     {
         ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToMaze);
@@ -58,21 +64,32 @@ public class CreateMiniworld : MonoBehaviour
     void Start()
     {
         inMaze = false;
-        startPos = vrOrigin.transform.position;        
+        startPos = vrOrigin.transform.position;
     }
 
+    /// <summary>
+    /// Methode Aktiviert das Clipboard.
+    /// </summary>
     public void activateClipboard()
     {
         clipboardArchitecture.SetActive(true);
         resetButton.SetActive(false);
     }
 
+    /// <summary>
+    /// Methode Deaktiviert das Clipboard.
+    /// </summary>
     public void deactivateClipboard()
     {
         clipboardArchitecture.SetActive(false);
         resetButton.SetActive(true);
     }
 
+    /// <summary>
+    /// Methode sucht das Architektur Objekt um die Szenerie später An- und Auszuschalten.
+    /// Zusätzlich wird das Skript "FillDesktop" ausgelesen, um die Anzeige auf dem Bildschirm
+    /// darzustellen.
+    /// </summary>
     private void findArchitectureObject()
     {
         architecture = GameObject.FindGameObjectWithTag("Architecture");
@@ -103,13 +120,13 @@ public class CreateMiniworld : MonoBehaviour
     {
         if (isActive)
         {
-            teleportToDesk();            
+            teleportToDesk();
             mazeScript.reset();
             deactivateListener();
             isActive = false;
             if (architecture == null) findArchitectureObject();
             architecture.SetActive(false);
-            fillDesktopScript.closeCamera();            
+            fillDesktopScript.closeCamera();
         }
     }
 
@@ -117,16 +134,17 @@ public class CreateMiniworld : MonoBehaviour
     /// Methode zum Versetzen der VR-Kamera in das Labyrinth, an die Stelle, an der das Männchen stand.
     /// Zusätzlich wird die Drehung angepasst.
     /// </summary>
-    public void teleportToMaze()    
+    public void teleportToMaze()
     {
         if (!inMaze)
         {
             inMaze = true;
             float scaleXZ = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.x;
             float scaleY = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.y;
-            Vector3 tempVector = new Vector3((miniPlayer.transform.localPosition.x / scaleXZ), (miniPlayer.transform.localPosition.y / scaleY), (miniPlayer.transform.localPosition.z / scaleXZ));
+            Vector3 tempVector = new Vector3((miniPlayer.transform.localPosition.x / scaleXZ), (miniPlayer.transform.localPosition.y / scaleY),
+                (miniPlayer.transform.localPosition.z / scaleXZ));
 
-            vrOrigin.transform.eulerAngles = new Vector3(vrOrigin.transform.eulerAngles.x, GameObject.FindGameObjectWithTag("MiniPlayer").transform.eulerAngles.y - 
+            vrOrigin.transform.eulerAngles = new Vector3(vrOrigin.transform.eulerAngles.x, GameObject.FindGameObjectWithTag("MiniPlayer").transform.eulerAngles.y -
                 GameObject.FindGameObjectWithTag("MainCamera").transform.eulerAngles.y, vrOrigin.transform.eulerAngles.z);
 
             vrOrigin.transform.position = GameObject.FindGameObjectWithTag("Maze").transform.position + tempVector;
@@ -145,18 +163,12 @@ public class CreateMiniworld : MonoBehaviour
             float scaleXZ = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.x;
             float scaleY = GameObject.FindGameObjectWithTag("MiniMaze").transform.GetChild(1).transform.localScale.y;
 
-            Debug.Log("Änderung Prüfen");
-            //Änderung + MainCamera überprüfen!
-            //float localXPos = vrOrigin.transform.localPosition.x - GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
-            //float localXPos = vrOrigin.transform.localPosition.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x;
             float localXPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position.x - GameObject.FindGameObjectWithTag("Maze").transform.position.x;
             float localYPos = vrOrigin.transform.localPosition.y - GameObject.FindGameObjectWithTag("Maze").transform.position.y;
             float localZPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
-            //float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.z - GameObject.FindGameObjectWithTag("Maze").transform.position.z;
-            //float localZPos = vrOrigin.transform.localPosition.z - GameObject.FindGameObjectWithTag("MainCamera").transform.position.z;
 
             Vector3 tempVector = new Vector3((localXPos * scaleXZ), (localYPos * scaleY), (localZPos * scaleXZ));
-            
+
             miniPlayer.transform.localPosition = tempVector;
             miniPlayer.transform.eulerAngles = new Vector3(miniPlayer.transform.eulerAngles.x, GameObject.FindGameObjectWithTag("MainCamera").transform.eulerAngles.y, miniPlayer.transform.eulerAngles.z);
             vrOrigin.transform.eulerAngles = new Vector3(vrOrigin.transform.eulerAngles.x, 0.0f, vrOrigin.transform.eulerAngles.z);

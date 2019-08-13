@@ -77,6 +77,9 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Methode füllt das Dropdownmenü mit allen möglichen Kombinationen der Scatterplots zur späteren Auswahl.
+    /// </summary>
     private void fillDataDropdown()
     {
         string[] tempString = GetPossibleScattersplots();
