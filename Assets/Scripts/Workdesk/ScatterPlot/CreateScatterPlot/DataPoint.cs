@@ -28,6 +28,23 @@ public class DataPoint : MonoBehaviour
 
     private Scatterplot scatterplot;
 
+    private Color color = Color.white;
+
+    public Color getColor()
+    {
+        return color;
+    }
+
+    public void setColor(Color color)
+    {
+        this.color = color;
+    }
+
+    private void Start()
+    {
+        color = Color.white;
+    }
+
     /// <summary>
     /// The dialog which holds the attribute values of this DataPoint.
     /// Will be shown when the DataPoint is selected.
