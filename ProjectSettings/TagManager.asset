@@ -47,6 +47,7 @@ TagManager:
   - ZSizeSlider
   - ResetButton
   - DataDropdown
+  - InfoText
   layers:
   - Default
   - TransparentFX

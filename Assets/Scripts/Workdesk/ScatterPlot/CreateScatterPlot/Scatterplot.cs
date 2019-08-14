@@ -77,15 +77,16 @@ public class Scatterplot : MonoBehaviour
         Transform scatterplotPlateTransform = scatterplotPlate.GetComponent<Transform>();
 
         dataPoints = new DataPoint[dataSource.DataCount];
+
         for (int i = 0; dataSource.DataCount > i; ++i)
         {
             Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotPlateTransform.position.x,
                 dataSource[yDim].Data[i] + scatterplotPlateTransform.position.y + 0.02f, dataSource[zDim].Data[i] + scatterplotPlateTransform.position.z);
             DataPoint dataPoint = Instantiate(pointPrefab, transform).GetComponent<DataPoint>();
             dataPoint.Initialize(i, pointSize, position);
-            
+
             dataPoints[i] = dataPoint;
-        }        
+        }
     }
 
     /// <summary>
@@ -97,16 +98,16 @@ public class Scatterplot : MonoBehaviour
     public void SelectDataPoint(int index)
     {
         foreach (DataPoint dataPoint in dataPoints)
-        {            
+        {
             if (dataPoint.index == index)
             {
-                dataPoint.GetComponent<Renderer>().material.color = Color.black;
+                //dataPoint.GetComponent<Renderer>().material.color = Color.black;
                 dataPoint.ShowText(true);
                 dataPoint.pointSize = pointSize + 0.01f;
             }
             else
             {
-                dataPoint.GetComponent<Renderer>().material.color = dataPoint.getColor();
+                //dataPoint.GetComponent<Renderer>().material.color = dataPoint.getColor();
                 dataPoint.ShowText(false);
                 dataPoint.pointSize = pointSize;
             }

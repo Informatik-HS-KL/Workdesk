@@ -16,6 +16,7 @@ public class Visualizer : MonoBehaviour
     /// All the found CSV-Files
     /// </summary>
     private TextAsset[] dataFiles;
+    private Text clipboardText;
 
     /// <summary>
     /// The size of the DataPoints.
@@ -53,6 +54,7 @@ public class Visualizer : MonoBehaviour
 
     public void Awake()
     {
+        clipboardText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
         loadAllScatterplots();
@@ -106,10 +108,35 @@ public class Visualizer : MonoBehaviour
             dataSource.load(dataFile.text, null);
             possibleScatterplots = CalculatePossibleScatterplots();
             Debug.Log("Loaded CSV file from: " + dataFile.name);
+            fillClipboard(dataFile.name);
+            dataSource.data = dataFile;
         }
         else
         {
             Debug.LogError("Datafile is null!");
+        }
+    }
+
+    /// <summary>
+    /// Methode füllt das Textfeld auf dem Klemmbrett, sodass der Nutzer die Farben nachvollziehen kann.
+    /// </summary>
+    /// <param name="name"></param>
+    private void fillClipboard(string name)
+    {
+        clipboardText.text = "";
+        if (name.Equals("auto-mpg.csv"))
+        {
+            clipboardText.text = clipboardText.text + "8 Cylinders = Red \n";
+            clipboardText.text = clipboardText.text + "6 Cylinders = Yellow \n";
+            clipboardText.text = clipboardText.text + "5 Cylinders = Blue \n";
+            clipboardText.text = clipboardText.text + "4 Cylinders = Cyan \n";
+            clipboardText.text = clipboardText.text + "3 Cylinders = Green";
+        }
+        else if (name.Equals("Iris.csv"))
+        {
+            clipboardText.text = clipboardText.text + "Iris-setosa = Red \n";
+            clipboardText.text = clipboardText.text + "Iris-versicolor = Yellow \n";
+            clipboardText.text = clipboardText.text + "Iris-virginica = Green";
         }
     }
 

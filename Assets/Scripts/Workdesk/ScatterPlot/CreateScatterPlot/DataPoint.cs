@@ -144,6 +144,8 @@ public class DataPoint : MonoBehaviour
         data[0, 0] = dataSource[xDim].Identifier;
         data[0, 1] = dataSource.getOriginalValue(dataSource[xDim].Data[index], dataSource[xDim].Identifier).ToString();
 
+        colorPoint(dataSource);
+
         data[1, 0] = dataSource[yDim].Identifier;
         data[1, 1] = dataSource.getOriginalValue(dataSource[yDim].Data[index], dataSource[yDim].Identifier).ToString();
 
@@ -151,6 +153,68 @@ public class DataPoint : MonoBehaviour
         data[2, 1] = dataSource.getOriginalValue(dataSource[zDim].Data[index], dataSource[zDim].Identifier).ToString();
 
         return data;
+    }
+
+    /// <summary>
+    /// Methode färbt die Datenpunkte.
+    /// Bei Auto nach Zylinderanzahl.
+    /// Bei Iris nach Spezies.
+    /// </summary>
+    /// <param name="dataSource"></param>
+    private void colorPoint(CSVDataSource dataSource)
+    {
+        int irisColumn = 4;     //3 verschiedene Farben
+        int autoMpgColumn = 1;  //5 verschiedene Farben
+
+        Renderer renderer = this.GetComponent<Renderer>();
+
+        if (dataSource.data.name.Equals("auto-mpg.csv"))
+        {
+            //index == Zeilennummer
+            //autoMpgNumber == Spaltennummer        
+            switch (dataSource.getOriginalValue(dataSource[autoMpgColumn].Data[index], dataSource[autoMpgColumn].Identifier).ToString())
+            {
+                case "8":
+                    color = Color.red;
+                    renderer.material.color = color;
+                    break;
+                case "6":
+                    color = Color.yellow;
+                    renderer.material.color = color;
+                    break;
+                case "5":
+                    color = Color.blue;
+                    renderer.material.color = color;
+                    break;
+                case "4":
+                    color = Color.cyan;
+                    renderer.material.color = color;
+                    break;
+                case "3":
+                    color = Color.green;
+                    renderer.material.color = color;
+                    break;
+            }
+
+        }
+        else if (dataSource.data.name.Equals("Iris.csv"))
+        {
+            switch (dataSource.getOriginalValue(dataSource[irisColumn].Data[index], dataSource[irisColumn].Identifier).ToString())
+            {
+                case "Iris-setosa":
+                    color = Color.red;
+                    renderer.material.color = color;
+                    break;
+                case "Iris-versicolor":
+                    color = Color.yellow;
+                    renderer.material.color = color;
+                    break;
+                case "Iris-virginica":
+                    color = Color.green;
+                    renderer.material.color = color;
+                    break;
+            }
+        }
     }
 
     /// <summary>
