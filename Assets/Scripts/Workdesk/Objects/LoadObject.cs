@@ -23,7 +23,7 @@ public class LoadObject : MonoBehaviour
     private int activatedObjectContainer;
 
     private bool objectLoaded;
-    private bool isActive = true;
+    private bool isActive = false;
 
     private void Awake()
     {
