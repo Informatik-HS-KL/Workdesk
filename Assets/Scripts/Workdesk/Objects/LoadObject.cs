@@ -45,6 +45,9 @@ public class LoadObject : MonoBehaviour
 
         GameObject[] tempObjects = Resources.LoadAll<GameObject>("Objects/ShowObjects");
         foreach (GameObject go in tempObjects) objectList.Add(go);
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().setObject(objectList[chosenObject].name);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().setMode("Turn");
     }
 
     public void activateView()
@@ -123,6 +126,7 @@ public class LoadObject : MonoBehaviour
     {
         chosenObject = objectDropdown.value;
         reloadObject();
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().setObject(objectList[chosenObject].name);
     }
 
     /// <summary>
@@ -131,6 +135,7 @@ public class LoadObject : MonoBehaviour
     /// <param name="buttonName">Name des betätigten Knopfes.</param>
     public void activateContainer(string buttonName)
     {
+        string mode = "";
         switch (buttonName)
         {
             case "TurnButton":
@@ -141,22 +146,26 @@ public class LoadObject : MonoBehaviour
                 }
                 unloadObjects();
                 loadObjectInContainer(1);
+                mode = "Turn";
                 break;
             case "TrackButton":
                 activateTrackerObjectContainer();
                 unloadObjects();
                 loadObjectInContainer(2);
+                mode = "Tracker";
                 break;
             case "GrabButton":
                 activateGrabbableObjectContainer();
                 unloadObjects();
                 loadObjectInContainer(3);
+                mode = "Grab";
                 break;
             case "TeleportButton":
                 unloadObjects();
                 transform.GetComponent<ChangeScene>().loadScene(chosenObject);
                 break;
         }
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().setMode(mode);
     }
 
     /// <summary>

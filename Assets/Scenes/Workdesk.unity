@@ -6206,7 +6206,8 @@ Prefab:
     - target: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
         type: 2}
       propertyPath: m_Text
-      value: First Person Camera in Standby.
+      value: "Ausgew\xE4hltes Objekt:\nMotorrad\n\nAusgew\xE4hlter Modus:\nTurn (3D
+        off)"
       objectReference: {fileID: 0}
     - target: {fileID: 222081631494230654, guid: 13db0b795570e514d9ca4d905d4abb93,
         type: 2}
