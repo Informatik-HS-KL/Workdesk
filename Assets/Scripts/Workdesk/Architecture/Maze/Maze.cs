@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using HTC.UnityPlugin.Vive;
 
 /// <summary>
-/// 
+/// Diese Klasse dient zum erzeugen des großen und kleinen Labyrinthes.
 /// </summary>
 public class Maze : MonoBehaviour
 {
@@ -388,10 +388,6 @@ public class Maze : MonoBehaviour
         start = Instantiate(start_cube, myPos, Quaternion.identity) as GameObject;
         startPos = start.transform.position;
 
-        //if (GameObject.Find("FPSController") != null)
-        //{
-        //    GameObject.Find("FPSController").transform.position = (startPos);
-        //}
         if (GameObject.FindGameObjectWithTag("MainCamera") != null)
         {
             GameObject.FindGameObjectWithTag("MainCamera").transform.position = (startPos);
@@ -597,31 +593,5 @@ public class Maze : MonoBehaviour
             miniMazeActive = false;
             buildMiniMaze();
         }
-        /*if (updateCount >= 35 && show)
-        {
-            
-            showSolution();
-            updateCount = 0;
-        }
-
-
-              
-        updateCount++;*/
     }
-
-    /*void LateUpdate()
-    {
-        // start/stop solver
-        if (Input.GetKeyUp(solveMazeKey))
-        {   
-            show = !show;
-        }
-
-        if (solve)
-        {
-            solveMaze();
-            //solution.Reverse();
-        }
-        solve = false;
-    }*/
 }

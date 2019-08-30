@@ -109,7 +109,7 @@ public class CreateMiniworld : MonoBehaviour
             if (architecture == null) findArchitectureObject();
             architecture.SetActive(true);
             fillDesktopScript.openCamera();
-            mazeScript.buildMaze();
+            //mazeScript.buildMaze();
         }
     }
 
