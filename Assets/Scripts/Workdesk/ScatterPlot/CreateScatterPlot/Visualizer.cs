@@ -46,8 +46,8 @@ public class Visualizer : MonoBehaviour
     private int[] scatterplotIndicesGlobal;
     private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
-    private int selectedScatterplot = 0;
-    private int chosenScatterplot = 0;
+    private int selectedScatterplot = 6;
+    private int chosenScatterplot = 6;
 
     public Dropdown scatterplotDropdown;
     public Dropdown dataDropdown;
@@ -58,7 +58,8 @@ public class Visualizer : MonoBehaviour
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
         loadAllScatterplots();
-        create(0);
+        create(6);
+        scatterplotDropdown.value = 6;
     }
 
     /// <summary>
