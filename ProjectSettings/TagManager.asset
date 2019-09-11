@@ -48,6 +48,7 @@ TagManager:
   - ResetButton
   - DataDropdown
   - InfoText
+  - bigScatterplot
   layers:
   - Default
   - TransparentFX

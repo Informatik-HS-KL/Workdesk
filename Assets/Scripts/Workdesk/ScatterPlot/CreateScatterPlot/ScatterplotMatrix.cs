@@ -26,6 +26,8 @@ public class ScatterplotMatrix : MonoBehaviour
 
     private Scatterplot[] scatterplots = new Scatterplot[0];
 
+    private bool bigScatterplot;
+
     /// <summary>
     /// Initializes the ScatterplotMatrix.
     /// Should always be called after creating this component.
@@ -33,9 +35,10 @@ public class ScatterplotMatrix : MonoBehaviour
     /// /// <param name="dataSource"></param>
     /// /// <param name="dimCombinations"></param>
     /// /// <param name="pointSize"></param>
-    public void Initialize(CSVDataSource dataSource, int[,] dimCombinations, float pointSize)
+    public void Initialize(CSVDataSource dataSource, int[,] dimCombinations, float pointSize, bool bigScatterplot)
     {
         this.pointSize = pointSize;
+        this.bigScatterplot = bigScatterplot;
 
         CreateScatterplots(dataSource, dimCombinations);
     }
@@ -78,10 +81,11 @@ public class ScatterplotMatrix : MonoBehaviour
             tempTransform.position += new Vector3(0f, 0.02f, 0f);
 
             Scatterplot scatterplot = Instantiate(scatterplotPrefab, tempTransform).GetComponent<Scatterplot>();
-            scatterplot.Initialize(dataSource, matrixPosX, matrixPosZ, pointSize, xDim, yDim, zDim);
+            scatterplot.Initialize(dataSource, matrixPosX, matrixPosZ, pointSize, xDim, yDim, zDim, bigScatterplot);
             scatterplots[i] = scatterplot;
 
-            scatterplot.transform.localScale -= Vector3.one / 2;
+            if (bigScatterplot) scatterplot.transform.localScale += Vector3.one ;
+            else scatterplot.transform.localScale -= Vector3.one / 2;
 
             yield return null;
         }

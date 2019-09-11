@@ -31,6 +31,7 @@ public class Scatterplot : MonoBehaviour
     public int xDim, yDim, zDim;
 
     private DataPoint[] dataPoints = new DataPoint[0];
+    private bool bigScatterplot;
 
     /// <summary>
     /// Initializes the ScatterplotMatrix.
@@ -43,13 +44,14 @@ public class Scatterplot : MonoBehaviour
     /// <param name="xDim"></param>
     /// <param name="yDim"></param>
     /// <param name="zDim"></param>
-    public void Initialize(CSVDataSource dataSource, float matrixPosX, float matrixPosZ, float pointSize, int xDim, int yDim, int zDim)
+    public void Initialize(CSVDataSource dataSource, float matrixPosX, float matrixPosZ, float pointSize, int xDim, int yDim, int zDim, bool bigScatterplot)
     {
         this.dataSource = dataSource;
         this.pointSize = pointSize;
         this.xDim = xDim;
         this.yDim = yDim;
         this.zDim = zDim;
+        this.bigScatterplot = bigScatterplot;
 
         float posOffset = 1;
 
@@ -72,16 +74,25 @@ public class Scatterplot : MonoBehaviour
     private void CreateDataPoints()
     {
         GameObject pointPrefab = Resources.Load<GameObject>("Prefabs/Scatterplot/DataPoint");
+        Transform scatterplotTransform = null;
 
-        GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("TurningPlateScatterplot");
-        Transform scatterplotPlateTransform = scatterplotPlate.GetComponent<Transform>();
+        if (bigScatterplot)
+        {
+            GameObject scatterplotHolder = GameObject.FindGameObjectWithTag("bigScatterplot");
+            scatterplotTransform = scatterplotHolder.GetComponent<Transform>();
+        }
+        else
+        {
+            GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("TurningPlateScatterplot");
+            scatterplotTransform = scatterplotPlate.GetComponent<Transform>();
+        }
 
         dataPoints = new DataPoint[dataSource.DataCount];
 
         for (int i = 0; dataSource.DataCount > i; ++i)
         {
-            Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotPlateTransform.position.x,
-                dataSource[yDim].Data[i] + scatterplotPlateTransform.position.y + 0.02f, dataSource[zDim].Data[i] + scatterplotPlateTransform.position.z);
+            Vector3 position = new Vector3(dataSource[xDim].Data[i] + scatterplotTransform.position.x,
+                dataSource[yDim].Data[i] + scatterplotTransform.position.y + 0.02f, dataSource[zDim].Data[i] + scatterplotTransform.position.z);
             DataPoint dataPoint = Instantiate(pointPrefab, transform).GetComponent<DataPoint>();
             dataPoint.Initialize(i, pointSize, position);
 

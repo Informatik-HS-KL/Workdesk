@@ -36,6 +36,7 @@ public class Visualizer : MonoBehaviour
     }
 
     private CSVDataSource dataSource;
+    public bool bigScatterplot;
 
     /// <summary>
     /// A list of all possible Scatterplots for the currently loaded CSV-File.
@@ -49,16 +50,17 @@ public class Visualizer : MonoBehaviour
     private int selectedScatterplot = 6;
     private int chosenScatterplot = 6;
 
-    public Dropdown scatterplotDropdown;
-    public Dropdown dataDropdown;
+    private Dropdown scatterplotDropdown;
+    private Dropdown dataDropdown;
 
     public void Awake()
     {
+        scatterplotDropdown = GameObject.FindGameObjectWithTag("ScatterplotDropdown").GetComponent<Dropdown>();
+        dataDropdown = GameObject.FindGameObjectWithTag("DataDropdown").GetComponent<Dropdown>();
         clipboardText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
         loadAllScatterplots();
-        create(6);
         scatterplotDropdown.value = 6;
     }
 
@@ -204,7 +206,7 @@ public class Visualizer : MonoBehaviour
             }
 
             scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();
-            scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize);
+            scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize, bigScatterplot);
             Debug.Log("ScatterplotMatrix was created.");
         }
         else
