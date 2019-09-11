@@ -33,7 +33,7 @@ public class ChangeTask : MonoBehaviour
         ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.DPadRight, ButtonEventType.Click, activateArchitectureView);
     }
 
-    // Use this for initialization
+    // Wird zur Initialisierung genutzt.
     void Start()
     {
         loadObjectScript = transform.GetComponent<LoadObject>();
@@ -102,7 +102,7 @@ public class ChangeTask : MonoBehaviour
         vrScreen.SetActive(false);
         screen.SetActive(false);
     }
-    // Update is called once per frame
+    // Update wird einmal pro Frame aufgerufen.
     void Update()
     {
 
