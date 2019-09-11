@@ -53,7 +53,7 @@ public class ClickButtonChangeScene : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     private void Start()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController");       
+        gameController = GameObject.FindGameObjectWithTag("GameController");
         exit = false;
         stay = false;
         startPosY = buttonObject.transform.localPosition.y;
@@ -81,6 +81,7 @@ public class ClickButtonChangeScene : MonoBehaviour
 
     /// <summary>
     /// Methode stellt die Collider ein, sodass die gewünschte Funktion des Knopfes gegeben ist.
+    /// Unterscheidbar zwischen Trigger drücken und Knopf mit Controler runterdrücken.
     /// </summary>
     /// <param name="clickable"></param>
     private void switchCollider(bool clickable)
@@ -184,4 +185,3 @@ public class ClickButtonChangeScene : MonoBehaviour
         }
     }
 }
-

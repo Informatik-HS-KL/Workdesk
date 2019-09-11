@@ -8,12 +8,6 @@ using UnityEngine;
 /// </summary>
 public class myTriggerEvent : MonoBehaviour
 {
-    // Wird zur Initialisierung genutzt.
-    void Start()
-    {
-
-    }
-
     /*
     /// <summary>
     /// Diese Methode wird immer dann aufgerufen, wenn ein Objekt mit dem festgelegten Collider (Collider als isTrigger) kollidiert.
@@ -42,11 +36,5 @@ public class myTriggerEvent : MonoBehaviour
     private void OnTriggerExit(Collider collider)
     {
         if (collider.attachedRigidbody.gameObject.name.Equals("Caster")) this.transform.GetComponentInParent<ClickButton>().myTriggerExit(collider, this.gameObject.name);
-    }
-
-    // Update wird einmal pro Frame aufgerufen.
-    void Update()
-    {
-
     }
 }

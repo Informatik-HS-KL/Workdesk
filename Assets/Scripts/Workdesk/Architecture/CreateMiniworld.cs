@@ -176,10 +176,4 @@ public class CreateMiniworld : MonoBehaviour
             vrOrigin.transform.position = startPos;
         }
     }
-
-    // Update wird einmal pro Frame aufgerufen.
-    void Update()
-    {
-
-    }
 }

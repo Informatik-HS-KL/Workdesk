@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Klasse wird verwendet um zu erkennen, ob ein Objekt den Collider berührt.
+/// </summary>
 public class myTriggerEventChangeScene : MonoBehaviour
 {
     /// <summary>

@@ -6,6 +6,7 @@ using HTC.UnityPlugin.Vive;
 
 /// <summary>
 /// Diese Klasse wird genutzt, um eine Scatterplot Matritzen zu erzeugen und in der Welt darzustellen.
+/// Zusätzlich dazu werden die erzeugten Scatterplot beim deaktivieren der Ansicht wieder gelöscht.
 /// </summary>
 public class BuildScatterplot : MonoBehaviour
 {
@@ -134,6 +135,10 @@ public class BuildScatterplot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Methode dient zum zerstören der angezeigten Scatterplots.
+    /// Wird beim deaktivieren der Ansicht aufgerufen.
+    /// </summary>
     private void destroyScatterplots()
     {
         foreach (Transform child in bigScatterplotHolder.transform)
@@ -145,10 +150,5 @@ public class BuildScatterplot : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-    }
-    // Update wird einmal pro Frame aufgerufen.
-    void Update()
-    {
-
     }
 }

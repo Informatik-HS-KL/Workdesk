@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Klasse dient zum Ausrichten der Textanzeige eines Datenpunktes, 
+/// sodass der Anwender diese immer sehen kann.
+/// </summary>
 public class LookAtCamera : MonoBehaviour
 {
     /// <summary>

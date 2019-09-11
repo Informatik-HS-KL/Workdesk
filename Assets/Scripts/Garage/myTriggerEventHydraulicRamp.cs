@@ -4,16 +4,10 @@ using UnityEngine;
 
 /// <summary>
 /// Die Klasse myTriggerEvent wird dazu genutzt, zu erkennen,
-/// ob eine Person einen Trigger berührt hat.
+/// ob ein Objekt einen Collider berührt hat.
 /// </summary>
 public class myTriggerEventHydraulicRamp : MonoBehaviour
 {
-    // Wird zur Initialisierung genutzt.
-    void Start()
-    {
-
-    }
-
     /// <summary>
     /// Diese Methode wird aufgerufen, solange ein Objekt sich im Collider befindet.
     /// </summary>

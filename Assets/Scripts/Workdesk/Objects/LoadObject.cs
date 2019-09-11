@@ -50,6 +50,9 @@ public class LoadObject : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().setMode("Turn");
     }
 
+    /// <summary>
+    /// Methode dient zur Aktiverung der Objectansicht.
+    /// </summary>
     public void activateView()
     {
         if (!isActive)
@@ -61,6 +64,9 @@ public class LoadObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Methode dient zur Deaktivierung der Objectansicht.
+    /// </summary>
     public void deactivateView()
     {
         if (isActive)
@@ -221,11 +227,5 @@ public class LoadObject : MonoBehaviour
         if (activatedObjectContainer == 1) Destroy(turningPlateObjectContainer.transform.GetChild(0).gameObject);
         else if (activatedObjectContainer == 2) Destroy(trackerObjectContainer.transform.GetChild(0).gameObject);
         else if (activatedObjectContainer == 3) Destroy(grabbableObjectContainer.transform.GetChild(0).gameObject);
-    }
-
-    // Update wird einmal pro Frame aufgerufen.
-    void Update()
-    {
-
     }
 }

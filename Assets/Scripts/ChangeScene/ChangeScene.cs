@@ -4,17 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Diese Klasse wird dazu genutzt zwischen den Szenen zu wechseln.
+/// Diese Klasse wird dazu genutzt, um zwischen den Szenen zu wechseln.
 /// </summary>
 public class ChangeScene : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     /// <summary>
     /// Methode zum Laden der Startszene durch den SceneManager.
     /// </summary>
@@ -47,12 +40,5 @@ public class ChangeScene : MonoBehaviour
                 SceneManager.LoadScene("TeapotShowRoom");
                 break;
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

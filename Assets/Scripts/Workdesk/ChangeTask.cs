@@ -15,7 +15,7 @@ public class ChangeTask : MonoBehaviour
 
     private GameObject screen;
     private GameObject vrScreen;
-    
+
     private void Awake()
     {
         ViveInput.AddListenerEx(HandRole.LeftHand, ControllerButton.DPadLeft, ButtonEventType.Click, activateObjectView);
@@ -66,7 +66,7 @@ public class ChangeTask : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode dient zum Aktivieren der ArchitekturAnsicht.
+    /// Methode dient zum Aktivieren der Architekturansicht.
     /// </summary>
     private void activateArchitectureView()
     {
@@ -101,10 +101,5 @@ public class ChangeTask : MonoBehaviour
     {
         vrScreen.SetActive(false);
         screen.SetActive(false);
-    }
-    // Update wird einmal pro Frame aufgerufen.
-    void Update()
-    {
-
     }
 }

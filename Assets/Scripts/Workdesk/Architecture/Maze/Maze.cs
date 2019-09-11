@@ -75,7 +75,7 @@ public class Maze : MonoBehaviour
     private int wallToBreak = 0;
 
     private void Awake()
-    {        
+    {
         mazeHolder = GameObject.FindGameObjectWithTag("Maze");
         miniMazeHolder = GameObject.FindGameObjectWithTag("MiniMaze");
         xSizeLabel = GameObject.FindGameObjectWithTag("XSize").GetComponent<Text>();
@@ -167,7 +167,7 @@ public class Maze : MonoBehaviour
         mazeHolder = null;
         mazeHolder = GameObject.FindGameObjectWithTag("Maze");
         cameraMan.transform.position = startPosCameraMan;
-        
+
 
         //solve = true;
 
@@ -253,8 +253,6 @@ public class Maze : MonoBehaviour
         }
     }//createCells
 
-
-
     void createMaze()
     {
         bool startedBuilding = false;
@@ -285,7 +283,6 @@ public class Maze : MonoBehaviour
                 startedBuilding = true;
             }
         }
-
         markStart();
         markEnd();
         miniMazeActive = true;
@@ -409,8 +406,6 @@ public class Maze : MonoBehaviour
 
         end.transform.parent = mazeHolder.transform;
     }
-
-
 
     /*void solveMaze()
     {

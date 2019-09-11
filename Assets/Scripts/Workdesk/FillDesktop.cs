@@ -6,7 +6,8 @@ using UnityEngine.Video;
 
 /// <summary>
 /// Diese Klasse wird dazu genutzt, um die Kamera auszulesen, die an der kleinen Figur angebracht ist.
-/// Das Bild dieser Kamera wird auf dem Bildschirm wiedergegeben.
+/// Das Bild dieser Kamera wird auf dem Bildschirm wiedergegeben. Zusätzlich dazu, werden in der Objectview
+/// Informationen über das ausgewählte Objekt und die ausgewählte Interaktion angezeigt.
 /// </summary>
 public class FillDesktop : MonoBehaviour
 {
@@ -141,6 +142,7 @@ public class FillDesktop : MonoBehaviour
         //Macht einen Screenshot der Szene und zeigt ihn auf dem Bildschirm an.
         //Nutzt die aktive Hauptkamera.
         //picture.texture = ScreenCapture.CaptureScreenshotAsTexture(1);
+
         if (firstPersonCam != null) takeScreenshot();
     }
 }

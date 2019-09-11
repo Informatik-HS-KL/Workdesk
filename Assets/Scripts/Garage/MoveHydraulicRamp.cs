@@ -40,6 +40,8 @@ public class MoveHydraulicRamp : MonoBehaviour
         up = false;
         down = true;
         loaded = false;
+        switchLight();
+        switchLight();
     }
 
     /// <summary>
@@ -61,7 +63,7 @@ public class MoveHydraulicRamp : MonoBehaviour
         {
             lightMaterial.SetColor("_EmissionColor", Color.white);
         }
-    }    
+    }
 
     /// <summary>
     /// Methode um die Positionen der vier bewegenden Liftplatten zu speichern.
@@ -78,7 +80,7 @@ public class MoveHydraulicRamp : MonoBehaviour
                 startPos[i] = lifts[i].gameObject.transform.localPosition;
                 endPos[i] = startPos[i] + new Vector3(0.0f, 2.0f, 0.0f);
             }
-        }        
+        }
     }
 
     /// <summary>
@@ -105,7 +107,6 @@ public class MoveHydraulicRamp : MonoBehaviour
                 }
                 vehicle.transform.localPosition -= new Vector3(0.0f, 0.01f, 0.0f);
             }
-
         }
         else if (name.Equals("ButtonUp"))
         {
@@ -127,6 +128,5 @@ public class MoveHydraulicRamp : MonoBehaviour
                 vehicle.transform.localPosition += new Vector3(0.0f, 0.01f, 0.0f);
             }
         }
-
     }
 }
