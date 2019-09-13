@@ -116,7 +116,7 @@ public class ClickButton : MonoBehaviour
     public void OnColliderEventPressUp(ColliderButtonEventData eventData)
     {
         //Nur der Trigger löst die gewünschte Aktion aus.
-        if (eventData.button.ToString().Equals("Trigger"))
+        if (eventData.button.ToString().Equals("Trigger") && clickable)
         {
             loadData();
         }
