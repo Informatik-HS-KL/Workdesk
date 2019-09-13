@@ -83,6 +83,9 @@ public class ClickButton : MonoBehaviour
 
     /// <summary>
     /// Methode stellt die Collider ein, sodass die gewünschte Funktion des Knopfes gegeben ist.
+    /// Sofern clickable ausgewählt ist, kann der Knopf mit Hilfe des eingestellten Controllerbuttons gedrückt werden.
+    /// Ist clickable ausgestellt, muss der Knopf nur mit dem Controller berührt werden. Dieser fährt dann automatisch nach unten.
+    /// Ist der Controller lange genug im Knopf und dieser fährt ganz nach unten, wird das Ereignis ausgelöst.
     /// </summary>
     /// <param name="clickable"></param>
     private void switchCollider(bool clickable)
