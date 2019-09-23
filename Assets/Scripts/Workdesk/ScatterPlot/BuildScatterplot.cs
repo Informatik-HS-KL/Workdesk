@@ -124,9 +124,9 @@ public class BuildScatterplot : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode zum Anzeigen des standard Scatterplots nach Aktivierung der Szene.
+    /// Methode zum Anzeigen des ausgewählten Scatterplots.
     /// </summary>
-    public void initScatterplot()
+    public void switchScatterplot()
     {
         if (init)
         {
