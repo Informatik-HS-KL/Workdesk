@@ -33,3 +33,45 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# ignore for latex
+**/*.bak
+**/*.prj
+
+# pdf is copied to fertig ...
+*.pdf
+
+# LaTeX temporary files
+**/*.aux
+**/*.glo
+**/*.idx
+**/*.log
+**/*.toc
+**/*.ist
+**/*.acn
+**/*.acr
+**/*.alg
+**/*.bbl
+**/*.blg
+**/*.dvi
+**/*.glg
+**/*.gls
+**/*.ilg
+**/*.ind
+**/*.lof
+**/*.lot
+**/*.maf
+**/*.mtc
+**/*.mtc1
+**/*.out
+**/*.nav
+**/*.smn
+**/*.snm
+**/*.out
+**/*.ps
+**/*.synctex
+**/*.synctex.gz
+
+# vi backups
+**/*~
+
