@@ -74,6 +74,7 @@ public class Visualizer : MonoBehaviour
 
         dataFiles = new TextAsset[fileInfos.Length];
         int textAssetIndex = 0;
+        if (scatterplotDropdown.options.Count != 0) scatterplotDropdown.ClearOptions();
         foreach (FileInfo fileInfo in fileInfos)
         {
             scatterplotDropdown.options.Add(new Dropdown.OptionData() { text = fileInfo.Name });
@@ -180,7 +181,7 @@ public class Visualizer : MonoBehaviour
         chosenScatterplot = 0;
         CreateScatterplotMatrix(scatterplotIndices);
 
-        fillDataDropdown();
+        if (!bigScatterplot) fillDataDropdown();
     }
 
     /// <summary>
