@@ -190,8 +190,9 @@ public class LoadObject : MonoBehaviour
             {
                 Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.parent.transform.position;
                 turningPlatePos = turningPlatePos + tempObj.transform.position;
-                GameObject clonedObject = Instantiate(tempObj, turningPlatePos, Quaternion.identity) as GameObject;
+                GameObject clonedObject = Instantiate(tempObj, turningPlatePos, Quaternion.identity) as GameObject;                
                 clonedObject.transform.parent = turningPlateObjectContainer.transform;
+                clonedObject.transform.rotation = new Quaternion(0f,0f,0f,0f);
             }
             else if (objContainer == 2) //Tracker
             {
