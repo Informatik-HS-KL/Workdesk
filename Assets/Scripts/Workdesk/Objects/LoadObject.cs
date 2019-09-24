@@ -72,6 +72,7 @@ public class LoadObject : MonoBehaviour
         if (isActive)
         {
             isActive = false;
+            activateContainer("TurnButton");
             deactivateAllContainers();
             chosenObject = 0;
             objectDropdown.value = chosenObject;
