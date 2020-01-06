@@ -4444,6 +4444,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 656018810}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &675694959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114748667647615876, guid: 13db0b795570e514d9ca4d905d4abb93,
+    type: 3}
+  m_PrefabInstance: {fileID: 1236762013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &682713091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,6 +4501,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: speechJson.json
   commandTimer: 5
+  onChangeTaskToObjectInspector:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1982846557}
+        m_MethodName: printInConsoleObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onChangeTaskToPlotInspector:
+    m_PersistentCalls:
+      m_Calls: []
+  onChangeTaskToArchitectureInspector:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &697625693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 495004, guid: cbfd31aaac017204885fcc03f0579a1a,
@@ -6767,8 +6799,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9caabd8bd57c5274fba3400607e4d574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPicture: {fileID: 0}
-  screenText: {fileID: 0}
+  rawPicture: {fileID: 649180886}
+  screenText: {fileID: 675694959}
 --- !u!114 &1149719820
 MonoBehaviour:
   m_ObjectHideFlags: 0
