@@ -31,6 +31,16 @@ public class KeywordHolder {
         _instance = JsonUtility.FromJson<KeywordHolder>(jsonData);
     }
 
+
+    public string[] allKeywordsAsArray()
+    {
+        List<string> listOfAllKeywords = new List<string>(objectSceneChangeKeywords.Count + plotSceneChangeKeywords.Count + architecturSceneChangeKeywords.Count);
+        listOfAllKeywords.AddRange(objectSceneChangeKeywords);
+        listOfAllKeywords.AddRange(plotSceneChangeKeywords);
+        listOfAllKeywords.AddRange(architecturSceneChangeKeywords);
+        return listOfAllKeywords.ToArray();
+
+    }
     
 
 

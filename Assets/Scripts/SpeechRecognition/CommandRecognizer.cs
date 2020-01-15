@@ -6,22 +6,25 @@ using UnityEngine.Windows.Speech;
 public class CommandRecognizer : MonoBehaviour
 {
     private bool commandRecognized;
-    private List<string> allCommands;
     private KeywordRecognizer keywordrecognizer;
 
     //EventHandler
     public delegate void ObjectEventHandler();
     public static event ObjectEventHandler onObjectStringRecognized;
-
+    public delegate void PlotEventHandler();
+    public static event PlotEventHandler onPlotStringRecognized;
+    public delegate void ArchitectureEventHandler();
+    public static event ArchitectureEventHandler onArchitectureStringRecognized;
     public void startCommanddListener()
     {
-        keywordrecognizer = new KeywordRecognizer(KeywordHolder.GetInstance().objectSceneChangeKeywords.ToArray());
+        keywordrecognizer = new KeywordRecognizer(KeywordHolder.GetInstance().allKeywordsAsArray());
         keywordrecognizer.OnPhraseRecognized += OnPhraseRecognized;
         keywordrecognizer.Start();
     }
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
+      
         if (KeywordHolder.GetInstance().objectSceneChangeKeywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
@@ -30,7 +33,25 @@ public class CommandRecognizer : MonoBehaviour
                 onObjectStringRecognized();
             }
         }
-   
+
+        if (KeywordHolder.GetInstance().plotSceneChangeKeywords.Contains(args.text.ToString()))
+        {
+            Debug.Log(args.text.ToString());
+            if (onPlotStringRecognized != null)
+            {
+                onPlotStringRecognized();
+            }
+        }
+
+        if (KeywordHolder.GetInstance().architecturSceneChangeKeywords.Contains(args.text.ToString()))
+        {
+            Debug.Log(args.text.ToString());
+            if (onArchitectureStringRecognized != null)
+            {
+                onArchitectureStringRecognized();
+            }
+        }
+
         commandRecognized = true;
     }
 

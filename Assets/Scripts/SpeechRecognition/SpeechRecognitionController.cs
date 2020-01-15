@@ -31,13 +31,21 @@ public class SpeechRecognitionController : MonoBehaviour
     private void Start()
     {
         CommandRecognizer.onObjectStringRecognized += this.invokeObjectEvent;
+        CommandRecognizer.onPlotStringRecognized += this.invokePlotEvent;
+        CommandRecognizer.onArchitectureStringRecognized += this.invokeArchitectureEvent;
     }
 
     public void invokeObjectEvent()
     {
         onChangeTaskToObjectInspector.Invoke();
     }
-
-
+    public void invokePlotEvent()
+    {
+        onChangeTaskToPlotInspector.Invoke();
+    }
+    public void invokeArchitectureEvent()
+    {
+        onChangeTaskToArchitectureInspector.Invoke();
+    }
 
 }
