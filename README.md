@@ -10,9 +10,9 @@ Wir bearbeiten unter anderem die folgenden Fragen:
 # News
 Das Repository ist umgezogen worden in die Organization VRLAB-HSKL. Für die lokalen Repos die ihr verwendet müsst ihr einfach den remote origin neu setzen. Auf der Konsole geht das mit:
 
-# Anzeigen der remotes
-git remote -v
-# Neue URL setzen
-git remote set-url origin https://github.com/VRLAB-HSKL/DesktopXR.git
-# Anzeigen der neuen remotes
-git remote -v
+Anzeigen der remotes:
+>> git remote -v
+Neue URL setzen:
+>> git remote set-url origin https://github.com/VRLAB-HSKL/DesktopXR.git
+Anzeigen der neuen remotes:
+>> git remote -v
