@@ -15,6 +15,8 @@ public class CommandRecognizer : MonoBehaviour
     public static event PlotEventHandler onPlotStringRecognized;
     public delegate void ArchitectureEventHandler();
     public static event ArchitectureEventHandler onArchitectureStringRecognized;
+    public delegate void InteractionEventHandler();
+    public static event InteractionEventHandler onInteractionStringRecognized;
     public void startCommanddListener()
     {
         keywordrecognizer = new KeywordRecognizer(KeywordHolder.GetInstance().allKeywordsAsArray());
@@ -24,7 +26,7 @@ public class CommandRecognizer : MonoBehaviour
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-      
+
         if (KeywordHolder.GetInstance().objectSceneChangeKeywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
@@ -49,6 +51,15 @@ public class CommandRecognizer : MonoBehaviour
             if (onArchitectureStringRecognized != null)
             {
                 onArchitectureStringRecognized();
+            }
+        }
+
+        if (KeywordHolder.GetInstance().interactionSceneChangeKeywords.Contains(args.text.ToString()))
+        {
+            Debug.Log(args.text.ToString());
+            if (onInteractionStringRecognized != null)
+            {
+                onInteractionStringRecognized();
             }
         }
 

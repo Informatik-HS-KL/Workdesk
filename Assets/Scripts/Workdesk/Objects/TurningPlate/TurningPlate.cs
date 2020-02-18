@@ -27,7 +27,7 @@ public class TurningPlate : MonoBehaviour
     {
         firstTime = true;
         activated3D = false;
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().set3DTurn(activated3D);
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().set3DTurn(activated3D);
     }
 
     public void resetPosition()
@@ -52,7 +52,7 @@ public class TurningPlate : MonoBehaviour
             else activated3D = true;
         }
 
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<FillDesktop>().set3DTurn(activated3D);
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().set3DTurn(activated3D);
     }
 
     // Update wird einmal pro Frame aufgerufen.

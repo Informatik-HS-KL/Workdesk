@@ -49,6 +49,7 @@ TagManager:
   - DataDropdown
   - InfoText
   - bigScatterplot
+  - Controller
   layers:
   - Default
   - TransparentFX

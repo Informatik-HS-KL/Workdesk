@@ -22,7 +22,7 @@ public class ClickButton : MonoBehaviour
     private RigidPose[] resetPoses;
     private HashSet<ColliderButtonEventData> pressingEvents = new HashSet<ColliderButtonEventData>();
 
-    private GameObject gameController;
+    public GameObject controller;
     private GameObject buttonBase;
     private GameObject button;
     private float startPosY;
@@ -54,7 +54,7 @@ public class ClickButton : MonoBehaviour
     // Wird zur Initialisierung genutzt.
     private void Start()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
+        controller = GameObject.FindGameObjectWithTag("Controller");
         loaded = false;
         exit = false;
         stay = false;
@@ -157,12 +157,12 @@ public class ClickButton : MonoBehaviour
     {
         if (this.name.Equals("ResetButton"))
         {
-            gameController.GetComponent<Maze>().reset();
+            controller.GetComponentInChildren<Maze>().reset();
         }
         else
         {
             loaded = true;
-            gameController.GetComponentInChildren<LoadObject>().activateContainer(this.name);
+            controller.GetComponentInChildren<ObjectController>().activateContainer(this.name);
         }
     }
 

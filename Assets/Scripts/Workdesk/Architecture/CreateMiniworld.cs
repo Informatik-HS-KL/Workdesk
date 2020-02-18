@@ -28,7 +28,7 @@ public class CreateMiniworld : MonoBehaviour
         findArchitectureObject();
         miniPlayer = GameObject.FindGameObjectWithTag("MiniPlayer");
         vrOrigin = GameObject.FindGameObjectWithTag("VROrigin");
-        mazeScript = GameObject.FindGameObjectWithTag("GameController").transform.GetComponent<Maze>();
+        mazeScript = GameObject.FindGameObjectWithTag("Controller").transform.GetComponentInChildren<Maze>();
         clipboardArchitecture = GameObject.FindGameObjectWithTag("ClipboardArchitecture");
         resetButton = GameObject.FindGameObjectWithTag("ResetButton");
     }

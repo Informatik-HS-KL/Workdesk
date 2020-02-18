@@ -142,12 +142,12 @@ public class Maze : MonoBehaviour
         tempMiniMaze.transform.parent = miniMazeHolder.transform;
 
         tempMiniMaze = null;
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().deactivateClipboard();
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<CreateMiniworld>().deactivateClipboard();
     }
 
     public void reset()
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<CreateMiniworld>().activateClipboard();
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<CreateMiniworld>().activateClipboard();
         if (isBuild)
         {
             if (GameObject.FindGameObjectWithTag("MiniMaze").transform.childCount == 3)

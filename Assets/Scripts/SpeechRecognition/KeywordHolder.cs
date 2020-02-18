@@ -6,19 +6,21 @@ using System;
 
 //Singelton Pattern
 [Serializable]
-public class KeywordHolder { 
+public class KeywordHolder
+{
 
     private static KeywordHolder _instance;
     public List<string> activationWords = new List<string>();
     public List<string> plotSceneChangeKeywords = new List<string>();
     public List<string> objectSceneChangeKeywords = new List<string>();
     public List<string> architecturSceneChangeKeywords = new List<string>();
+    public List<string> interactionSceneChangeKeywords = new List<string>();
 
     private KeywordHolder() { }
 
     public static KeywordHolder GetInstance()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = new KeywordHolder();
         }
@@ -34,14 +36,15 @@ public class KeywordHolder {
 
     public string[] allKeywordsAsArray()
     {
-        List<string> listOfAllKeywords = new List<string>(objectSceneChangeKeywords.Count + plotSceneChangeKeywords.Count + architecturSceneChangeKeywords.Count);
+        List<string> listOfAllKeywords = new List<string>(objectSceneChangeKeywords.Count + plotSceneChangeKeywords.Count + architecturSceneChangeKeywords.Count + interactionSceneChangeKeywords.Count);
         listOfAllKeywords.AddRange(objectSceneChangeKeywords);
         listOfAllKeywords.AddRange(plotSceneChangeKeywords);
         listOfAllKeywords.AddRange(architecturSceneChangeKeywords);
+        listOfAllKeywords.AddRange(interactionSceneChangeKeywords);
         return listOfAllKeywords.ToArray();
 
     }
-    
+
 
 
 }

@@ -26,13 +26,13 @@ public class ChangeSliderText : MonoBehaviour {
     public void setXSize()
     {
         xSize.text = xSizeSlider.value.ToString();
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<Maze>().setXSize();
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<Maze>().setXSize();
     }
 
     public void setZSize()
     {
         zSize.text = zSizeSlider.value.ToString();
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<Maze>().setZSize();
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<Maze>().setZSize();
     }
 
     // Update is called once per frame
