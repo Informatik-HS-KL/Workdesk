@@ -35,6 +35,8 @@ public class ObjectController : MonoBehaviour
         saveObjectsFromFolder();
         clipBoardController.populateDropdownList(dropdown, objectList);
         loadObjectInContainer(activatedObjectContainer);
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().setObject(objectList[chosenObject].name);
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().setMode("Turn");
     }
 
     /// <summary>
@@ -44,8 +46,8 @@ public class ObjectController : MonoBehaviour
     public void activateGrabbableObjectContainer()
     {
         grabbableObjectContainer.gameObject.SetActive(true);
-        trackerObjectContainer.gameObject.SetActive(false);
-        turningPlateObjectContainer.transform.parent.gameObject.SetActive(false);
+        trackerObjectContainer?.gameObject.SetActive(false);
+        turningPlateObjectContainer?.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -54,9 +56,9 @@ public class ObjectController : MonoBehaviour
     /// </summary>
     public void activateTrackerObjectContainer()
     {
-        grabbableObjectContainer.gameObject.SetActive(false);
+        grabbableObjectContainer?.gameObject.SetActive(false);
         trackerObjectContainer.gameObject.SetActive(true);
-        turningPlateObjectContainer.transform.parent.gameObject.SetActive(false);
+        turningPlateObjectContainer?.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -65,8 +67,8 @@ public class ObjectController : MonoBehaviour
     /// </summary>
     public void activateTurningPlateObjectContainer()
     {
-        grabbableObjectContainer.gameObject.SetActive(false);
-        trackerObjectContainer.gameObject.SetActive(false);
+        grabbableObjectContainer?.gameObject.SetActive(false);
+        trackerObjectContainer?.gameObject.SetActive(false);
         turningPlateObjectContainer.transform.parent.gameObject.SetActive(true);
     }
 
@@ -128,6 +130,7 @@ public class ObjectController : MonoBehaviour
         chosenObject = dropdown.value;
         Debug.Log("Reload Object" + chosenObject);
         unloadObjects();
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().setObject(objectList[chosenObject].name);
         loadObjectInContainer(activatedObjectContainer);
     }
 
@@ -137,6 +140,7 @@ public class ObjectController : MonoBehaviour
     /// <param name="buttonName">Name des betätigten Knopfes.</param>
     public void activateContainer(string buttonName)
     {
+        string mode = "";
         switch (buttonName)
         {
             case "TurnButton":
@@ -148,24 +152,28 @@ public class ObjectController : MonoBehaviour
                 }
                 unloadObjects();
                 loadObjectInContainer(1);
+                mode = "Turn";
                 break;
             case "TrackButton":
                 Debug.Log("TrackButton");
                 activateTrackerObjectContainer();
                 unloadObjects();
                 loadObjectInContainer(2);
+                mode = "Tracker";
                 break;
             case "GrabButton":
                 Debug.Log("GrabButton");
                 activateGrabbableObjectContainer();
                 unloadObjects();
                 loadObjectInContainer(3);
+                mode = "Grab";
                 break;
             case "TeleportButton":
                 unloadObjects();
                 transform.GetComponent<ChangeScene>().loadScene(chosenObject);
                 break;
         }
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().setMode(mode);
     }
 
     /// <summary>

@@ -13,7 +13,6 @@ public class CreateMiniworld : MonoBehaviour
     private GameObject vrOrigin;
     private GameObject clipboardArchitecture;
     private GameObject resetButton;
-    private FillDesktop fillDesktopScript;
     private Maze mazeScript;
 
     private bool isActive = true;
@@ -31,6 +30,12 @@ public class CreateMiniworld : MonoBehaviour
         mazeScript = GameObject.FindGameObjectWithTag("Controller").transform.GetComponentInChildren<Maze>();
         clipboardArchitecture = GameObject.FindGameObjectWithTag("ClipboardArchitecture");
         resetButton = GameObject.FindGameObjectWithTag("ResetButton");
+        openCamera();
+    }
+
+    private void openCamera()
+    {
+        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().openCamera();
     }
 
     private void OnDestroy()
@@ -93,41 +98,6 @@ public class CreateMiniworld : MonoBehaviour
     private void findArchitectureObject()
     {
         architecture = GameObject.FindGameObjectWithTag("Architecture");
-        fillDesktopScript = transform.GetComponent<FillDesktop>();
-    }
-
-    /// <summary>
-    /// Methode dient zur Aktivierung der Architekturansicht.
-    /// </summary>
-    public void activateView()
-    {
-        if (!isActive)
-        {
-            activateListener();
-            activateClipboard();
-            isActive = true;
-            if (architecture == null) findArchitectureObject();
-            architecture.SetActive(true);
-            fillDesktopScript.openCamera();
-            //mazeScript.buildMaze();
-        }
-    }
-
-    /// <summary>
-    /// Methode dient zur Deaktivierung der Architekturansicht.
-    /// </summary>
-    public void deactivateView()
-    {
-        if (isActive)
-        {
-            teleportToDesk();
-            mazeScript.reset();
-            deactivateListener();
-            isActive = false;
-            if (architecture == null) findArchitectureObject();
-            architecture.SetActive(false);
-            fillDesktopScript.closeCamera();
-        }
     }
 
     /// <summary>

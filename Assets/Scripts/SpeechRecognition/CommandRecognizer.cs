@@ -9,14 +9,17 @@ public class CommandRecognizer : MonoBehaviour
     private KeywordRecognizer keywordrecognizer;
 
     //EventHandler
-    public delegate void ObjectEventHandler();
-    public static event ObjectEventHandler onObjectStringRecognized;
-    public delegate void PlotEventHandler();
-    public static event PlotEventHandler onPlotStringRecognized;
-    public delegate void ArchitectureEventHandler();
-    public static event ArchitectureEventHandler onArchitectureStringRecognized;
-    public delegate void InteractionEventHandler();
-    public static event InteractionEventHandler onInteractionStringRecognized;
+    public delegate void Event1Handler();
+    public static event Event1Handler onEvent1Recognized;
+    public delegate void Event2Handler();
+    public static event Event2Handler onEvent2Recognized;
+    public delegate void Event3handler();
+    public static event Event3handler onEvent3Recognized;
+    public delegate void Event4Handler();
+    public static event Event4Handler onEvent4Recognized;
+    public delegate void Event5Handler();
+    public static event Event5Handler onEvent5Recognized;
+
     public void startCommanddListener()
     {
         keywordrecognizer = new KeywordRecognizer(KeywordHolder.GetInstance().allKeywordsAsArray());
@@ -27,42 +30,31 @@ public class CommandRecognizer : MonoBehaviour
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
 
-        if (KeywordHolder.GetInstance().objectSceneChangeKeywords.Contains(args.text.ToString()))
+        if (KeywordHolder.GetInstance().event1Keywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
-            if (onObjectStringRecognized != null)
-            {
-                onObjectStringRecognized();
-            }
+            onEvent1Recognized?.Invoke();
         }
-
-        if (KeywordHolder.GetInstance().plotSceneChangeKeywords.Contains(args.text.ToString()))
+        if (KeywordHolder.GetInstance().event2Keywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
-            if (onPlotStringRecognized != null)
-            {
-                onPlotStringRecognized();
-            }
+            onEvent2Recognized?.Invoke();
         }
-
-        if (KeywordHolder.GetInstance().architecturSceneChangeKeywords.Contains(args.text.ToString()))
+        if (KeywordHolder.GetInstance().event3Keywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
-            if (onArchitectureStringRecognized != null)
-            {
-                onArchitectureStringRecognized();
-            }
+            onEvent3Recognized?.Invoke();
         }
-
-        if (KeywordHolder.GetInstance().interactionSceneChangeKeywords.Contains(args.text.ToString()))
+        if (KeywordHolder.GetInstance().event4Keywords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
-            if (onInteractionStringRecognized != null)
-            {
-                onInteractionStringRecognized();
-            }
+            onEvent4Recognized?.Invoke();
         }
-
+        if (KeywordHolder.GetInstance().event5Keywords.Contains(args.text.ToString()))
+        {
+            Debug.Log(args.text.ToString());
+            onEvent5Recognized?.Invoke();
+        }
         commandRecognized = true;
     }
 

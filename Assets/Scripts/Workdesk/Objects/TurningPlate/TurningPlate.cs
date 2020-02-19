@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Diese Klasse dient zur Interaktion mit der Platte. Zusätzlich wird das Skript "TurningPlateCollider" benötigt.
@@ -27,7 +28,10 @@ public class TurningPlate : MonoBehaviour
     {
         firstTime = true;
         activated3D = false;
-        GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().set3DTurn(activated3D);
+        if (SceneManager.GetActiveScene().Equals("TaskObject"))
+        {
+            GameObject.FindGameObjectWithTag("Controller").GetComponentInChildren<FillDesktop>().set3DTurn(activated3D);
+        }
     }
 
     public void resetPosition()

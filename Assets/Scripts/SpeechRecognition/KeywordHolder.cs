@@ -11,10 +11,11 @@ public class KeywordHolder
 
     private static KeywordHolder _instance;
     public List<string> activationWords = new List<string>();
-    public List<string> plotSceneChangeKeywords = new List<string>();
-    public List<string> objectSceneChangeKeywords = new List<string>();
-    public List<string> architecturSceneChangeKeywords = new List<string>();
-    public List<string> interactionSceneChangeKeywords = new List<string>();
+    public List<string> event1Keywords = new List<string>();
+    public List<string> event2Keywords = new List<string>();
+    public List<string> event3Keywords = new List<string>();
+    public List<string> event4Keywords = new List<string>();
+    public List<string> event5Keywords = new List<string>();
 
     private KeywordHolder() { }
 
@@ -36,11 +37,12 @@ public class KeywordHolder
 
     public string[] allKeywordsAsArray()
     {
-        List<string> listOfAllKeywords = new List<string>(objectSceneChangeKeywords.Count + plotSceneChangeKeywords.Count + architecturSceneChangeKeywords.Count + interactionSceneChangeKeywords.Count);
-        listOfAllKeywords.AddRange(objectSceneChangeKeywords);
-        listOfAllKeywords.AddRange(plotSceneChangeKeywords);
-        listOfAllKeywords.AddRange(architecturSceneChangeKeywords);
-        listOfAllKeywords.AddRange(interactionSceneChangeKeywords);
+        List<string> listOfAllKeywords = new List<string>(event1Keywords.Count + event2Keywords.Count + event3Keywords.Count + event4Keywords.Count + event5Keywords.Count);
+        listOfAllKeywords.AddRange(event1Keywords);
+        listOfAllKeywords.AddRange(event2Keywords);
+        listOfAllKeywords.AddRange(event3Keywords);
+        listOfAllKeywords.AddRange(event4Keywords);
+        listOfAllKeywords.AddRange(event5Keywords);
         return listOfAllKeywords.ToArray();
 
     }

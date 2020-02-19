@@ -48,6 +48,11 @@ public class BuildScatterplot : MonoBehaviour
         inScatterplotRoom = false;
         scatterplotRoomPos = new Vector3(-8.0f, 0.0f, -10.0f);
         startPos = vrOrigin.transform.position;
+        activateListener();
+
+        init = true;
+        visualizerScript.create(scatterplotDropdown.value);
+        bigVisualizerScript.create(scatterplotDropdown.value);
     }
 
     /// <summary>
@@ -60,19 +65,11 @@ public class BuildScatterplot : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode dient zum Deaktivieren von zwei Listenern.
-    /// </summary>
-    private void deactivateListener()
-    {
-        ViveInput.RemoveListenerEx(HandRole.LeftHand, ControllerButton.Grip, ButtonEventType.Click, teleportToScatterplotRoom);
-        ViveInput.RemoveListenerEx(HandRole.RightHand, ControllerButton.Grip, ButtonEventType.Click, teleportToDesk);
-    }
-
-    /// <summary>
     /// Methode zum Setzen der VR-Kamera in den Scatterplotraum.
     /// </summary>
     private void teleportToScatterplotRoom()
     {
+        Debug.Log("TeleportToRoom:  " + inScatterplotRoom);
         if (!inScatterplotRoom)
         {
             inScatterplotRoom = true;
@@ -85,41 +82,11 @@ public class BuildScatterplot : MonoBehaviour
     /// </summary>
     private void teleportToDesk()
     {
+        Debug.Log("TeleportToDesk:  " + inScatterplotRoom);
         if (inScatterplotRoom)
         {
             inScatterplotRoom = false;
             vrOrigin.transform.position = startPos;
-        }
-    }
-
-    /// <summary>
-    /// Methode dient zum Aktivieren und Anzeigen der Scatterplot Ansicht.
-    /// </summary>
-    public void activateView()
-    {
-        if (!isActive)
-        {
-            activateListener();
-            isActive = true;
-            scatterplots.SetActive(true);
-            init = true;
-            visualizerScript.create(scatterplotDropdown.value);
-            bigVisualizerScript.create(scatterplotDropdown.value);
-        }
-    }
-
-    /// <summary>
-    /// Methode dient zum Deaktivieren der Scatterplot Ansicht.
-    /// </summary>
-    public void deactivateView()
-    {
-        if (isActive)
-        {
-            destroyScatterplots();
-            deactivateListener();
-            isActive = false;
-            scatterplots.SetActive(false);
-            init = false;
         }
     }
 
@@ -130,6 +97,7 @@ public class BuildScatterplot : MonoBehaviour
     {
         if (init)
         {
+            Debug.Log("switchScatterplot():  " + scatterplotDropdown.value);
             visualizerScript.create(scatterplotDropdown.value);
             bigVisualizerScript.create(scatterplotDropdown.value);
         }

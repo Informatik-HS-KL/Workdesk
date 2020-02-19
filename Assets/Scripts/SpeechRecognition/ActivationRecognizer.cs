@@ -15,7 +15,7 @@ public class ActivationRecognizer : MonoBehaviour
     private void Awake()
     {
         commandRecognizer = (new GameObject("CommandRecognizer")).AddComponent<CommandRecognizer>();
-     //   commandRecognizer.transform.SetParent(this.gameObject.GetComponent<Transform>());
+        commandRecognizer.transform.SetParent(this.gameObject.GetComponent<Transform>());
     }
 
     public void startActivationWordListener(int commandTimer)

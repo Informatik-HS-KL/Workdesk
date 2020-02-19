@@ -18,7 +18,7 @@ public class WorkdeskController : MonoBehaviour
     public void activateScatterPlottTask()
     {
         Debug.Log("Objekt Task activated");
-        SceneManager.LoadScene("TaskScatterplott");
+        SceneManager.LoadScene("TaskPlot");
     }
     public void activateArchitectureTask()
     {
