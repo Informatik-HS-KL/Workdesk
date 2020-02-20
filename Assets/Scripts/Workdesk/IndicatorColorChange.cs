@@ -16,7 +16,7 @@ public class IndicatorColorChange : MonoBehaviour
 
     public void changeToFailureColor()
     {
-        indicator.GetComponent<Renderer>().material.color = waitingColor;
+        indicator.GetComponent<Renderer>().material.color = failureColor;
     }
 
     public void changeToSuccessColor()

@@ -79,15 +79,18 @@ public class SpeechRecognitionController : MonoBehaviour
     //visual events invoking methods
     public void invokeWaiting()
     {
-        onChangeEvent3.Invoke();
+        Debug.Log("onWaiting");
+        onWaiting.Invoke();
     }
     public void invokeSuccess()
     {
-        onChangeEvent4.Invoke();
+        Debug.Log("onSuccess");
+        onSuccess.Invoke();
     }
     public void invokeFailure()
     {
-        onChangeEvent5.Invoke();
+        Debug.Log("onFailure");
+        onFailure.Invoke();
     }
 
 }

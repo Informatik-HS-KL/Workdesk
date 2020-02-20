@@ -21,10 +21,17 @@ public class ActivationRecognizer : MonoBehaviour
     public delegate void failureHandler();
     public static event failureHandler onFailureRecognized;
 
+    private IEnumerator coroutine;
+
     private void Awake()
     {
         commandRecognizer = (new GameObject("CommandRecognizer")).AddComponent<CommandRecognizer>();
         commandRecognizer.transform.SetParent(this.gameObject.GetComponent<Transform>());
+    }
+
+    private void Start()
+    {
+        CommandRecognizer.onCommandRecognized += this.onRecognized;
     }
 
     public void startActivationWordListener(int commandTimer)
@@ -39,32 +46,42 @@ public class ActivationRecognizer : MonoBehaviour
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-        onWaitingRecognized?.Invoke();
         if (KeywordHolder.GetInstance().activationWords.Contains(args.text.ToString()))
         {
+            onWaitingRecognized?.Invoke();
             Debug.Log(args.text.ToString());
             keywordrecognizer.Stop();
-            StartCoroutine(waitForCommand());
+            coroutine = noCommandRecognized();
+            StartCoroutine(coroutine);
             commandRecognizer.startCommanddListener();
         }
     }
 
-    private IEnumerator waitForCommand()
+    private void onRecognized()
+    {
+        StopCoroutine(coroutine);
+        onSuccessRecognized?.Invoke();
+        keywordrecognizer.Start();
+        commandRecognizer.stopCommandRecognizer();
+        Debug.Log("command recognized");
+        StartCoroutine(disableColorChanges());
+
+    }
+
+    private IEnumerator disableColorChanges()
+    {
+        yield return new WaitForSeconds(2);
+        onFailureRecognized?.Invoke();
+    }
+
+
+    private IEnumerator noCommandRecognized()
     {
         yield return new WaitForSeconds(commandTimer);
-        if (commandRecognizer.getCommandHere() == false)
-        {
-            onFailureRecognized?.Invoke();
-            keywordrecognizer.Start();
-            commandRecognizer.stopCommandRecognizer();
-            Debug.Log("no command recognized");
-        }
-        else
-        {
-            onSuccessRecognized?.Invoke();
-            keywordrecognizer.Start();
-            commandRecognizer.stopCommandRecognizer();
-            Debug.Log("command recognized");
-        }
-    }
+        onFailureRecognized?.Invoke();
+        keywordrecognizer.Start();
+        commandRecognizer.stopCommandRecognizer();
+        Debug.Log("no command recognized");
+    }   
+    
 }

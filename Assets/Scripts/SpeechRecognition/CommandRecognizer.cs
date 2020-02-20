@@ -5,7 +5,6 @@ using UnityEngine.Windows.Speech;
 
 public class CommandRecognizer : MonoBehaviour
 {
-    private bool commandRecognized;
     private KeywordRecognizer keywordrecognizer;
 
     //EventHandler
@@ -19,6 +18,8 @@ public class CommandRecognizer : MonoBehaviour
     public static event Event4Handler onEvent4Recognized;
     public delegate void Event5Handler();
     public static event Event5Handler onEvent5Recognized;
+    public delegate void CommandRecognizedHandler();
+    public static event CommandRecognizedHandler onCommandRecognized;
 
     public void startCommanddListener()
     {
@@ -55,13 +56,9 @@ public class CommandRecognizer : MonoBehaviour
             Debug.Log(args.text.ToString());
             onEvent5Recognized?.Invoke();
         }
-        commandRecognized = true;
+        onCommandRecognized?.Invoke();
     }
 
-    public bool getCommandHere()
-    {
-        return commandRecognized;
-    }
     public void stopCommandRecognizer()
     {
         keywordrecognizer.Stop();
