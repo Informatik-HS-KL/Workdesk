@@ -12,6 +12,15 @@ public class ActivationRecognizer : MonoBehaviour
     private KeywordRecognizer keywordrecognizer;
     private CommandRecognizer commandRecognizer;
 
+    private GameObject indicator;
+
+    public delegate void waitingHandler();
+    public static event waitingHandler onWaitingRecognized;
+    public delegate void successHandler();
+    public static event successHandler onSuccessRecognized;
+    public delegate void failureHandler();
+    public static event failureHandler onFailureRecognized;
+
     private void Awake()
     {
         commandRecognizer = (new GameObject("CommandRecognizer")).AddComponent<CommandRecognizer>();
@@ -30,7 +39,7 @@ public class ActivationRecognizer : MonoBehaviour
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-
+        onWaitingRecognized?.Invoke();
         if (KeywordHolder.GetInstance().activationWords.Contains(args.text.ToString()))
         {
             Debug.Log(args.text.ToString());
@@ -45,16 +54,17 @@ public class ActivationRecognizer : MonoBehaviour
         yield return new WaitForSeconds(commandTimer);
         if (commandRecognizer.getCommandHere() == false)
         {
+            onFailureRecognized?.Invoke();
             keywordrecognizer.Start();
             commandRecognizer.stopCommandRecognizer();
             Debug.Log("no command recognized");
         }
         else
         {
+            onSuccessRecognized?.Invoke();
             keywordrecognizer.Start();
             commandRecognizer.stopCommandRecognizer();
             Debug.Log("command recognized");
         }
     }
-
 }

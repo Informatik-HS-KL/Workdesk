@@ -885,110 +885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2c6973113eb3a46b797636f5e7304a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &682713091
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 682713092}
-  - component: {fileID: 682713093}
-  m_Layer: 0
-  m_Name: SpeechRecognitionController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &682713092
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682713091}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7401034, y: -0.20640498, z: -0.1021496}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1982846556}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &682713093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682713091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a56523cea249a8742b6018c5298488e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configFileName: speechJson.json
-  responseTimeInSec: 5
-  onChangeEvent1:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982846557}
-        m_MethodName: activateObjectTask
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onChangeEvent2:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982846557}
-        m_MethodName: activateScatterPlottTask
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onChangeEvent3:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982846557}
-        m_MethodName: activateArchitectureTask
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onChangeEvent4:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982846557}
-        m_MethodName: activateInteractionTask
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onChangeEvent5:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &697625693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 495004, guid: cbfd31aaac017204885fcc03f0579a1a,
@@ -1162,7 +1058,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1982846556}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1125464625
 MonoBehaviour:
@@ -1221,6 +1117,109 @@ MonoBehaviour:
   onChangeTaskToInteractionInspector:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1127500869
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1447404971}
+    m_Modifications:
+    - target: {fileID: 4131511014995175654, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_Name
+      value: SpeechIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6311208
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3505832
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.70651853
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 18b99c920232be441a2a08998ffb1e1d, type: 3}
+--- !u!4 &1127500870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8176947867089107165, guid: 18b99c920232be441a2a08998ffb1e1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1127500869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1127500871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8558270008711531545, guid: 18b99c920232be441a2a08998ffb1e1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1127500869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1127500872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4131511014995175654, guid: 18b99c920232be441a2a08998ffb1e1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1127500869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1127500873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127500872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5723b91ec9248041a61b94f4c43b2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 1127500871}
+  successColor: {r: 0, g: 1, b: 0, a: 1}
+  failureColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  waitingColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1157452287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1576,7 @@ Transform:
   - {fileID: 1443255278}
   - {fileID: 1604526921}
   - {fileID: 37280234}
+  - {fileID: 1127500870}
   m_Father: {fileID: 542930812}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1832,6 +1832,141 @@ Transform:
   m_Father: {fileID: 1244131292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1833776330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833776331}
+  - component: {fileID: 1833776332}
+  m_Layer: 0
+  m_Name: SpeechRecognitionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1833776331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833776330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1982846556}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1833776332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833776330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56523cea249a8742b6018c5298488e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configFileName: speechJson.json
+  responseTimeInSec: 5
+  onChangeEvent1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1982846557}
+        m_MethodName: activateScatterPlottTask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onChangeEvent2:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1982846557}
+        m_MethodName: activateObjectTask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onChangeEvent3:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1982846557}
+        m_MethodName: activateArchitectureTask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onChangeEvent4:
+    m_PersistentCalls:
+      m_Calls: []
+  onChangeEvent5:
+    m_PersistentCalls:
+      m_Calls: []
+  onWaiting:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1127500873}
+        m_MethodName: changeToWaitingColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1127500873}
+        m_MethodName: changeToSuccessColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFailure:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1127500873}
+        m_MethodName: changeToFailureColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1918739561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a,
@@ -1867,8 +2002,8 @@ Transform:
   m_LocalPosition: {x: 0.7401034, y: 0.20640498, z: 0.1021496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 682713092}
   - {fileID: 1125464624}
+  - {fileID: 1833776331}
   m_Father: {fileID: 832972365}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
