@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TaskArchitecture.unity
     guid: e53d4f5eeb8d064429962b75c82f6345
+  - enabled: 1
+    path: Assets/Scenes/TaskInteraction.unity
+    guid: 896e18f24b67e8347bd675523ea44f0d
   m_configObjects: {}

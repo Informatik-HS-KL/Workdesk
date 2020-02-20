@@ -28,5 +28,6 @@ public class WorkdeskController : MonoBehaviour
     public void activateInteractionTask()
     {
         Debug.Log("Interaction Task activated");
+        SceneManager.LoadScene("TaskInteraction");
     }
 }
