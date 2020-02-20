@@ -188,7 +188,7 @@ public class LoadObject : MonoBehaviour
 
             if (objContainer == 1)  //Turning Table
             {
-                Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.parent.transform.position;
+                Vector3 turningPlatePos = turningPlateObjectContainer.transform.parent.transform.position;
                 turningPlatePos = turningPlatePos + tempObj.transform.position;
                 GameObject clonedObject = Instantiate(tempObj, turningPlatePos, Quaternion.identity) as GameObject;                
                 clonedObject.transform.parent = turningPlateObjectContainer.transform;
@@ -202,7 +202,7 @@ public class LoadObject : MonoBehaviour
             }
             else if (objContainer == 3) //Grab
             {
-                GameObject clonedObject = Instantiate(tempObj, new Vector3(0.2f, 0.8f, 0.2f), Quaternion.identity) as GameObject;
+                GameObject clonedObject = Instantiate(tempObj, grabbableObjectContainer.transform.position, Quaternion.identity) as GameObject;
                 clonedObject.transform.parent = grabbableObjectContainer.transform;
                 clonedObject.AddComponent<BasicGrabbable>();
             }
