@@ -8,8 +8,24 @@ public class KeyHandler : MonoBehaviour,
     IPointerEnterHandler, 
     IPointerExitHandler, 
     IPointerClickHandler
+   
 {
+    private Key key;
 
+    public void setKeyValue(Key key)
+    {
+        this.key = key;
+    }
+
+    public string getKeyValueShift()
+    {
+        return key.ShiftkeyValue;
+    }
+
+    public string getKeyValueNormal()
+    {
+        return key.KeyValue;
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
