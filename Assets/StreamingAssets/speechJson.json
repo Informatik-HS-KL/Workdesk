@@ -1,1 +1,8 @@
-{"activationWords":["desk","tisch"],"event1Keywords":["plot","scatterplot"],"event2Keywords":["object","Objekt"], "event3Keywords":["Architektur", "architecture"], "event4Keywords":["Interaktion", "interaction"], "event5Keywords":["Event5"]}
+{
+    "activationWords": ["desk", "tisch"],
+    "event1Keywords": ["plot", "scatterplot"],
+    "event2Keywords": ["object", "Objekt"],
+    "event3Keywords": ["Architektur", "architecture"],
+    "event4Keywords": ["Interaktion", "interaction"],
+    "event5Keywords": ["Event5"]
+}

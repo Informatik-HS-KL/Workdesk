@@ -6,33 +6,36 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/DataShare.unity
+    guid: 8e004b753cc8458438c052a0352e083d
+  - enabled: 0
     path: Assets/Scenes/Workdesk.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BikeShowRoom.unity
     guid: ba149ae2ca3502d4c88a91ada365e6be
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CarShowRoom.unity
     guid: 60f3765b909d3e24fbb906e4989fa2e5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DinosaurShowRoom.unity
     guid: 16357247681dbf14f8c7f4a25461d075
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PalmTreeShowRoom.unity
     guid: b1bb1019e5662e647874b75da587ef2b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TeapotShowRoom.unity
     guid: 91e76ba98ceab2c46b3f1c9143f42456
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TaskObject.unity
     guid: 53943225c9ca42444afb5c8766491d18
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TaskPlot.unity
     guid: a050dec072fdca14f95cfa050c57b0ef
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TaskArchitecture.unity
     guid: e53d4f5eeb8d064429962b75c82f6345
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TaskInteraction.unity
     guid: 896e18f24b67e8347bd675523ea44f0d
   m_configObjects: {}

@@ -60,22 +60,25 @@ public class Visualizer : MonoBehaviour
         clipboardText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
-        loadAllScatterplots();
+        loadFilesFromDirectory();
         scatterplotDropdown.value = 6;
     }
 
     /// <summary>
     /// Lädt alle CSV-Dateien aus dem StreamingAssets Verzeichnis.
     /// </summary>
-    private void loadAllScatterplots()
+    private void loadFilesFromDirectory()
     {
         dataFiles = Resources.LoadAll<TextAsset>(csvDirectoryName);
-        FileInfo[] fileInfos = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
+        FileInfo[] csvFileInfo = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.csv");
+       // FileInfo[] jsonFileInfo = new DirectoryInfo(Application.streamingAssetsPath).GetFiles("*.json");
+        
 
-        dataFiles = new TextAsset[fileInfos.Length];
+        dataFiles = new TextAsset[csvFileInfo.Length];
         int textAssetIndex = 0;
+        //Leeren falls im Dropdown bereits Values existieren
         if (scatterplotDropdown.options.Count != 0) scatterplotDropdown.ClearOptions();
-        foreach (FileInfo fileInfo in fileInfos)
+        foreach (FileInfo fileInfo in csvFileInfo)
         {
             scatterplotDropdown.options.Add(new Dropdown.OptionData() { text = fileInfo.Name });
             dataFiles[textAssetIndex] = new TextAsset(File.ReadAllText(fileInfo.FullName));
@@ -170,6 +173,7 @@ public class Visualizer : MonoBehaviour
         LoadDataSource(dataFiles[selectedScatterplot]);
 
         int size = possibleScatterplots.GetLength(0);
+        Debug.Log("GetLength: " + possibleScatterplots.GetLength(0));
         int[] temp = new int[size];
         for (int i = 0; i < possibleScatterplots.GetLength(0); i++)
         {
@@ -182,6 +186,20 @@ public class Visualizer : MonoBehaviour
         CreateScatterplotMatrix(scatterplotIndices);
 
         if (!bigScatterplot) fillDataDropdown();
+    }
+    //SEB
+    public void createInitialScatterPlot(TextAsset file)
+    {
+        LoadDataSource(file);
+        int size = possibleScatterplots.GetLength(0);
+        Debug.Log("GetLength: Own" + possibleScatterplots.GetLength(0));
+        int[] temp = new int[size];
+        for (int i = 0; i < possibleScatterplots.GetLength(0); i++)
+        {
+            temp[i] = i;
+        }
+        int[] scatterplotIndices = temp;
+        CreateScatterplotMatrix(scatterplotIndices);
     }
 
     /// <summary>
@@ -203,7 +221,7 @@ public class Visualizer : MonoBehaviour
 
             for (int j = 0; 3 > j; ++j)
             {
-                dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
+                dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[5], j];
             }
 
             scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();

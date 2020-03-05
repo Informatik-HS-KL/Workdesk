@@ -37,6 +37,10 @@ public class ScatterplotMatrix : MonoBehaviour
     /// /// <param name="pointSize"></param>
     public void Initialize(CSVDataSource dataSource, int[,] dimCombinations, float pointSize, bool bigScatterplot)
     {
+        foreach(int dimi in dimCombinations)
+        {
+            Debug.Log(dimi.ToString());
+        }
         this.pointSize = pointSize;
         this.bigScatterplot = bigScatterplot;
 
@@ -69,8 +73,9 @@ public class ScatterplotMatrix : MonoBehaviour
     /// <returns></returns>
     IEnumerator CreateScatterplotsCoroutine(GameObject scatterplotPrefab, CSVDataSource dataSource, int[,] dimCombinations, int matrixWidth)
     {
-        for (int i = 0; dimCombinations.GetLength(0) > i; ++i)
+        for (int i = 0; dimCombinations.GetLength(0)> i; i++)
         {
+            Debug.Log("creations scatterplot" + i);
             int matrixPosX = i % matrixWidth * 2;
             int matrixPosZ = i / matrixWidth * 2;
             int xDim = dimCombinations[i, 0];
