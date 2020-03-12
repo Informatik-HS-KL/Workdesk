@@ -47,8 +47,8 @@ public class Visualizer : MonoBehaviour
     private int[] scatterplotIndicesGlobal;
     private string csvDirectoryName = "Datasets";
     private ScatterplotMatrix scatterplotMatrix;
-    private int selectedScatterplot = 6;
-    private int chosenScatterplot = 6;
+    private int selectedScatterplot = 0;
+    private int chosenScatterplot = 0;
 
     private Dropdown scatterplotDropdown;
     private Dropdown dataDropdown;
@@ -60,7 +60,7 @@ public class Visualizer : MonoBehaviour
         clipboardText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
         dataSource = gameObject.AddComponent<CSVDataSource>();
 
-        loadFilesFromDirectory();
+        //loadFilesFromDirectory();
         scatterplotDropdown.value = 6;
     }
 
@@ -108,15 +108,39 @@ public class Visualizer : MonoBehaviour
     /// Lädt die ausgewählte CSV-Datei.
     /// </summary>
     /// <param name="dataFile"></param>
-    public void LoadDataSource(TextAsset dataFile)
+    public void LoadDataSource(TextAsset plotData)
     {
-        if (null != dataFile)
+        if (null != plotData)
         {
-            dataSource.load(dataFile.text, null);
+            dataSource.load(plotData.text, null);
             possibleScatterplots = CalculatePossibleScatterplots();
-            Debug.Log("Loaded CSV file from: " + dataFile.name);
-            fillClipboard(dataFile.name);
-            dataSource.data = dataFile;
+            //Debug.Log("Loaded CSV file from: " + dataFile.name);
+            fillClipboard(plotData.name);
+            dataSource.data = plotData;
+            //fill selectedlist
+           // dataSource.selectedIndicies = plotData.SelectedAsset;
+        }
+        else
+        {
+            Debug.LogError("Datafile is null!");
+        }
+    }
+
+    /// <summary>
+    /// Lädt die ausgewählte CSV-Datei.
+    /// </summary>
+    /// <param name="dataFile"></param>
+    public void LoadDataSource2(PlotData plotData)
+    {
+        if (null != plotData.CsvAsset)
+        {
+            dataSource.load(plotData.CsvAsset.text, null);
+            possibleScatterplots = CalculatePossibleScatterplots();
+            //Debug.Log("Loaded CSV file from: " + dataFile.name);
+            fillClipboard(plotData.CsvAsset.name);
+            dataSource.data = plotData.CsvAsset;
+            //fill selectedlist
+            dataSource.selectedIndicies = plotData.SelectedAsset;
         }
         else
         {
@@ -158,9 +182,9 @@ public class Visualizer : MonoBehaviour
     /// <summary>
     /// Methode zum Auswählen eines bestimmten Scatterplots aus der gewählten CSV-Datei.
     /// </summary>
-    public void loadSpecificScatterplot()
+    public void loadSpecificScatterplot(int value)
     {
-        chosenScatterplot = dataDropdown.value;
+        chosenScatterplot = value;
         CreateScatterplotMatrix(scatterplotIndicesGlobal);
     }
 
@@ -173,7 +197,7 @@ public class Visualizer : MonoBehaviour
         LoadDataSource(dataFiles[selectedScatterplot]);
 
         int size = possibleScatterplots.GetLength(0);
-        Debug.Log("GetLength: " + possibleScatterplots.GetLength(0));
+        //Debug.Log("GetLength: " + possibleScatterplots.GetLength(0));
         int[] temp = new int[size];
         for (int i = 0; i < possibleScatterplots.GetLength(0); i++)
         {
@@ -188,17 +212,19 @@ public class Visualizer : MonoBehaviour
         if (!bigScatterplot) fillDataDropdown();
     }
     //SEB
-    public void createInitialScatterPlot(TextAsset file)
+    public void createInitialScatterPlot(PlotData plotData)
     {
-        LoadDataSource(file);
+        selectedScatterplot = 0;
+        LoadDataSource2(plotData);
         int size = possibleScatterplots.GetLength(0);
-        Debug.Log("GetLength: Own" + possibleScatterplots.GetLength(0));
+        //Debug.Log("GetLength: Own" + possibleScatterplots.GetLength(0));
         int[] temp = new int[size];
         for (int i = 0; i < possibleScatterplots.GetLength(0); i++)
         {
             temp[i] = i;
         }
         int[] scatterplotIndices = temp;
+        scatterplotIndicesGlobal = temp;
         CreateScatterplotMatrix(scatterplotIndices);
     }
 
@@ -221,12 +247,12 @@ public class Visualizer : MonoBehaviour
 
             for (int j = 0; 3 > j; ++j)
             {
-                dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[5], j];
+                dimCombinations[0, j] = possibleScatterplots[scatterplotIndices[chosenScatterplot], j];
             }
 
             scatterplotMatrix = Instantiate(Resources.Load<GameObject>("Prefabs/Scatterplot/ScatterplotMatrix"), transform).GetComponent<ScatterplotMatrix>();
             scatterplotMatrix.Initialize(dataSource, dimCombinations, pointSize, bigScatterplot);
-            Debug.Log("ScatterplotMatrix was created.");
+            //Debug.Log("ScatterplotMatrix was created.");
         }
         else
         {

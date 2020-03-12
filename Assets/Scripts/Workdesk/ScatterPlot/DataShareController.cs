@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using IATK;
+using Newtonsoft.Json;
 
 public class DataShareController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DataShareController : MonoBehaviour
     2. Json */
     private CSVDataSource dataSource;
     private Visualizer visualizer;
+    private PlotClipBoardController plotClipBoardController;
+    string fileToShow = "";
 
     // Start is called before the first frame update
     void Start()
@@ -21,65 +24,72 @@ public class DataShareController : MonoBehaviour
 
         dataSource = gameObject.AddComponent<CSVDataSource>();
         visualizer = GameObject.FindGameObjectWithTag("Visualizer").GetComponent<Visualizer>();
-
-        // Bestimmt welcher File als erstes Im Scatterplot angezeigt werden soll
-        string outputDir = getCommandLineArgs("-file");
-        if (!(outputDir is null))
+        plotClipBoardController = (new GameObject("PlotClipBoardController")).AddComponent<PlotClipBoardController>();
+ 
+          // Bestimmt welcher File als erstes Im Scatterplot angezeigt werden soll
+        string outputFile = getCommandLineArgs("--file");
+        fileToShow = outputFile;
+        // command line arguments case
+        if (!(outputFile is null))
         {
-            //Laden des Files
-            if (Path.GetExtension(outputDir).Equals(".csv"))
-            {
-                Debug.Log(Path.GetExtension(outputDir));
-                //CSV Loader
-            }
-            else if (Path.GetExtension(outputDir).Equals(".json"))
-            {
-                Debug.Log(Path.GetExtension(outputDir));
-                //JSON Loader
-            }
-
+            //Init File
+            PlotFileLoader fileLoader = new PlotFileLoader();
+            PlotData data = fileLoader.getPlotData(outputFile);
+            visualizer.createInitialScatterPlot(data);
+            plotClipBoardController.fillPlotList(data);
         }
+        //configfile case
         else
         {
-            //Laden des Files welcher in der JsonConfigDatei hinterlegt ist
+            //loading configFile in StreamingAsset folder
             string configFileName = "ScatterPlotConfig.json";
             string jsonText = Utilities.readFileFromStreaminAssets(configFileName);
             //Fill ConfigHolder with ConfigData
             ConfigHolder.GetInstance().fillWithJSON(jsonText);
-            string fileToShow = ConfigHolder.GetInstance().getFileToShow();
-            if (fileToShow.Equals("Iris.csv"))
-            {
-                string irisData = Utilities.readFileFromStreaminAssets("Iris.csv");
-                dataSource.load(irisData, null);
-                Debug.Log("Datengeladen?  " + dataSource.IsLoaded);
-                TextAsset asset = new TextAsset(irisData);
-                dataSource.data = asset;
-                dataSource.data.name = "Iris.csv";
-                Debug.Log(dataSource.data);
-                visualizer.createInitialScatterPlot(asset);
-            }
-            else
-            {
 
-            }
+            fileToShow = ConfigHolder.GetInstance().getFileToShow();
 
+            PlotFileLoader fileLoader = new PlotFileLoader();
+            PlotData data = fileLoader.getPlotData(fileToShow);
+            visualizer.createInitialScatterPlot(data);
+            plotClipBoardController.fillPlotList(data);           
+        }
+
+        string outputDir = getCommandLineArgs("--dir");
+        if (!(outputDir is null))
+        {
+            PlotDirectoryLoader dirLoader = new PlotDirectoryLoader(fileToShow);
+            List<PlotData> dataList = dirLoader.getPlotDataListFromDir(outputDir);
+            plotClipBoardController.fillPlotListwithList(dataList);
+        }
+        else
+        {
             string folderToShow = ConfigHolder.GetInstance().getFolderToShow();
-            if (folderToShow.Equals("StreamingAssets"))
-            {
 
-            }
-            else
-            {
-                Directory.GetFiles(folderToShow, "*.csv", SearchOption.TopDirectoryOnly);
-                DirectoryInfo dir = new DirectoryInfo(folderToShow);
-                FileInfo[] info = dir.GetFiles("*.*");
-                foreach (FileInfo f in info)
-                {
-                    Debug.Log(f.Name);
-                }
-            }
+            PlotDirectoryLoader dirLoader = new PlotDirectoryLoader(fileToShow);
+            List<PlotData> dataList = dirLoader.getPlotDataListFromDir(folderToShow);
+            plotClipBoardController.fillPlotListwithList(dataList);
 
         }
+        plotClipBoardController.fillScatterPlotDropwdown();
+        plotClipBoardController.fillScatterplotAxisDropwdown(visualizer.GetPossibleScattersplots());
+    }
+
+
+
+
+    public void loadSelectedScatterPlot()
+    {
+        int value = plotClipBoardController.getScatterPlotValue();
+        PlotData data = plotClipBoardController.getPlotDataByDropwDownValue(value);
+        visualizer.createInitialScatterPlot(data);
+        plotClipBoardController.fillScatterplotAxisDropwdown(visualizer.GetPossibleScattersplots());
+    }
+
+    public void loadSelectedAxisScatterPlot()
+    {
+        int value = plotClipBoardController.getScatterPlotAxisValue();
+        visualizer.loadSpecificScatterplot(value);
     }
 
     /* Methode liefert CommandLine Befehle zurück, die nach einem Bestimmt Command folgen */

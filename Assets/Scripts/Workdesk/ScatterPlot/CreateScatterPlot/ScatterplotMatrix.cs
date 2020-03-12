@@ -39,7 +39,7 @@ public class ScatterplotMatrix : MonoBehaviour
     {
         foreach(int dimi in dimCombinations)
         {
-            Debug.Log(dimi.ToString());
+            //Debug.Log(dimi.ToString());
         }
         this.pointSize = pointSize;
         this.bigScatterplot = bigScatterplot;
@@ -75,7 +75,7 @@ public class ScatterplotMatrix : MonoBehaviour
     {
         for (int i = 0; dimCombinations.GetLength(0)> i; i++)
         {
-            Debug.Log("creations scatterplot" + i);
+            //Debug.Log("creations scatterplot" + i);
             int matrixPosX = i % matrixWidth * 2;
             int matrixPosZ = i / matrixWidth * 2;
             int xDim = dimCombinations[i, 0];

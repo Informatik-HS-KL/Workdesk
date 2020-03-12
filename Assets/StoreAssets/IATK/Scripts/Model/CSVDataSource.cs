@@ -16,6 +16,9 @@ namespace IATK
     {
         // DATA
 
+        //Morsch
+        public List<int> selectedIndicies;
+
         [Tooltip("Text asset containing the data")]
         public TextAsset data;
 

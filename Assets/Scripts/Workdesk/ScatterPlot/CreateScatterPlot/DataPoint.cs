@@ -145,6 +145,7 @@ public class DataPoint : MonoBehaviour
         data[0, 1] = dataSource.getOriginalValue(dataSource[xDim].Data[index], dataSource[xDim].Identifier).ToString();
 
         colorPoint(dataSource);
+        colorSelected(dataSource);
 
         data[1, 0] = dataSource[yDim].Identifier;
         data[1, 1] = dataSource.getOriginalValue(dataSource[yDim].Data[index], dataSource[yDim].Identifier).ToString();
@@ -153,6 +154,19 @@ public class DataPoint : MonoBehaviour
         data[2, 1] = dataSource.getOriginalValue(dataSource[zDim].Data[index], dataSource[zDim].Identifier).ToString();
 
         return data;
+    }
+
+    private void colorSelected(CSVDataSource dataSource)
+    {
+        if (!(dataSource.selectedIndicies is null))
+        {
+            Renderer renderer = this.GetComponent<Renderer>();
+            if (dataSource.selectedIndicies.Contains(index))
+            {
+                color = Color.black;
+                renderer.material.color = color;
+            }
+        }
     }
 
     /// <summary>

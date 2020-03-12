@@ -83,7 +83,7 @@ public class Scatterplot : MonoBehaviour
         }
         else
         {
-            GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("TurningPlateScatterplot");
+            GameObject scatterplotPlate = GameObject.FindGameObjectWithTag("Visualizer");
             scatterplotTransform = scatterplotPlate.GetComponent<Transform>();
         }
 
